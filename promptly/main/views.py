@@ -23,3 +23,8 @@ def maintained():
             abort(503)
     except ValueError:
         pass
+
+
+@main.route('/')
+def index():
+    return '<h1>Hello World!</h1>'
