@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-100" data-bs-theme="auto">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,16 +12,17 @@
     {% block head_css %}{% endblock %}
     {% block head_js %}{% endblock %}
   </head>
-  <body class="d-flex flex-column h-100">
-    <header>
-      {% include "layout/header.html" %}
-    </header>
-
+  <body>
     <!-- Begin page content -->
-    <main class="flex-shrink-0">
-      <div class="container">
-        {% block container %}{% endblock %}
-      </div>
+    <main class="d-flex flex-nowrap">
+      {% include "layout/sidebar.html" %}
+
+      <section class="content">
+        <div class="container">
+          {% block container %}{% endblock %}
+        </div>
+      </section>
+
     </main>
 
     <footer class="footer mt-auto py-3 bg-body-tertiary">
