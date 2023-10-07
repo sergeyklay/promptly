@@ -76,11 +76,31 @@ textarea:focus {
 #user-info {
   flex: 0 0 auto;
   background-color: #34495e;
-  padding: 15px;
+  padding: 1rem;
   text-align: center;
   position: sticky;
   bottom: 0;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+#user-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+#user-email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 32px - 10px);
 }
 
 #main-content {
