@@ -18,15 +18,21 @@
         {% include "layout/sidebar.html" %}
       </aside>
 
-      <main id="content">
-        <section id="chat-output">
-          {% block container %}{% endblock %}
-        </section>
+      <div id="main-content">
+        <header id="header">
+          {% include "layout/header.html" %}
+        </header>
 
-        <footer id="chat-input">
-          {% include "layout/footer.html" %}
-        </footer>
-      </main>
+        <main id="content">
+          <section id="chat-output">
+            {% block container %}{% endblock %}
+          </section>
+
+          <footer id="chat-input">
+            {% include "layout/footer.html" %}
+          </footer>
+        </main>
+      </div>
     </div>
 
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>

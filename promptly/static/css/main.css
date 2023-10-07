@@ -4,13 +4,27 @@ body, html {
 
 #wrapper {
     display: flex;
-    flex-direction: row;
     height: 100%;
 }
 
 #sidebar {
     flex: 0 0 250px;
     background-color: #f8f9fa;
+    height: 100%;
+}
+
+#main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    flex: 0 0 auto;
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
 }
 
 #content {
@@ -30,6 +44,7 @@ body, html {
     flex: 0 0 15%;
     padding: 15px;
 }
+
 
 #prompt-textarea {
     max-height: 200px;
