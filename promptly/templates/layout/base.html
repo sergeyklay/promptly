@@ -13,21 +13,21 @@
     {% block head_js %}{% endblock %}
   </head>
   <body>
-    <!-- Begin page content -->
-    <main class="d-flex flex-nowrap">
-      {% include "layout/sidebar.html" %}
+    <div id="wrapper">
+      <aside id="sidebar">
+        {% include "layout/sidebar.html" %}
+      </aside>
 
-      <section class="content">
-        <div class="container">
+      <main id="content">
+        <section id="chat-output">
           {% block container %}{% endblock %}
-        </div>
-      </section>
+        </section>
 
-    </main>
-
-    <footer class="footer mt-auto py-3 bg-body-tertiary">
-      {% include "layout/footer.html" %}
-    </footer>
+        <footer id="chat-input">
+          {% include "layout/footer.html" %}
+        </footer>
+      </main>
+    </div>
 
     <script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
