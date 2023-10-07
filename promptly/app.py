@@ -13,7 +13,7 @@ from flask import Flask
 
 def create_app(config=None) -> Flask:
     """Create and configure an instance of the Flask application."""
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='')
 
     configure_app(app, config)
     configure_blueprints(app)
