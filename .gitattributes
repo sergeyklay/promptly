@@ -16,8 +16,18 @@
 # Setting up linguist
 #
 
-*.rst             linguist-documentation -linguist-detectable
-LICENSE           linguist-documentation -linguist-detectable
+*.rst   linguist-documentation -linguist-detectable
+LICENSE linguist-documentation -linguist-detectable
+
+# The following lines mark the bootstrap and jquery files as vendored
+# code, so they won't be included in the repository's language
+# statistics on GitHub.
+promptly/static/css/bootstrap.min.css           linguist-vendored
+promptly/static/css/bootstrap.min.css.map       linguist-vendored
+promptly/static/js/bootstrap.bundle.min.js      linguist-vendored
+promptly/static/js/bootstrap.bundle.min.js.map  linguist-vendored
+promptly/static/js/jquery.min.js                linguist-vendored
+promptly/static/js/jquery.min.map               linguist-vendored
 
 # Exclude files from exporting
 # (used by the "download ZIP archive" option, for example).
