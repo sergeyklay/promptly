@@ -10,6 +10,7 @@
 import os
 
 from flask import abort
+from flask import render_template
 
 from promptly.utils import strtobool
 from . import main
@@ -27,4 +28,4 @@ def maintained():
 
 @main.route('/')
 def index():
-    return '<h1>Hello World!</h1>'
+    return render_template('home.html')
