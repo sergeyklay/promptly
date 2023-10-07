@@ -130,13 +130,33 @@ KEYWORDS = [
 
 # Classifiers: available ones listed at https://pypi.org/classifiers
 CLASSIFIERS = [
+    'Development Status :: 2 - Pre-Alpha',
+
+    'Environment :: Web Environment',
+
+    'Intended Audience :: Developers',
+    'Intended Audience :: Information Technology',
+
+    'Natural Language :: English',
+
+    'License :: OSI Approved :: MIT',
+    'Operating System :: OS Independent',
+
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3 :: Only',
+
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
 ]
 
 # Dependencies that are downloaded by pip on installation and why.
 INSTALL_REQUIRES = [
-    'Flask>=2.2.2',  # Our framework for building API
-    'Werkzeug>=2.2.0',  # Read key-value pairs from a .env file
-    'python-dotenv>=0.21.0',  # Read key-value pairs from a .env file
+    'Flask>=3.0.0',  # Our framework for building API
+    'Werkzeug>=3.0.0',  # Read key-value pairs from a .env file
+    'python-dotenv>=1.0.0',  # Read key-value pairs from a .env file
 ]
 
 DEPENDENCY_LINKS = []
