@@ -29,3 +29,9 @@ function autoResize(element) {
 $(document).on('input', 'textarea', function() {
   autoResize(this);
 });
+
+$(document).ready(function() {
+  $('#minimize-btn').on('click', function() {
+    $('#sidebar').toggleClass('minimized');
+  });
+});

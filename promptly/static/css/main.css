@@ -37,6 +37,24 @@ textarea:focus {
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
+  transition: flex 0.3s ease-in-out;
+}
+
+#sidebar.minimized {
+  flex: 0 0 50px;
+  overflow: hidden;
+}
+
+#sidebar.minimized #sidebar-header {
+  background-color: transparent;
+  padding-left: 0px;
+  margin-left: -4px;
+}
+
+#sidebar.minimized #sidebar-items,
+#sidebar.minimized #user-info,
+#sidebar.minimized #new-chat-btn {
+  display: none;
 }
 
 #sidebar-header {
@@ -47,7 +65,7 @@ textarea:focus {
   padding: 15px;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 #new-chat-btn {
