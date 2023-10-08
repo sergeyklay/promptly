@@ -34,4 +34,27 @@ $(document).ready(function() {
   $('#minimize-btn').on('click', function() {
     $('#sidebar').toggleClass('minimized');
   });
+
+  $('#send-btn').on('click', function() {
+    var messageText = $('#prompt-textarea').val().trim();
+    if (messageText.length > 0) {
+      $('#prompt-textarea').val('');
+
+      // TODO: Send request to server
+
+      var newMessageHtml = '<div class="chat-message">' +
+          '<p>' + messageText + '</p>' +
+          '</div>';
+
+      $('#chat-output').append(newMessageHtml);
+      $('#chat-output').scrollTop($('#chat-output')[0].scrollHeight);
+    }
+  });
+
+  $('#prompt-textarea').on('keypress', function(e) {
+    if (e.which == 13 && !e.shiftKey) {
+      e.preventDefault();
+      $('#send-btn').click();
+    }
+  });
 });
