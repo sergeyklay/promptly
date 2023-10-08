@@ -160,15 +160,38 @@ textarea:focus {
 #chat-input {
   padding: 15px;
   background-color: #bdc3c7;
+  position: relative;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
 }
 
 #prompt-textarea {
+  flex-grow: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
   max-height: 200px;
   height: 56px;
   overflow-y: hidden;
+
+  padding-right: 50px;
 }
 
-footer > .form-control {
+.input-group-append {
+  position: absolute;
+  right: 11px;
+  bottom: 11px;
+}
+
+.input-wrapper > .form-control {
   appearance: none;
   border-color: #8e8ea0;
   resize: none;
@@ -180,4 +203,8 @@ footer > .form-control {
   line-height: 1.5rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+#send-btn {
+  z-index: 10;
 }
