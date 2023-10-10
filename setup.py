@@ -186,6 +186,7 @@ EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
         'flake8>=6.1.0',  # The modular source code checker
+        'pylint>=3.0.1',  # Python code static checker
     ],
     'docs': [
     ],

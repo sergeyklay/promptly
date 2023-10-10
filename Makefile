@@ -89,6 +89,7 @@ serve: $(VENV_PYTHON) .env runner.py
 lint: $(VENV_PYTHON)
 	@echo $(CS)Running linters$(CE)
 	-$(VENV_BIN)/flake8 $(FLAKE8_FLAGS) ./
+	$(VENV_BIN)/pylint $(PYLINT_FLAGS) ./$(PKG_NAME)
 	@echo
 
 .PHONY: clean
