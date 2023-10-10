@@ -171,6 +171,7 @@ CLASSIFIERS = [
 INSTALL_REQUIRES = [
     'Flask>=3.0.0',  # Our framework for building API
     'Werkzeug>=3.0.0',  # The comprehensive WSGI web application library
+    'openai>=0.28.1',  # Python client library for the OpenAI API
     'python-dotenv>=1.0.0',  # Read key-value pairs from a .env file
 ]
 

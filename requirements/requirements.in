@@ -7,4 +7,5 @@
 
 Flask
 Werkzeug
+openai
 python-dotenv
