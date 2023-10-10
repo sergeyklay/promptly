@@ -189,6 +189,8 @@ EXTRAS_REQUIRE = {
         'flake8-import-order>=0.18.1',  # Checks the ordering of imports
         'flake8>=6.1.0',  # The modular source code checker
         'pylint>=3.0.1',  # Python code static checker
+        'pytest>=7.4.2',  # Our tests framework
+        'coverage[toml]>=7.3.2',  # Code coverage measurement for Python
     ],
     'docs': [
     ],

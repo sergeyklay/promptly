@@ -14,6 +14,8 @@
 
 # Directories to ignore (do not add trailing '/'s, they skip symlinks):
 /*.egg-info
+/.pytest_cache
+/htmlcov
 
 # Application configuration
 .env
@@ -21,3 +23,6 @@
 # Python cache.
 *.py[cod]
 __pycache__
+
+# Ignore codecoverage stuff.
+coverage.*
