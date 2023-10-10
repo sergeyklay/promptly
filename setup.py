@@ -184,6 +184,7 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
+        'flake8>=6.1.0',  # The modular source code checker
     ],
     'docs': [
     ],

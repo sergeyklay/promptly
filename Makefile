@@ -85,6 +85,12 @@ serve: $(VENV_PYTHON) .env runner.py
 	$(VENV_BIN)/flask --app runner:app run --debug
 	@echo
 
+.PHONY: lint
+lint: $(VENV_PYTHON)
+	@echo $(CS)Running linters$(CE)
+	-$(VENV_BIN)/flake8 $(FLAKE8_FLAGS) ./
+	@echo
+
 .PHONY: clean
 clean:
 	@echo $(CS)Remove build and tests artefacts and directories$(CE)
@@ -118,6 +124,7 @@ help:
 	@echo '  install:      Install project and all its dependencies'
 	@echo '  uninstall:    Uninstall local version of the project'
 	@echo '  serve:        Run builtin server'
+	@echo '  lint:         Lint the code'
 	@echo '  clean:        Remove build and tests artefacts and directories'
 	@echo '  maintainer-clean:'
 	@echo '                Delete almost everything that can be reconstructed'
