@@ -170,7 +170,7 @@ CLASSIFIERS = [
 # Dependencies that are downloaded by pip on installation and why.
 INSTALL_REQUIRES = [
     'Flask>=3.0.0',  # Our framework for building API
-    'Werkzeug>=3.0.0',  # Read key-value pairs from a .env file
+    'Werkzeug>=3.0.0',  # The comprehensive WSGI web application library
     'python-dotenv>=1.0.0',  # Read key-value pairs from a .env file
 ]
 
