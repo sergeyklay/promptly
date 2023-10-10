@@ -218,3 +218,18 @@ textarea:focus {
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
+@keyframes ellipsis {
+  to {
+    width: 1em;
+  }
+}
+
+.loading::after {
+  display: inline-block;
+  content: ".";
+  animation: ellipsis 1s steps(5, end) infinite;
+  padding-left: 2ch;
+  overflow: hidden;
+  vertical-align: bottom;
+}

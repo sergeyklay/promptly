@@ -36,17 +36,41 @@ $(document).ready(function() {
   });
 
   $('#send-btn').on('click', function() {
-    var messageText = $('#prompt-textarea').val().trim();
-    if (messageText.length > 0) {
+    var userMessage = $('#prompt-textarea').val();
+    if (userMessage.length > 0) {
       $('#prompt-textarea').val('');
 
-      // TODO: Send request to server
-
       var newMessageHtml = '<div class="chat-message">' +
-          '<p>' + messageText + '</p>' +
+          '<p>' + userMessage + '</p>' +
           '</div>';
 
+
       $('#chat-output').append(newMessageHtml);
+
+      var loadingElement = $('<div class="loading">Waiting for server response</div>');
+      $('#chat-output').append(loadingElement);
+
+      $.ajax({
+        url: '/conversation',
+        method: 'POST',
+        data: {
+          message: userMessage,
+        },
+        success: function (response) {
+          loadingElement.remove();
+
+          serverResponse = '<div class="chat-message">' +
+            '<p>' + response.message + '</p>' +
+            '</div>';
+
+          $('#chat-output').append(serverResponse);
+        },
+        error: function () {
+          // TODO: Show error
+          loadingElement.remove();
+        }
+      });
+
       $('#chat-output').scrollTop($('#chat-output')[0].scrollHeight);
     }
   });
