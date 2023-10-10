@@ -72,9 +72,17 @@ def configure_blueprints(app: Flask):
 
 def configure_extensions(app: Flask):
     """Configure extensions for the application."""
-    pass
+    @app.cli.command()
+    def deploy():
+        """Run deployment tasks."""
+
+    @app.cli.command()
+    def seed():
+        """Add seed data to the database."""
 
 
 def configure_context_processors(app: Flask):
     """Configure the context processors."""
-    pass
+    @app.shell_context_processor
+    def make_shell_context():
+        """Configure flask shell command to autoimport app objects."""

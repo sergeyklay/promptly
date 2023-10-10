@@ -24,7 +24,20 @@ class Config:
 
     @staticmethod
     def init_app(app):
-        pass
+        """Initialize the application with configuration-specific settings.
+
+        This method takes a Flask application instance and configures it
+        with settings defined in the configuration object.
+
+        :param app: The Flask application instance.
+        :type app: Flask
+
+        Usage::
+
+            config_obj = DevelopmentConfig()
+            config_obj.init_app(app)
+
+        """
 
 
 class DevelopmentConfig(Config):
@@ -39,7 +52,6 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     """Uses production database server."""
-    pass
 
 
 config = {

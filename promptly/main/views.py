@@ -19,6 +19,15 @@ GPT_MODEL = 'gpt-3.5-turbo-16k'
 
 @main.before_app_request
 def maintained():
+    """Check if the application is in maintenance mode.
+
+    This function is called before each request to the application.
+    If the environment variable 'PROMPTLY_MAINTENANCE_MODE' is set to a truthy
+    value, the function will abort the request with a 503 Service Unavailable
+    status.
+
+    :raises: 503 Service Unavailable, if the app is in maintenance mode.
+    """
     try:
         mode = os.getenv('PROMPTLY_MAINTENANCE_MODE', 'False')
         if strtobool(mode):
@@ -29,11 +38,28 @@ def maintained():
 
 @main.route('/')
 def index():
+    """Render the homepage of the application.
+
+    :return: The rendered homepage template.
+    :rtype: str
+    """
     return render_template('home.html')
 
 
 @main.route('/conversation', methods=['POST'])
 def process_chat():
+    """Process a user's chat message and return the model's response.
+
+    Extracts the user's message from the request form, sends it to OpenAI for
+    processing, extracts the response from OpenAI's reply, and sends the
+    response back to the user.
+
+    :return: A JSON object containing the model's response to the user's
+             message.
+    :rtype: flask.Response
+    :raises: A variety of exceptions, such as `openai.error.OpenAIError` for
+             issues with the OpenAI call.
+    """
     query = request.form.get('message')
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
