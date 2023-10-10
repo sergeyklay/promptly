@@ -5,17 +5,18 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The routes module for the application."""
+"""Main module for the Promptly Flask application.
+
+This module contains the general routes and views for the main section of the
+Promptly application, including the homepage and maintenance mode handling.
+"""
 
 import os
 
-import openai
-from flask import abort, jsonify, render_template, request
+from flask import abort, render_template
 
 from promptly.utils import strtobool
 from . import main
-
-GPT_MODEL = 'gpt-3.5-turbo-16k'
 
 
 @main.before_app_request
@@ -45,35 +46,3 @@ def index():
     :rtype: str
     """
     return render_template('home.html')
-
-
-@main.route('/conversation', methods=['POST'])
-def process_chat():
-    """Process a user's chat message and return the model's response.
-
-    Extracts the user's message from the request form, sends it to OpenAI for
-    processing, extracts the response from OpenAI's reply, and sends the
-    response back to the user.
-
-    :return: A JSON object containing the model's response to the user's
-             message.
-    :rtype: flask.Response
-    :raises: A variety of exceptions, such as `openai.error.OpenAIError` for
-             issues with the OpenAI call.
-    """
-    query = request.form.get('message')
-
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    response = openai.ChatCompletion.create(
-        messages=[{'role': 'user', 'content': query}],
-        model=GPT_MODEL,
-        temperature=0,
-        max_tokens=2048,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-    )
-
-    response_message = response['choices'][0]['message']['content']
-
-    return jsonify({'message': response_message})

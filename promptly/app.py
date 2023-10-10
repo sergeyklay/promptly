@@ -66,8 +66,12 @@ def configure_app(app: Flask, config_name=None):
 def configure_blueprints(app: Flask):
     """Configure blueprints for the application."""
     # main blueprint registration
-    from promptly.main import main as main_bp
-    app.register_blueprint(main_bp)
+    from promptly.main import main
+    app.register_blueprint(main)
+
+    # main blueprint registration
+    from promptly.api import api
+    app.register_blueprint(api)
 
 
 def configure_extensions(app: Flask):
