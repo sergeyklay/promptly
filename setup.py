@@ -127,12 +127,16 @@ def get_version_string():
 # What does this project relate to.
 KEYWORDS = [
     'ai',
-    'caht',
+    'chat',
+    'chatbot',
     'chatgpt',
     'gpt',
+    'gpt-3',
+    'gpt-4',
     'llm',
     'openai',
     'prompt injection',
+    'prompt',
     'text generation',
 ]
 
