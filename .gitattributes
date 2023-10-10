@@ -12,12 +12,10 @@
 # Auto-detect text files, ensure they use LF.
 * text=auto eol=lf
 
-#
 # Setting up linguist
-#
-
 *.rst   linguist-documentation -linguist-detectable
 LICENSE linguist-documentation -linguist-detectable
+
 
 # The following lines mark the bootstrap and jquery files as vendored
 # code, so they won't be included in the repository's language
@@ -31,7 +29,6 @@ promptly/static/js/jquery.min.map               linguist-vendored
 
 # Exclude files from exporting
 # (used by the "download ZIP archive" option, for example).
-#
 .github         export-ignore
 .gitattributes  export-ignore
 .gitignore      export-ignore
