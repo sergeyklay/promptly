@@ -29,17 +29,18 @@ load_env_vars(os.path.dirname(os.path.abspath(__file__)))
 #    - production
 #    - default (alias for development)
 #
-# To specify an application's startup mode, set the variable PROMPTLY_CONFIG to
-# an appropriate value as follows:
+# To specify an application's startup mode, set the variable
+# PROMPTLY_CONFIG to an appropriate value as follows:
 #
 #   $ export PROMPTLY_CONFIG=production
 #   $ flask --app runner:app run
 #
-# Please note: When starting the application with flask script (which is by
-# design the way to run an application in development mode), the --debug command
-# line flag has nothing to do with the value of PROMPTLY_CONFIG variable because
-# they are handled differently, by different subsystems. Thus, the following way
-# of starting is perfectly functional (although it makes no sense):
+# Please note: When starting the application with flask script (which
+# is by design the way to run an application in development mode), the
+# --debug command line flag has nothing to do with the value of
+# PROMPTLY_CONFIG variable because they are handled differently, by
+# different subsystems. Thus, the following way of starting is
+# perfectly functional (although it makes no sense):
 #
 #   $ export PROMPTLY_CONFIG=production
 #   $ flask --app runner:app run --debug
@@ -47,12 +48,12 @@ load_env_vars(os.path.dirname(os.path.abspath(__file__)))
 config = os.getenv('PROMPTLY_CONFIG', 'default').lower()
 app = create_app(config)
 
-# The alternative way to start the application is through the Flask.run()
-# method. This will immediately launch a local server exactly the same way the
-# flask script does.
+# The alternative way to start the application is through the
+# Flask.run() method. This will immediately launch a local server
+# exactly the same way the flask script does.
 #
-# The following code is for starting an application using only one of the
-# following launch methods:
+# The following code is for starting an application using only one of
+# the following launch methods:
 #
 #   $ python runner.py
 #   $ ./runner.py

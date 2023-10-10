@@ -8,9 +8,7 @@
 """The routes module for the application."""
 
 import os
-
-from flask import abort
-from flask import render_template
+from flask import abort, render_template
 
 from promptly.utils import strtobool
 from . import main
@@ -19,8 +17,8 @@ from . import main
 @main.before_app_request
 def maintained():
     try:
-        maintenance = strtobool(os.getenv('PROMPTLY_MAINTENANCE_MODE', 'False'))
-        if bool(maintenance):
+        mode = os.getenv('PROMPTLY_MAINTENANCE_MODE', 'False')
+        if strtobool(mode):
             abort(503)
     except ValueError:
         pass
