@@ -6,4 +6,6 @@
 # the LICENSE file that was distributed with this source code.
 
 flake8
+flake8-blind-except
+flake8-import-order
 pylint

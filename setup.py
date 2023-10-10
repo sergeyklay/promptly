@@ -185,6 +185,8 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
+        'flake8-blind-except>=0.2.0',  # Checks for blind except: statements
+        'flake8-import-order>=0.18.1',  # Checks the ordering of imports
         'flake8>=6.1.0',  # The modular source code checker
         'pylint>=3.0.1',  # Python code static checker
     ],
