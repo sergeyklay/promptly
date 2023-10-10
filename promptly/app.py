@@ -11,6 +11,7 @@ import os
 
 from flask import Flask
 
+
 def create_app(config=None) -> Flask:
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, static_url_path='')
@@ -57,9 +58,10 @@ def configure_app(app: Flask, config_name=None):
     #    $ flask --app runner:app run
     #
     # The configuration files themselves are actual Python files.  Only values
-    # in uppercase are actually stored in the con fig object later on. So make
+    # in uppercase are actually stored in the config object later on. So make
     # sure to use uppercase letters for your config keys.
     app.config.from_envvar('PRODUCTS_API_SETTINGS', silent=True)
+
 
 def configure_blueprints(app: Flask):
     """Configure blueprints for the application."""
