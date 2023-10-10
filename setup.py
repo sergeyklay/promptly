@@ -126,6 +126,14 @@ def get_version_string():
 
 # What does this project relate to.
 KEYWORDS = [
+    'ai',
+    'caht',
+    'chatgpt',
+    'gpt',
+    'llm',
+    'openai',
+    'prompt injection',
+    'text generation',
 ]
 
 # Classifiers: available ones listed at https://pypi.org/classifiers
@@ -148,8 +156,11 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
     'Programming Language :: Python :: 3 :: Only',
+    "Programming Language :: Python :: Implementation :: CPython",
 
+    'Topic :: Communications :: Chat',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    'Topic :: Utilities',
 ]
 
 # Dependencies that are downloaded by pip on installation and why.
