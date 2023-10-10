@@ -8,8 +8,9 @@
 """The routes module for the application."""
 
 import os
+
 import openai
-from flask import abort, render_template, request, jsonify
+from flask import abort, jsonify, render_template, request
 
 from promptly.utils import strtobool
 from . import main
