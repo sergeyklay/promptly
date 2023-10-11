@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/"
+  },
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
+}

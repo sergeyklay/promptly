@@ -12,9 +12,13 @@ function autoResize(element) {
   // Reset height to auto to shrink back if needed
   $(element).css('height', 'auto');
 
-  var newHeight;
-  if(element.scrollHeight > 304) {  // 304 = 38*8, where 38 is the line-height
-    newHeight = 304;
+  let newHeight;
+  const computedLineHeight = window.getComputedStyle(element).lineHeight;
+  const numericLineHeight = parseFloat(computedLineHeight);
+  const maxHeight = numericLineHeight * 8;
+
+  if (element.scrollHeight > maxHeight) {
+    newHeight = maxHeight;
     $(element).css('overflow-y', 'auto');
   } else {
     newHeight = element.scrollHeight;
