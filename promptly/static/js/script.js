@@ -30,24 +30,46 @@ $(document).on('input', 'textarea', function() {
   autoResize(this);
 });
 
+
 $(document).ready(function() {
-  $('#minimize-btn').on('click', function() {
-    $('#sidebar').toggleClass('minimized');
+  let sidebarVisible = true;
+
+  $("#sidebar-toggler-btn").click(function() {
+    if (sidebarVisible) {
+      $("#sidebar").animate({left: "-=250"}, 500);
+      $(this).animate({left: "10px"}, 500);
+
+      $("#chat-window").css("left", "0");
+      $("#chat-window").css("width", "100%");
+
+      $("#sidebar-toggler-btn i").text("chevron_right");
+    } else {
+      $("#sidebar").animate({left: "0"}, 500);
+      $(this).animate({left: "180px"}, 500);
+
+      $("#chat-window").css("left", "250px");
+      $("#chat-window").css("width", "calc(100% - 250px)");
+
+      $("#sidebar-toggler-btn i").text("menu");
+    }
+    sidebarVisible = !sidebarVisible;
   });
 
-  $('#send-btn').on('click', function() {
-    var userMessage = $('#prompt-textarea').val();
+  $("#new-chat").click(function() {
+    alert("New chat created!");
+  });
+
+  $('#send-button').on('click', function() {
+    const userMessage = $('#prompt-textarea').val();
     if (userMessage.length > 0) {
       $('#prompt-textarea').val('');
 
       var newMessageHtml = '<div class="chat-message">' +
-          '<p>' + userMessage + '</p>' +
-          '</div>';
-
-
+                           '<p>' + userMessage + '</p>' +
+                           '</div>';
       $('#chat-output').append(newMessageHtml);
 
-      var loadingElement = $('<div class="loading">Waiting for server response</div>');
+      const loadingElement = $('<div class="loading">Waiting for server response</div>');
       $('#chat-output').append(loadingElement);
 
       $.ajax({
@@ -60,8 +82,8 @@ $(document).ready(function() {
           loadingElement.remove();
 
           serverResponse = '<div class="chat-message">' +
-            '<p>' + response.message + '</p>' +
-            '</div>';
+                           '<p>' + response.message + '</p>' +
+                           '</div>';
 
           $('#chat-output').append(serverResponse);
         },
@@ -78,7 +100,7 @@ $(document).ready(function() {
   $('#prompt-textarea').on('keypress', function(e) {
     if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
-      $('#send-btn').click();
+      $('#send-button').click();
     }
   });
 });

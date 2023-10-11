@@ -16,6 +16,7 @@
 /*.egg-info
 /.pytest_cache
 /htmlcov
+/html
 
 # Application configuration
 .env
