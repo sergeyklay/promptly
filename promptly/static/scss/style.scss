@@ -1,20 +1,9 @@
-/**
- * This file is part of the Promptly.
- *
- * Copyright (C) 2023 Serghei Iakovlev <egrep@protonmail.ch>
- *
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
-/* ======================= Common ============================ */
 .header {
   height: 60px;
   line-height: 60px;
   padding: 0 15px;
 }
 
-/* ======================= Sidebar ============================ */
 #sidebar {
   width: 250px;
   position: fixed;
@@ -27,7 +16,7 @@
 }
 
 .sidebar-header {
-  composes: header;
+  @extend .header;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -86,9 +75,9 @@
   text-align: center;
 }
 
-.sidebar-footer p {}
+.sidebar-footer p {
+}
 
-/* ======================= Chat Wnodow ============================ */
 #chat-window {
   left: 250px;
   width: calc(100% - 250px);
@@ -100,14 +89,16 @@
   min-height: 100vh;
 }
 
-.chat-header, .chat-body, .chat-footer {
+.chat-header,
+.chat-body,
+.chat-footer {
   padding: 16px;
   box-sizing: border-box;
 }
 
 .chat-header {
   flex: 0;
-  composes: header;
+  @extend .header;
   background-color: #2c3e50;
   color: white;
   display: flex;
@@ -125,12 +116,30 @@
   position: sticky;
   bottom: 0;
   background-color: #fff;
+  text-align: right;
 }
 
 @media (min-width: 1024px) {
   .chat-input-container {
-    max-width: 42rem;
+    max-width: 47rem;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+.chat-input-container {
+  textarea {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    resize: none;
+    line-height: 1.6em;
+    height: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .chat-input-container {
+    textarea {
+      padding: 1.1rem;
+    }
   }
 }
