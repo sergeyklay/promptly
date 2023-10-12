@@ -15,6 +15,7 @@ import os
 
 from flask import abort, render_template
 
+from promptly.models import Chat
 from promptly.utils import strtobool
 from . import main
 
@@ -45,4 +46,5 @@ def index():
     :return: The rendered homepage template.
     :rtype: str
     """
-    return render_template('home.html')
+    chats = Chat.query.all()
+    return render_template('home.html', chats=chats)

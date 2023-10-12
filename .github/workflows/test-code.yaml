@@ -51,6 +51,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Setuptools self-test
+        run: |
+          python setup.py --fullname
+          python setup.py --long-description
+          python setup.py --classifiers
+
       - name: Make self-test
         run: make help
 
@@ -63,11 +69,8 @@ jobs:
       - name: Run database migrations
         run: make migrate
 
-      - name: Setuptools self-test
-        run: |
-          python setup.py --fullname
-          python setup.py --long-description
-          python setup.py --classifiers
+      - name: Add seed data to the database
+        run: make seed
 
       - name: Run unit tests with coverage
         run: make test

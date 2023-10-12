@@ -6,66 +6,12 @@
 
 <div class="sidebar-main">
   <div class="chat-history">
+    {% for chat in chats %}
     <div class="chat-item">
-      <h6>GANs Discussion</h6>
-      <p>Do you think GANs are overhyped?...</p>
+      <h6>{{ chat.title }}</h6>
+      <p>{{ chat.teaser }}</p>
     </div>
-    <div class="chat-item">
-      <h6>NLP Enthusiasts</h6>
-      <p>Is the Transformer still cool?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Reinforcement Learning</h6>
-      <p>Heard about the new OpenAI algo?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Quantum Computing</h6>
-      <p>Is it the future or just a fad?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Climate Change Debate</h6>
-      <p>What are the actionable steps?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>SpaceX Fans</h6>
-      <p>Next launch predictions?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Python vs Rust</h6>
-      <p>Which one's actually better?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>CRISPR Talks</h6>
-      <p>Ethical concerns anyone?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>AI in Healthcare</h6>
-      <p>How soon is the revolution?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Cybersecurity 101</h6>
-      <p>Best practices for 2023?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Big Data Analysis</h6>
-      <p>Is Hadoop still relevant?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Serverless Architecture</h6>
-      <p>When not to go serverless?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Evolution Theory</h6>
-      <p>How accurate are the timelines?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Particle Physics</h6>
-      <p>Is the Higgs Boson overrated?...</p>
-    </div>
-    <div class="chat-item">
-      <h6>Dark Matter Research</h6>
-      <p>Latest breakthroughs?...</p>
-    </div>
+    {% endfor %}
   </div>
 </div>
 
