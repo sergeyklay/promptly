@@ -85,6 +85,24 @@ serve: $(VENV_PYTHON) .env runner.py
 	$(VENV_BIN)/flask --app runner:app run --debug
 	@echo
 
+.PHONY: migrate
+migrate: $(VENV_PYTHON)
+	@echo $(CS)Run database migrations$(CE)
+	$(VENV_BIN)/flask --app runner:app db upgrade
+	@echo
+
+.PHONY: shell
+shell: $(PYTHON)
+	@echo $(CS)Starting a shell$(CE)
+	$(VENV_BIN)/flask --app runner:app shell
+	@echo
+
+.PHONY: seed
+seed: $(VENV_PYTHON)
+	@echo $(CS)Add seed data to the database$(CE)
+	$(VENV_BIN)/flask --app runner:app seed
+	@echo
+
 .PHONY: lint
 lint: $(VENV_PYTHON)
 	@echo $(CS)Running linters$(CE)
@@ -144,6 +162,9 @@ help:
 	@echo '  install:      Install project and all its dependencies'
 	@echo '  uninstall:    Uninstall local version of the project'
 	@echo '  serve:        Run builtin server'
+	@echo '  migrate:      Run database migrations'
+	@echo '  shell:        Run a shell in the app context'
+	@echo '  seed:         Add seed data to the database'
 	@echo '  lint:         Lint the code'
 	@echo '  test:         Run unit tests with coverage'
 	@echo '  ccov:         Combine coverage reports'
