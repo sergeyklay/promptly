@@ -14,6 +14,8 @@ import sqlalchemy as sa
 from sqlalchemy import orm as so
 from sqlalchemy.sql import func
 
+# TODO: Sortout with the "bug" bellow
+# pylint: disable=cyclic-import
 from .app import db
 
 
