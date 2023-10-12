@@ -32,7 +32,7 @@ def conversation():
     :raises: A variety of exceptions, such as `openai.error.OpenAIError` for
              issues with the OpenAI call.
     """
-    query = request.form.get('message')
+    query = request.json.get('message')
 
     openai.api_key = os.getenv('OPENAI_API_KEY')
     response = openai.ChatCompletion.create(

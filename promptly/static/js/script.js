@@ -9,8 +9,7 @@
 
 // Function to auto-resize the textarea
 function autoResize(element) {
-  // Reset height to auto to shrink back if needed
-  $(element).css('height', 'auto');
+  element.style.height = "auto";
 
   let newHeight;
   const computedLineHeight = window.getComputedStyle(element).lineHeight;
@@ -19,92 +18,101 @@ function autoResize(element) {
 
   if (element.scrollHeight > maxHeight) {
     newHeight = maxHeight;
-    $(element).css('overflow-y', 'auto');
+    element.style.overflowY = "auto";
   } else {
     newHeight = element.scrollHeight;
-    $(element).css('overflow-y', 'hidden');
+    element.style.overflowY = "hidden";
   }
 
-  // Set the height to the scroll height or max-height
-  $(element).css('height', newHeight + 'px');
+  element.style.height = `${newHeight}px`;
 }
 
+function appendMessageToChat(message, chatOutput) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "chat-message";
+  messageDiv.innerHTML = `<p>${message}</p>`;
+  chatOutput.appendChild(messageDiv);
+}
 
-$(document).ready(function() {
-  // Add the input event listener to the textarea using jQuery
-  $(document).on('input', 'textarea', function() {
-    autoResize(this);
+document.addEventListener("DOMContentLoaded", function() {
+  // Add the input event listener to the textarea
+  document.addEventListener("input", function(event) {
+    if (event.target.tagName.toLowerCase() === "textarea") {
+      autoResize(event.target);
+    }
   });
 
   let sidebarVisible = true;
 
-  $("#sidebar-toggler-btn").click(function() {
+  const sidebarTogglerBtn = document.getElementById("sidebar-toggler-btn");
+  sidebarTogglerBtn.addEventListener("click", function() {
+    const sidebar = document.getElementById("sidebar");
+    const chatWindow = document.getElementById("chat-window");
+    const iconElement = this.querySelector("i");
+
     if (sidebarVisible) {
-      $("#sidebar").animate({left: "-=250"}, 500);
-      $(this).animate({left: "10px"}, 500);
-
-      $("#chat-window").css("left", "0");
-      $("#chat-window").css("width", "100%");
-
-      $("#sidebar-toggler-btn i").text("chevron_right");
+      sidebar.style.left = "-250px";
+      this.style.left = "10px";
+      chatWindow.style.left = "0";
+      chatWindow.style.width = "100%";
+      iconElement.textContent = "chevron_right";
     } else {
-      $("#sidebar").animate({left: "0"}, 500);
-      $(this).animate({left: "180px"}, 500);
-
-      $("#chat-window").css("left", "250px");
-      $("#chat-window").css("width", "calc(100% - 250px)");
-
-      $("#sidebar-toggler-btn i").text("menu");
+      sidebar.style.left = "0";
+      this.style.left = "180px";
+      chatWindow.style.left = "250px";
+      chatWindow.style.width = "calc(100% - 250px)";
+      iconElement.textContent = "menu";
     }
+
     sidebarVisible = !sidebarVisible;
   });
 
-  $("#new-chat").click(function() {
+  const newChatBtn = document.getElementById("new-chat");
+  newChatBtn.addEventListener("click", function() {
     alert("New chat created!");
   });
 
-  $('#send-button').on('click', function() {
-    const userMessage = $('#prompt-textarea').val();
+  const sendButton = document.getElementById("send-button");
+  sendButton.addEventListener("click", function() {
+    const userMessage = document.getElementById("prompt-textarea").value;
+    const chatOutput = document.getElementById("chat-output");
+
     if (userMessage.length > 0) {
-      $('#prompt-textarea').val('');
+      document.getElementById("prompt-textarea").value = '';
+      appendMessageToChat(userMessage, chatOutput);
 
-      var newMessageHtml = '<div class="chat-message">' +
-          '<p>' + userMessage + '</p>' +
-          '</div>';
-      $('#chat-output').append(newMessageHtml);
+      const loadingElement = document.createElement("div");
+      loadingElement.className = "loading";
+      loadingElement.textContent = "Waiting for server response";
+      chatOutput.appendChild(loadingElement);
 
-      const loadingElement = $('<div class="loading">Waiting for server response</div>');
-      $('#chat-output').append(loadingElement);
-
-      $.ajax({
-        url: '/conversation',
+      // Replace with fetch API instead of jQuery's $.ajax
+      fetch('/conversation', {
         method: 'POST',
-        data: {
-          message: userMessage,
+        headers: {
+          'Content-Type': 'application/json'
         },
-        success: function (response) {
-          loadingElement.remove();
-
-          serverResponse = '<div class="chat-message">' +
-            '<p>' + response.message + '</p>' +
-            '</div>';
-
-          $('#chat-output').append(serverResponse);
-        },
-        error: function () {
-          // TODO: Show error
-          loadingElement.remove();
-        }
+        body: JSON.stringify({ message: userMessage })
+      })
+      .then(response => response.json())
+      .then(data => {
+        loadingElement.remove();
+        appendMessageToChat(data.message, chatOutput);
+      })
+      .catch(() => {
+        // TODO: Show error
+        loadingElement.remove();
       });
 
-      $('#chat-output').scrollTop($('#chat-output')[0].scrollHeight);
+      chatOutput.scrollTop = chatOutput.scrollHeight;
     }
   });
 
-  $('#prompt-textarea').on('keypress', function(e) {
-    if (e.which == 13 && !e.shiftKey) {
+  const promptTextarea = document.getElementById("prompt-textarea");
+  promptTextarea.addEventListener("keypress", function(e) {
+    if (e.which === 13 && !e.shiftKey) {
       e.preventDefault();
-      $('#send-button').click();
+      sendButton.click();
     }
   });
 });
