@@ -15,7 +15,7 @@
 # Setting up linguist
 *.rst    linguist-documentation -linguist-detectable
 LICENSE  linguist-documentation -linguist-detectable
-*.drawio linguist-language=XML
+*.drawio linguist-language=XML linguist-detectable
 
 # The following lines mark the bootstrap and jquery files as vendored
 # code, so they won't be included in the repository's language
