@@ -29,13 +29,13 @@ function autoResize(element) {
   $(element).css('height', newHeight + 'px');
 }
 
-// Add the input event listener to the textarea using jQuery
-$(document).on('input', 'textarea', function() {
-  autoResize(this);
-});
-
 
 $(document).ready(function() {
+  // Add the input event listener to the textarea using jQuery
+  $(document).on('input', 'textarea', function() {
+    autoResize(this);
+  });
+
   let sidebarVisible = true;
 
   $("#sidebar-toggler-btn").click(function() {
@@ -69,8 +69,8 @@ $(document).ready(function() {
       $('#prompt-textarea').val('');
 
       var newMessageHtml = '<div class="chat-message">' +
-                           '<p>' + userMessage + '</p>' +
-                           '</div>';
+          '<p>' + userMessage + '</p>' +
+          '</div>';
       $('#chat-output').append(newMessageHtml);
 
       const loadingElement = $('<div class="loading">Waiting for server response</div>');
@@ -86,8 +86,8 @@ $(document).ready(function() {
           loadingElement.remove();
 
           serverResponse = '<div class="chat-message">' +
-                           '<p>' + response.message + '</p>' +
-                           '</div>';
+            '<p>' + response.message + '</p>' +
+            '</div>';
 
           $('#chat-output').append(serverResponse);
         },
