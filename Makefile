@@ -85,6 +85,12 @@ serve: $(VENV_PYTHON) .env runner.py
 	$(VENV_BIN)/flask --app runner:app run --debug
 	@echo
 
+.PHONY: revision
+revision: $(VENV_PYTHON)
+	@echo $(CS)Run database migrations$(CE)
+	$(VENV_BIN)/flask --app runner:app db revision --autogenerate
+	@echo
+
 .PHONY: migrate
 migrate: $(VENV_PYTHON)
 	@echo $(CS)Run database migrations$(CE)
@@ -162,6 +168,7 @@ help:
 	@echo '  install:      Install project and all its dependencies'
 	@echo '  uninstall:    Uninstall local version of the project'
 	@echo '  serve:        Run builtin server'
+	@echo '  revision:     Autogenerate new migration revisions'
 	@echo '  migrate:      Run database migrations'
 	@echo '  shell:        Run a shell in the app context'
 	@echo '  seed:         Add seed data to the database'

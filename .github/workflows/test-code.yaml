@@ -51,11 +51,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Make self-test
+        run: make help
+
       - name: Set up virtualenv
         run: make init
 
       - name: Install dependencies
         run: make install
+
+       - name: Run database migrations
+        run: make migrate
 
       - name: Setuptools self-test
         run: |

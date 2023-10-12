@@ -24,6 +24,7 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(app=None, metadata=metadata)
 
+
 def create_app(config=None) -> Flask:
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, static_url_path='')
@@ -100,6 +101,7 @@ def configure_extensions(app: Flask):
     @app.cli.command()
     def deploy():
         """Run deployment tasks."""
+        # Migrate database to latest revision.
         upgrade()
 
     @app.cli.command()
@@ -109,6 +111,20 @@ def configure_extensions(app: Flask):
 
 def configure_context_processors(app: Flask):
     """Configure the context processors."""
+    import inspect
+    from promptly import models
+
+    ctx = {}
+    for pair in inspect.getmembers(models, inspect.isclass):
+        # Do not reimport non-project models
+        if pair[1].__module__ == models.__name__:
+            ctx[pair[0]] = pair[1]
+
     @app.shell_context_processor
     def make_shell_context():
         """Configure flask shell command to autoimport app objects."""
+        return {
+            'app': app,
+            'db': db,
+            **ctx
+        }
