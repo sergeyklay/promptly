@@ -1,0 +1,62 @@
+[
+  {
+    "title": "GANs Discussion",
+    "teaser": "Do you think GANs are overhyped?..."
+  },
+  {
+    "title": "NLP Enthusiasts",
+    "teaser": "Is the Transformer still cool?..."
+  },
+  {
+    "title": "Reinforcement Learning",
+    "teaser": "Heard about the new OpenAI algo?.."
+  },
+  {
+    "title": "Quantum Computing",
+    "teaser": "Is it the future or just a fad?..."
+  },
+  {
+    "title": "Climate Change Debate",
+    "teaser": "What are the actionable steps?..."
+  },
+  {
+    "title": "SpaceX Fans",
+    "teaser": "Next launch predictions?..."
+  },
+  {
+    "title": "Python vs Rust",
+    "teaser": "Which one's actually better?..."
+  },
+  {
+    "title": "CRISPR Talks",
+    "teaser": "Ethical concerns anyone?..."
+  },
+  {
+    "title": "AI in Healthcare",
+    "teaser": "How soon is the revolution?..."
+  },
+  {
+    "title": "Cybersecurity 101",
+    "teaser": "Best practices for 2023?..."
+  },
+  {
+    "title": "Big Data Analysis",
+    "teaser": "Is Hadoop still relevant?..."
+  },
+  {
+    "title": "Serverless Architecture",
+    "teaser": "When not to go serverless?..."
+  },
+  {
+    "title": "Evolution Theory",
+    "teaser": "How accurate are the timelines?..."
+  },
+  {
+    "title": "Particle Physics",
+    "teaser": "Is the Higgs Boson overrated?..."
+  },
+  {
+    "title": "Dark Matter Research",
+    "teaser": "Latest breakthroughs?..."
+  }
+]

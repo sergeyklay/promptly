@@ -7,6 +7,8 @@
 
 """This module is responsible for seeding the database with fake data."""
 
+import json
+import os
 import signal
 import sys
 
@@ -21,71 +23,26 @@ def seed_all():
     seed_chat_history()
 
 
+def load_json_data(filename):
+    """Load JSON data from a file."""
+    with open(filename, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
 def seed_chat_history():
     """Seeds all chat history to the database."""
-    chats = [
-        {
-            'title': 'GANs Discussion',
-            'teaser': 'Do you think GANs are overhyped?...',
-        },
-        {
-            'title': 'NLP Enthusiasts',
-            'teaser': 'Is the Transformer still cool?...',
-        },
-        {
-            'title': 'Reinforcement Learning',
-            'teaser': 'Heard about the new OpenAI algo?..',
-        },
-        {
-            'title': 'Quantum Computing',
-            'teaser': 'Is it the future or just a fad?...',
-        },
-        {
-            'title': 'Climate Change Debate',
-            'teaser': 'What are the actionable steps?...',
-        },
-        {
-            'title': 'SpaceX Fans',
-            'teaser': 'Next launch predictions?...',
-        },
-        {
-            'title': 'Python vs Rust',
-            'teaser': "Which one's actually better?...",
-        },
-        {
-            'title': 'CRISPR Talks',
-            'teaser': 'Ethical concerns anyone?...',
-        },
-        {
-            'title': 'AI in Healthcare',
-            'teaser': 'How soon is the revolution?...',
-        },
-        {
-            'title': 'Cybersecurity 101',
-            'teaser': 'Best practices for 2023?...',
-        },
-        {
-            'title': 'Big Data Analysis',
-            'teaser': 'Is Hadoop still relevant?...',
-        },
-        {
-            'title': 'Serverless Architecture',
-            'teaser': 'When not to go serverless?...',
-        },
-        {
-            'title': 'Evolution Theory',
-            'teaser': 'How accurate are the timelines?...',
-        },
-        {
-            'title': 'Particle Physics',
-            'teaser': 'Is the Higgs Boson overrated?...',
-        },
-        {
-            'title': 'Dark Matter Research',
-            'teaser': 'Latest breakthroughs?...',
-        },
-    ]
+    file_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        'migrations',
+        'seed-chats-history.json'
+    )
 
+    if not os.path.exists(file_path):
+        sys.stderr.write(f'JSON file not found at {file_path}\n')
+        sys.stderr.flush()
+        sys.exit(2)  # No such file or directory
+
+    chats = load_json_data(file_path)
     for index, chat_data in enumerate(chats):
         try:
             chat = Chat(**chat_data)
