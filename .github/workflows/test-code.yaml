@@ -60,7 +60,7 @@ jobs:
       - name: Install dependencies
         run: make install
 
-       - name: Run database migrations
+      - name: Run database migrations
         run: make migrate
 
       - name: Setuptools self-test
