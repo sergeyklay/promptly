@@ -15,7 +15,10 @@
 ;; For a deeper understanding, you can refer to:
 ;; - Inside Emacs, run the command: (info "(emacs) Directory Variables")
 ;; - In the terminal, execute: info "(emacs) Directory Variables"
-;;   or specify the path using '-d' like so:
+;;
+;; Note: In some installations may be necessary to specify the info path using
+;; '-d' like so:
+;;
 ;;   info -d /Applications/Emacs.app/Contents/Resources/info "(emacs) Directory Variables"
 
 ;;; Code:
@@ -27,20 +30,20 @@
 
 ;;; Commentary:
 ;;
-;; - `indent-tabs-mode`:
+;; - `indent-tabs-mode':
 ;;   Set to `nil` to use spaces for indentation instead of tabs. This is the
 ;;   conventional way to indent Python code.
 ;;
-;; - `tab-width`:
+;; - `tab-width':
 ;;   This sets the number of spaces a tab character represents. The conventional
 ;;   setting is 4 for Python code.
 ;;
-;; - `fill-column`:
+;; - `fill-column':
 ;;   This sets the column beyond which automatic line-wrapping occurs. Setting
 ;;   it to 79 is in compliance with PEP 8, which is the style guide for writing
 ;;   Python code.
 ;;
-;; - `python-indent-offset`:
+;; - `python-indent-offset':
 ;;   This sets the number of spaces for each indentation level in Python mode.
 ;;   The conventional setting is 4.
 ;;
