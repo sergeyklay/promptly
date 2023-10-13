@@ -75,13 +75,11 @@ To create a virtual environment, follow these steps:
 
 .. code-block:: console
 
-   $ .\venv\Scripts\activate
-
-   On Unix or MacOS, use:
-
-.. code-block:: console
-
+   # On Unix or MacOS, use:
    $ source venv/bin/activate
+
+   # On Windows use:
+   $ .\venv\Scripts\activate
 
 Now you're in the virtual environment, and you can install dependencies isolated
 from your global environment.
