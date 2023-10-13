@@ -12,6 +12,8 @@ base application info used by various functions within the
 package and provides a factory function to create application
 instance.
 
+Refer to the `documentation <https://promptly.readthedocs.io/>`_ for
+details on the use of this package.
 """
 
 __copyright__ = 'Copyright (C) 2023 Serghei Iakovlev'
@@ -19,5 +21,5 @@ __version__ = '0.0.1'
 __license__ = 'MIT'
 __author__ = 'Serghei Iakovlev'
 __author_email__ = 'egrep@protonmail.ch'
-__url__ = 'https://github.com/sergeyklay/promprtly'
+__url__ = 'https://promptly.readthedocs.io/'
 __description__ = 'A customizable ChatGPT API interface for OpenAPI models.'

@@ -2,6 +2,9 @@
 
     <h1 align="center">Promptly</h1>
     <p align="center">
+        <a href="https://promptly.readthedocs.io/en/stable/?badge=stable">
+            <img src="https://readthedocs.org/projects/promptly/badge/?version=stable" alt="Documentation Status" />
+        </a>
         <a href="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml">
             <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml/badge.svg" alt="Test Code" />
         </a>
@@ -45,8 +48,10 @@ Project Information
 ===================
 
 Promptly is an open-source project under the `MIT License <https://choosealicense.com/licenses/mit/>`_,
+its documentation lives at `Read the Docs <https://promptly.readthedocs.io/>`_,
 with its code available at `GitHub <https://github.com/sergeyklay/promptly>`_.
-It’s tested rigorously to ensure reliable interactions with ML models.
+It’s rigorously tested on Python 3.10+ to ensure reliable interactions with ML
+models.
 
 Contributions to Promptly are most welcome!
 

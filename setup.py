@@ -66,6 +66,7 @@ def long_description():
         title = f"{PKG_NAME}: {find_meta('description')}"
         head = '=' * (len(title) - 1)
 
+        changelog_url = f"{find_meta('url')}/en/latest/changelog.html"
         contents = (
             head,
             format(title.strip(' .')),
@@ -77,7 +78,7 @@ def long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/blob/main/CHANGELOG.rst>`_.",
+            f"`Full changelog <{changelog_url}>`_.",
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
@@ -213,7 +214,7 @@ EXTRAS_REQUIRE['develop'] = \
 # Project's URLs
 PROJECT_URLS = {
     'Documentation': find_meta('url'),
-    'Changelog': f"{find_meta('url')}/blob/main/CHANGELOG.rst",
+    'Changelog': f"{find_meta('url')}/en/latest/changelog.html",
     'Bug Tracker': f"{find_meta('url')}/issues",
     'Source Code': find_meta('url'),
 }
