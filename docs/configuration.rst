@@ -7,7 +7,7 @@ Configuration via Environment Variables
 The application can be configured through several environment variables. Below
 is a description of some key variables and their usage:
 
-1. **PROMPTLY_MAINTENANCE_MODE**
+1. ``PROMPTLY_MAINTENANCE_MODE``
     This variable is used to toggle maintenance mode for the application. When
     maintenance mode is active, the application will respond with a "503 Service
     Unavailable" status for every request. To activate maintenance mode, set the
@@ -22,7 +22,7 @@ is a description of some key variables and their usage:
         $ export PROMPTLY_MAINTENANCE_MODE=True
         $ flask --app runner:app run
 
-2. **PROMPTLY_SETTINGS**
+2. ``PROMPTLY_SETTINGS``
     This variable points to a configuration file that can hold additional
     configuration settings for the application. The configuration file should be
     a Python file, and only variables defined in uppercase will be read and
@@ -35,7 +35,7 @@ is a description of some key variables and their usage:
         $ export PROMPTLY_SETTINGS="/path/to/settings.cfg"
         $ flask --app runner:app run
 
-3. **PROMPTLY_CONFIG**
+3. ``PROMPTLY_CONFIG``
     This variable defines the startup mode of the application. Valid values
     include "development", "testing", "production", and "default" (which is an
     alias for "development"). This variable influences how the application is
