@@ -2,8 +2,8 @@
 
     <h1 align="center">Promptly</h1>
     <p align="center">
-        <a href="https://promptly.readthedocs.io/en/stable/?badge=stable">
-            <img src="https://readthedocs.org/projects/promptly/badge/?version=stable" alt="Documentation Status" />
+        <a href="https://promptly.readthedocs.io/en/latest/?badge=latest">
+            <img src="https://readthedocs.org/projects/promptly/badge/?version=latest" alt="Documentation Status" />
         </a>
         <a href="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml">
             <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml/badge.svg" alt="Test Code" />
