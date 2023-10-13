@@ -5,7 +5,10 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
+import os
+
 import pytest
+from flask_migrate import upgrade
 
 from promptly.app import create_app
 
@@ -17,7 +20,9 @@ def app():
         'TESTING': True,
     })
     with app_instance.app_context():
-        # TODO: flask_migrate.upgrade()
+        upgrade(os.path.join(
+            os.path.dirname(app_instance.root_path), 'migrations')
+        )
         yield app_instance
 
 

@@ -17,9 +17,9 @@ def create_app(config=None) -> Flask:
     app = Flask(__name__, static_url_path='')
 
     configure_app(app, config)
-    configure_blueprints(app)
     configure_extensions(app)
     configure_context_processors(app)
+    configure_blueprints(app)
 
     return app
 
@@ -61,17 +61,6 @@ def configure_app(app: Flask, config_name=None):
     # in uppercase are actually stored in the config object later on. So make
     # sure to use uppercase letters for your config keys.
     app.config.from_envvar('PRODUCTS_API_SETTINGS', silent=True)
-
-
-def configure_blueprints(app: Flask):
-    """Configure blueprints for the application."""
-    # main blueprint registration
-    from promptly.main import main_bp
-    app.register_blueprint(main_bp)
-
-    # api blueprint registration
-    from promptly.api import api_bp
-    app.register_blueprint(api_bp)
 
 
 def configure_extensions(app: Flask):
@@ -118,3 +107,14 @@ def configure_context_processors(app: Flask):
             'db': models.db,
             **ctx
         }
+
+
+def configure_blueprints(app: Flask):
+    """Configure blueprints for the application."""
+    # main blueprint registration
+    from promptly.main import main_bp
+    app.register_blueprint(main_bp)
+
+    # api blueprint registration
+    from promptly.api import api_bp
+    app.register_blueprint(api_bp)

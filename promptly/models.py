@@ -13,8 +13,7 @@ from typing import List
 import sqlalchemy as sa
 from flask import abort
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
-from sqlalchemy import orm as so
+from sqlalchemy import MetaData, orm as so
 from sqlalchemy.sql import func
 
 convention = {
