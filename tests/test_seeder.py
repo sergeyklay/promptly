@@ -14,7 +14,8 @@ from promptly.seeder import load_json_data
 
 @pytest.fixture
 def mock_open(mocker):
-    return mocker.patch('builtins.open', mocker.mock_open(read_data='{"foo": "bar"}'))
+    return mocker.patch(
+        'builtins.open', mocker.mock_open(read_data='{"foo": "bar"}'))
 
 
 @pytest.fixture

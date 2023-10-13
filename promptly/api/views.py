@@ -16,9 +16,6 @@ from flask import jsonify, request
 api_bp = Blueprint('api', __name__)
 
 
-GPT_MODEL = 'gpt-3.5-turbo-16k'
-
-
 @api_bp.route('/conversation', methods=['POST'])
 def conversation():
     """Process a user's chat message and return the model's response.
@@ -36,9 +33,11 @@ def conversation():
     query = request.json.get('message')
 
     openai.api_key = os.getenv('OPENAI_API_KEY')
+    openai_model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
+
     response = openai.ChatCompletion.create(
         messages=[{'role': 'user', 'content': query}],
-        model=GPT_MODEL,
+        model=openai_model,
         temperature=0,
         max_tokens=2048,
         top_p=1,
