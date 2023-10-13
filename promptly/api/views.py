@@ -9,9 +9,10 @@
 
 import os
 
-import openai
 from flask import Blueprint
 from flask import jsonify, request
+
+from .utils import completion
 
 api_bp = Blueprint('api', __name__)
 
@@ -31,11 +32,9 @@ def conversation():
              issues with the OpenAI call.
     """
     query = request.json.get('message')
-
-    openai.api_key = os.getenv('OPENAI_API_KEY')
     openai_model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
 
-    response = openai.ChatCompletion.create(
+    response = completion(
         messages=[{'role': 'user', 'content': query}],
         model=openai_model,
         temperature=0,
