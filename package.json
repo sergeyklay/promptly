@@ -2,7 +2,7 @@
   "name": "promptly",
   "version": "0.0.1",
   "private": true,
-  "description": "Promptly is a dev-focused tool for enhanced interaction with GPT models, featuring advanced options like Prompt Injection for more precise query responses.",
+  "description": "A customizable ChatGPT API interface for OpenAPI models.",
   "main": "index.js",
   "scripts": {
     "intro": "cat package.json | jq .scripts",
