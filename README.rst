@@ -39,6 +39,57 @@ Features:
 
 .. teaser-end
 
+Local Development
+=================
+
+It's highly recommended to use a virtual environment for local development to
+keep the dependencies required by different projects separate and to avoid
+potential conflicts. A virtual environment is a self-contained directory tree
+that contains a Python installation for a particular version of Python, plus a
+number of additional packages. This way, you can work on your project using its
+specific dependencies, without any interference with other projects or system
+libraries.
+
+To create a virtual environment, follow these steps:
+
+1. Install `virtualenv` if you haven't already:
+
+.. code-block:: console
+
+   $ pip install virtualenv
+
+2. Navigate to your project directory
+   (assuming you've already cloned the repository):
+
+.. code-block:: console
+
+   $ cd promptly
+
+3. Create a virtual environment in the project directory:
+
+.. code-block:: console
+
+   $ virtualenv venv
+
+4. Activate the virtual environment. On Windows, use:
+
+.. code-block:: console
+
+   $ .\venv\Scripts\activate
+
+   On Unix or MacOS, use:
+
+.. code-block:: console
+
+   $ source venv/bin/activate
+
+Now you're in the virtual environment, and you can install dependencies isolated
+from your global environment.
+
+For more information on virtual environments, check out the official
+`Python documentation <https://docs.python.org/3/tutorial/venv.html>`_.
+
+
 Getting Started
 ===============
 
