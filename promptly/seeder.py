@@ -50,8 +50,11 @@ def seed_chat_history():
             db.session.commit()
             chats[index] = chat
         except KeyboardInterrupt:  # the user hit control-C
-            sys.stderr.write('\nReceived keyboard interrupt, terminating...\n')
+            sys.stderr.write('\nReceived keyboard interrupt, terminating ')
+            sys.stderr.write('and rollback the current DB transaction...\n')
             sys.stderr.flush()
+
+            db.session.rollback()
 
             # Control-C is fatal error signal 2, for more see
             # https://tldp.org/LDP/abs/html/exitcodes.html
