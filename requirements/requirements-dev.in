@@ -12,6 +12,7 @@ flake8-blind-except
 flake8-import-order
 pylint
 pytest
+pytest-mock
 
 # docs
 sphinx

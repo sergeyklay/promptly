@@ -195,6 +195,7 @@ EXTRAS_REQUIRE = {
         'flake8>=6.1.0',  # The modular source code checker
         'pylint>=3.0.1',  # Python code static checker
         'pytest>=7.4.2',  # Our tests framework
+        'pytest-mock>=3.11.1',  # Mocking with pytest
         'coverage[toml]>=7.3.2',  # Code coverage measurement for Python
     ],
     'docs': [
