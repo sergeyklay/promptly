@@ -28,8 +28,7 @@ def load_json_data(filename):
 
 def seed_chat_history():
     """Seeds all chat history to the database."""
-    from promptly.app import db
-    from promptly.models import Chat
+    from promptly.models import db, Chat
 
     file_path = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),

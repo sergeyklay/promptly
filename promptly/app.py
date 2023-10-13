@@ -10,19 +10,6 @@
 import os
 
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
-
-convention = {
-    'ix': 'ix_%(column_0_label)s',
-    'uq': 'uq_%(table_name)s_%(column_0_name)s',
-    'ck': 'ck_%(table_name)s_%(constraint_name)s',
-    'fk': 'fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s',
-    'pk': 'pk_%(table_name)s',
-}
-
-metadata = MetaData(naming_convention=convention)
-db = SQLAlchemy(app=None, metadata=metadata)
 
 
 def create_app(config=None) -> Flask:
@@ -89,6 +76,7 @@ def configure_blueprints(app: Flask):
 
 def configure_extensions(app: Flask):
     """Configure extensions for the application."""
+    from promptly.models import db
     from flask_migrate import Migrate, upgrade
 
     # Flask-SQLAlchemy
@@ -127,6 +115,6 @@ def configure_context_processors(app: Flask):
         """Configure flask shell command to autoimport app objects."""
         return {
             'app': app,
-            'db': db,
+            'db': models.db,
             **ctx
         }
