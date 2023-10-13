@@ -56,8 +56,8 @@ def long_description():
         if not path.isfile(changelog):
             return ''
 
-        pattern = (fr'({VERSION_REGEX} \(.*?\)\r?\n.*?)'
-                   r'\r?\n\r?\n\r?\n----\r?\n\r?\n\r?\n')
+        pattern = (fr'({VERSION_REGEX} \(.*?\)\r?\n-*'
+                   r'\r?\n\r?\n(?:[\s\S]*?)(?=----))')
         result = re.search(pattern, read_file(changelog), re.S)
 
         return result.group(1) if result else ''
