@@ -47,8 +47,8 @@ def seed_all():
 
         [
             {
-                "table": "users",
-                "model": "User",
+                "table": "chats",
+                "model": "Chat",
                 "data": [
                     {"title": "GANs Discussion", "teaser": "..."},
                     {"title": "NLP Enthusiasts", "teaser": "..."}
