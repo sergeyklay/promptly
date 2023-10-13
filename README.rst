@@ -71,7 +71,7 @@ To create a virtual environment, follow these steps:
 
    $ virtualenv venv
 
-4. Activate the virtual environment. On Windows, use:
+4. Activate the virtual environment:
 
 .. code-block:: console
 
