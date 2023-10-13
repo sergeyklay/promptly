@@ -13,11 +13,11 @@
 # https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
 
 # Directories to ignore (do not add trailing '/'s, they skip symlinks):
-/*.egg-info
+/.cache
 /.pytest_cache
 /htmlcov
-/html
 /node_modules
+/promptly.egg-info
 
 # Application configuration
 .env
