@@ -29,7 +29,7 @@ _BOOL_MAP = {
 def strtobool(value: str) -> bool:
     """Convert a string representation of truth to true (1) or false (0).
 
-    String values are case insensitive and can be any of: 'y', 'yes', 't',
+    String values are case-insensitive and can be any of: 'y', 'yes', 't',
     'true', 'on', '1', 'n', 'no', 'f', 'false', 'off', '0'.
 
     :param value: The string to convert to a boolean.

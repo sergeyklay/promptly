@@ -50,7 +50,7 @@ def configure_app(app: Flask, config_name=None):
     """Configure application."""
     from promptly.config import config, Config
 
-    # Use the default config and override it afterwards
+    # Use the default config and override it afterward
     app.config.from_object(config['default'])
 
     if config is not None:
