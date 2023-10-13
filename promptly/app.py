@@ -54,7 +54,7 @@ def configure_app(app: Flask, config_name=None):
     # Update config from environment variable (if any). This environment
     # variable can be set in the shell before starting the server:
     #
-    #    $ export PROMPTLY_API_SETTINGS="/var/www/server/settings.cfg"
+    #    $ export PROMPTLY_SETTINGS="/var/www/server/settings.cfg"
     #    $ flask --app runner:app run
     #
     # The configuration files themselves are actual Python files.  Only values
