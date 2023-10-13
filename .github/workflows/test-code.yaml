@@ -63,11 +63,31 @@ jobs:
       - name: Set up virtualenv
         run: make init
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: make install
 
       - name: Run database migrations
         run: make migrate
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: npm
+
+      - name: Setup npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: package.json self-test
+        run: npm run intro
+
+      - name: Install JS dependencies
+        run: npm ci --ignore-scripts
 
       - name: Add seed data to the database
         run: make seed
