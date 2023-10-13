@@ -5,6 +5,7 @@ Installation
 Ensure you have the following installed on your machine:
 
 - Python >= 3.10
+- Node.js >= 16
 - Your favorite text editor
   (*If you're an Emacs hacker, you'll feel right at home*)
 - Basic understanding of OpenAPI, web development, and how GPT models work
@@ -81,7 +82,7 @@ Run database migrations:
    $ make migrate
 
 
-Finally the necessary JS libraries:
+Finally install the necessary Node.js libraries:
 
 .. code-block:: console
 
