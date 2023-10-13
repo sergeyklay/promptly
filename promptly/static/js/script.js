@@ -7,38 +7,48 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-// Function to auto-resize the textarea
-function autoResize(element) {
-  element.style.height = "auto";
+/**
+ * Automatically resizes the textarea element based on its content.
+ *
+ * @param {HTMLTextAreaElement} e - The textarea element to resize.
+ */
+function autoResizePromptTextarea(e) {
+  e.style.height = "auto";
 
   let newHeight;
-  const computedLineHeight = window.getComputedStyle(element).lineHeight;
+  const computedLineHeight = window.getComputedStyle(e).lineHeight;
   const numericLineHeight = parseFloat(computedLineHeight);
   const maxHeight = numericLineHeight * 8;
 
-  if (element.scrollHeight > maxHeight) {
+  if (e.scrollHeight > maxHeight) {
     newHeight = maxHeight;
-    element.style.overflowY = "auto";
+    e.style.overflowY = "auto";
   } else {
-    newHeight = element.scrollHeight;
-    element.style.overflowY = "hidden";
+    newHeight = e.scrollHeight;
+    e.style.overflowY = "hidden";
   }
 
-  element.style.height = `${newHeight}px`;
+  e.style.height = `${newHeight}px`;
 }
 
-function appendMessageToChat(message, chatOutput) {
+/**
+ * Appends a new message to the chat output container.
+ *
+ * @param {string} message - The message text to append.
+ * @param {HTMLElement} outputContainer - The DOM element to which the message will be appended.
+ */
+function appendMessageToChat(message, outputContainer) {
   const messageDiv = document.createElement("div");
   messageDiv.className = "chat-message";
   messageDiv.innerHTML = `<p>${message}</p>`;
-  chatOutput.appendChild(messageDiv);
+  outputContainer.appendChild(messageDiv);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   // Add the input event listener to the textarea
   document.addEventListener("input", function(event) {
     if (event.target.tagName.toLowerCase() === "textarea") {
-      autoResize(event.target);
+      autoResizePromptTextarea(event.target);
     }
   });
 
@@ -110,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const promptTextarea = document.getElementById("prompt-textarea");
   promptTextarea.addEventListener("keypress", function(e) {
-    if (e.which === 13 && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendButton.click();
     }
