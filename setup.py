@@ -197,6 +197,8 @@ EXTRAS_REQUIRE = {
         'coverage[toml]>=7.3.2',  # Code coverage measurement for Python
     ],
     'docs': [
+        'sphinx>=7.2.6',  # Python documentation generator,
+        'furo>=2023.9.10',  # Sphinx documentation theme
     ],
 }
 

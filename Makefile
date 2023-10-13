@@ -135,6 +135,15 @@ ccov: $(VENV_PYTHON)
 .PHONY: test-all
 test-all: uninstall clean install test lint
 
+.PHONY: docs
+docs: $(VENV_PYTHON)
+	@echo $(CS)Build package documentation$(CE)
+	$(VENV_BIN)/sphinx-build -n -T -W -b html -d ./doctrees docs docs/_build/html
+	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d ./doctrees docs docs/_build/html
+	$(VENV_PYTHON) -m doctest README.rst
+	$(RM) -r ./doctrees
+	@echo
+
 .PHONY: clean
 clean:
 	@echo $(CS)Remove build and tests artefacts and directories$(CE)
