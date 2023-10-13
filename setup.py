@@ -124,7 +124,7 @@ def get_version_string():
     return version_string
 
 
-# What does this project relate to.
+# What does this project relate to?
 KEYWORDS = [
     'ai',
     'chat',
