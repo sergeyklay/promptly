@@ -10,15 +10,16 @@
 import os
 
 import openai
+from flask import Blueprint
 from flask import jsonify, request
 
-from . import api
+api_bp = Blueprint('api', __name__)
 
 
 GPT_MODEL = 'gpt-3.5-turbo-16k'
 
 
-@api.route('/conversation', methods=['POST'])
+@api_bp.route('/conversation', methods=['POST'])
 def conversation():
     """Process a user's chat message and return the model's response.
 

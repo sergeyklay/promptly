@@ -12,10 +12,4 @@ application.
 
 """
 
-from flask import Blueprint
-
-main = Blueprint('main', __name__)
-
-# TODO: Sortout with the "bug" bellow
-# pylint: disable=cyclic-import
-from . import views  # noqa: F401, E402
+from .views import main_bp  # noqa: F401

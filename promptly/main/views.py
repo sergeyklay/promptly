@@ -14,13 +14,15 @@ Promptly application, including the homepage and maintenance mode handling.
 import os
 
 from flask import abort, render_template
+from flask import Blueprint
 
-from promptly.models import Chat
 from promptly.utils import strtobool
-from . import main
 
 
-@main.before_app_request
+main_bp = Blueprint('main', __name__)
+
+
+@main_bp.before_app_request
 def maintained():
     """Check if the application is in maintenance mode.
 
@@ -39,12 +41,13 @@ def maintained():
         pass
 
 
-@main.route('/')
-def index():
+@main_bp.route('/')
+def home_page():
     """Render the homepage of the application.
 
     :return: The rendered homepage template.
     :rtype: str
     """
+    from promptly.models import Chat
     chats = Chat.query.all()
     return render_template('home.html', chats=chats)
