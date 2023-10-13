@@ -16,6 +16,7 @@ is a description of some key variables and their usage:
     mode.
 
     Example usage:
+
     .. code-block:: shell
 
         $ export PROMPTLY_MAINTENANCE_MODE=True
@@ -28,6 +29,7 @@ is a description of some key variables and their usage:
     applied.
 
     Example usage:
+
     .. code-block:: shell
 
         $ export PROMPTLY_SETTINGS="/path/to/settings.cfg"
@@ -41,6 +43,7 @@ is a description of some key variables and their usage:
     Flask script.
 
     Example usage:
+
     .. code-block:: shell
 
         $ export PROMPTLY_CONFIG=production
