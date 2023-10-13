@@ -16,24 +16,26 @@
 
 .. teaser-begin
 
-Promptly is a tool designed for enthusiasts who are eager to explore various machine learning models
-through APIs. It enables users to interact with multiple models, offering more settings and control
-compared to the conventional ChatGPT by OpenAI. With additional features like Prompt Injection
-and Fine Tuning, Promptly stands as a self-serving tool for developers aiming to dig deep into
-ML architectures.
+Welcome to Promptly, an open-source research project aimed at interacting with
+OpenAPI compatible language models. If you're an engineer, data scientist, or
+just an enthusiast looking for fine-grained control over your conversational
+model, you're in the right place.
 
-This project integrates:
+This project isn't production-ready. It's more like a sandbox where you can mess
+around with prompt injections, fine-tuning, and much more. Do expect bugs; after
+all, that's part of the fun!
 
-* A comprehensive set of APIs to interact with various ML models.
-* Options for Prompt Injection and Fine Tuning to tailor the interactions.
-* An exploration into different ML architectures to understand their workings.
+Features:
+
+- **Customizable API Calls:** Go beyond the traditional ChatGPT API limitations.
+- **Prompt Injection:** Want to steer the conversation? Inject prompts to guide
+  the model.
+- **Fine-Tuning Support:** Got a model that's been fine-tuned? This project has
+  you covered.
+- **Multiple Models:** This isn't a one-trick pony. Use any OpenAPI-compatible
+  model you like.
 
 .. teaser-end
-
-Promptly Usage
-==============
-
-Promptly serves as a gateway to interact with different ML models via APIs. It is mainly developed as a self-serving tool for developers and ML enthusiasts to have more control and settings in interacting with ML models, beyond what's offered by OpenAI's ChatGPT.
 
 Getting Started
 ===============
@@ -43,7 +45,10 @@ Prerequisites
 
 Ensure you have the following installed on your machine:
 
-* Python >= 3.10
+- Python >= 3.10
+- Your favorite text editor
+  (*If you're an Emacs hacker, you'll feel right at home*)
+- Basic understanding of OpenAPI, web development, and how GPT models work
 
 Installing
 ----------
@@ -61,6 +66,26 @@ Install the necessary Python libraries:
 
    $ make init
    $ make install
+
+Run database migrations:
+
+.. code-block:: console
+
+   $ make migrate
+
+
+Finally the necessary JS libraries:
+
+.. code-block:: console
+
+   $ npm ci
+
+Optionally you can add seed (fake) data to the database:
+
+.. code-block:: console
+
+   $ make seed
+
 
 Usage
 -----
@@ -80,8 +105,13 @@ Contributions to Promptly are most welcome!
 
 .. -support-
 
+
 Support
 =======
+
+This project is a research tool and comes with no warranties. It might crash,
+produce nonsensical outputs, or accidentally start a thermonuclear war. Use at
+your own risk.
 
 For any questions, remarks, or bug reporting, feel free to
 `open an issue <https://github.com/sergeyklay/promptly/issues>`_ on GitHub.
