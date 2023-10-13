@@ -11,6 +11,7 @@ from datetime import datetime
 from typing import List
 
 import sqlalchemy as sa
+from flask import abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy import orm as so
@@ -26,6 +27,100 @@ convention = {
 
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(app=None, metadata=metadata)
+
+
+class BaseMixin:
+    """A base mixin class for application models.
+
+    A base mixin class for ORM models to provide common methods for performing
+    database operations. The class provides classmethods for fetching, creating
+    records, and instance methods for saving or deleting records from the
+    database.
+    """
+
+    @classmethod
+    def get(cls, entity_id):
+        """Fetch a record from the database by its identifier.
+
+        Parameters
+        ----------
+        entity_id : Any
+            The identifier of the record to fetch.
+
+        Returns
+        -------
+        db.Model
+            The fetched model instance if found, otherwise None.
+        """
+        return db.session.get(cls, entity_id)
+
+    @classmethod
+    def get_or_404(cls, entity_id):
+        """Fetch a record from the database by its identifier or abort.
+
+        Fetches a record from the database by its identifier,
+        aborts with a 404 error if the record is not found.
+
+        Parameters
+        ----------
+        entity_id : Any
+            The identifier of the record to fetch.
+
+        Returns
+        -------
+        db.Model
+            The fetched model instance.
+
+        Raises
+        ------
+        HTTPException
+            If the record is not found.
+        """
+        rv = cls.get(entity_id)
+        if rv is None:
+            abort(404, message=f'{cls.__name__} not found')
+        return rv
+
+    @classmethod
+    def create(cls, **kwargs):
+        """Create and save a new model instance.
+
+        Creates a new instance of the model, saves it to the database,
+        and returns the created instance.
+
+        Parameters
+        ----------
+        **kwargs
+            The keyword arguments to initialize the model instance.
+
+        Returns
+        -------
+        db.Model
+            The created model instance.
+        """
+        instance = cls(**kwargs)
+        instance.save()
+        return instance
+
+    def save(self):
+        """Save the current model to the database.
+
+        Returns
+        -------
+        None
+        """
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        """Delete the current model from the database.
+
+        Returns
+        -------
+        None
+        """
+        db.session.delete(self)
+        db.session.commit()
 
 
 class IdentityMixin:
@@ -65,7 +160,7 @@ class TimestampMixin:
         return modified.strftime('%a, %d %b %Y %H:%M:%S GMT')
 
 
-class Chat(IdentityMixin, TimestampMixin, db.Model):
+class Chat(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
     """Chat Model.
 
     Represents a chat conversation in the application.
@@ -90,7 +185,7 @@ class Chat(IdentityMixin, TimestampMixin, db.Model):
     )
 
 
-class ChatEntry(IdentityMixin, TimestampMixin, db.Model):
+class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
     """ChatEntry Model.
 
     Represents a single message in a Chat.
