@@ -37,10 +37,21 @@ function autoResizePromptTextarea(e) {
  * @param {string} message - The message text to append.
  * @param {HTMLElement} outputContainer - The DOM element to which the message will be appended.
  */
-function appendMessageToChat(message, outputContainer) {
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "chat-message";
-  messageDiv.innerHTML = `<p>${message}</p>`;
+function appendMessageToChat(message, outputContainer, isUserMessage) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = isUserMessage ? 'chat-message user-message' : 'chat-message server-response';
+
+  const header = document.createElement('div');
+  header.className = 'message-header';
+  header.textContent = isUserMessage ? 'You' : 'AI';
+
+  const body = document.createElement('div');
+  body.className = 'message-body';
+  body.innerHTML = `<p>${message}</p>`;
+
+  messageDiv.appendChild(header);
+  messageDiv.appendChild(body);
+
   outputContainer.appendChild(messageDiv);
 }
 
@@ -89,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (userMessage.length > 0) {
       document.getElementById("prompt-textarea").value = '';
-      appendMessageToChat(userMessage, chatOutput);
+      appendMessageToChat(userMessage, chatOutput, true);
 
       const loadingElement = document.createElement("div");
       loadingElement.className = "loading";
@@ -107,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
       .then(response => response.json())
       .then(data => {
         loadingElement.remove();
-        appendMessageToChat(data.message, chatOutput);
+        appendMessageToChat(data.message, chatOutput, false);
       })
       .catch(() => {
         // TODO: Show error
