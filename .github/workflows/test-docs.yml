@@ -1,0 +1,44 @@
+# This file is part of the Promptly.
+#
+# Copyright (C) 2023 Serghei Iakovlev <egrep@protonmail.ch>
+#
+# For the full copyright and license information, please view
+# the LICENSE file that was distributed with this source code.
+
+name: Docs
+
+on:
+  push:
+    branches-ignore:
+      # These should always correspond to pull requests, so ignore them for
+      # the push trigger and let them be triggered by the pull_request
+      # trigger, avoiding running the workflow twice.  This is a minor
+      # optimization so there's no need to ensure this is comprehensive.
+      - 'dependabot/**'
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-22.04
+    name: Build and test package documentation
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4.7.0
+        with:
+          python-version: '3.10'
+
+      - name: Set up virtualenv
+        run: make init
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Build and test package documentation
+        run: make docs
