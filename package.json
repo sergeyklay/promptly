@@ -1,7 +1,37 @@
 {
+  "name": "promptly",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Promptly is a dev-focused tool for enhanced interaction with GPT models, featuring advanced options like Prompt Injection for more precise query responses.",
+  "main": "index.js",
   "scripts": {
+    "intro": "cat package.json | jq .scripts",
     "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergeyklay/promptly.git"
+  },
+  "keywords": [
+    "ai",
+    "chat",
+    "chatbot",
+    "chatgpt",
+    "gpt",
+    "gpt-3",
+    "gpt-4",
+    "llm",
+    "openai",
+    "prompt injection",
+    "prompt",
+    "text generation"
+  ],
+  "author": "Serghei Iakovlev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergeyklay/promptly/issues"
+  },
+  "homepage": "https://github.com/sergeyklay/promptly#readme",
   "devDependencies": {
     "node-sass": "^9.0.0"
   }
