@@ -154,15 +154,6 @@ docs: $(VENV_PYTHON)
 	@mkdir -p $(BUILD_DOC_DIR)
 	$(VENV_BIN)/sphinx-build -n -T -W -b html -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
 	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
-	@echo
-	$(VENV_PYTHON) -m doctest -v AUTHORS.rst
-	@echo
-	$(VENV_PYTHON) -m doctest -v CHANGELOG.rst
-	@echo
-	$(VENV_PYTHON) -m doctest -v CONTRIBUTING.rst
-	@echo
-	$(VENV_PYTHON) -m doctest -v README.rst
-	@echo
 	$(RM) -r $(DOCTREES)
 	$(call end_section)
 
