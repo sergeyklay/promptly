@@ -66,6 +66,8 @@ install: $(REQUIREMENTS)
 	@echo $(CS)Installing $(PKG_NAME) and all its dependencies$(CE)
 	$(VENV_BIN)/pip-sync $^
 	$(VENV_PIP) install --progress-bar=off -e .
+	@echo $(CS)Clean install Node.js dependencies$(CE)
+	npm ci
 	@echo
 
 .PHONY: uninstall

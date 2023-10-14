@@ -64,3 +64,8 @@ $(error "Python is not available. Please install Python.")
 endif
 endif
 endif
+
+HAVE_NPM := $(shell command -v npm 2> /dev/null)
+ifndef HAVE_NPM
+$(error "npm is not available. Please install Node.js.")
+endif

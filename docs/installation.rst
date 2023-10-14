@@ -81,13 +81,6 @@ Run database migrations:
 
    $ make migrate
 
-
-Finally install the necessary Node.js libraries:
-
-.. code-block:: console
-
-   $ npm ci
-
 Optionally you can add seed (fake) data to the database:
 
 .. code-block:: console

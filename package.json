@@ -6,7 +6,10 @@
   "main": "index.js",
   "scripts": {
     "intro": "cat package.json | jq .scripts",
-    "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/"
+    "copy-materialize": "copyfiles -u 4 node_modules/materialize-css/dist/css/materialize.min.css promptly/static/css && copyfiles -u 4 node_modules/materialize-css/dist/js/materialize.min.js promptly/static/js",
+    "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/",
+    "postinstall": "npm run copy-materialize",
+    "postupdate": "npm run copy-materialize"
   },
   "repository": {
     "type": "git",
@@ -31,8 +34,12 @@
   "bugs": {
     "url": "https://github.com/sergeyklay/promptly/issues"
   },
-  "homepage": "https://github.com/sergeyklay/promptly#readme",
+  "homepage": "https://promptly.readthedocs.io/",
+  "dependencies": {
+    "materialize-css": "^1.0.0"
+  },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "node-sass": "^9.0.0"
   }
 }
