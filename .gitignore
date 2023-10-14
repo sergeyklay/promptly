@@ -16,6 +16,7 @@
 /.cache
 /.pytest_cache
 /htmlcov
+/instance
 /node_modules
 /promptly.egg-info
 

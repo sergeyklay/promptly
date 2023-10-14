@@ -40,6 +40,9 @@ define end_section
 	@echo
 endef
 
+$(INSTANCE_DIR):
+	@mkdir $@
+
 .env: .env.example
 	cp $< $@
 
@@ -93,7 +96,7 @@ uninstall:
 	$(call end_section)
 
 .PHONY: serve
-serve: $(VENV_PYTHON) .env runner.py
+serve: $(VENV_PYTHON) $(INSTANCE_DIR) .env runner.py
 	$(call section, "Run builtin server")
 	$(VENV_BIN)/flask --app runner:app run --debug
 	$(call end_section)
@@ -111,7 +114,7 @@ migrate: $(VENV_PYTHON)
 	$(call end_section)
 
 .PHONY: shell
-shell: $(PYTHON)
+shell: $(INSTANCE_DIR)
 	$(call section, "Starting a shell")
 	$(VENV_BIN)/flask --app runner:app shell
 	$(call end_section)
@@ -180,6 +183,7 @@ maintainer-clean: clean
 	$(call rm-venv-link)
 	$(RM) *.env *.sqlite3
 	$(RM) -r $(BUILD_DOC_DIR)
+	$(RM) -r $(INSTANCE_DIR)
 	$(call end_section)
 
 .PHONY: help

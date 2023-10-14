@@ -11,6 +11,7 @@
 ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PKG_NAME = promptly
 
+INSTANCE_DIR = ./instance
 BUILD_DOC_DIR = ./docs/_build
 DOCTREES = $(BUILD_DOC_DIR)/doctrees
 
