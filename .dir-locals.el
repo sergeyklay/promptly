@@ -23,12 +23,7 @@
 
 ;;; Code:
 
-((python-mode . ((indent-tabs-mode . nil)      ; Use spaces, not tabs
-                 (tab-width . 4)               ; A tab is four spaces
-                 (fill-column . 79)            ; Set fill column to 79 chars
-                 (python-indent-offset . 4)))) ; Set indentation to 4 spaces
-
-;;; Commentary:
+;;;; Python
 ;;
 ;; - `indent-tabs-mode':
 ;;   Set to `nil` to use spaces for indentation instead of tabs. This is the
@@ -50,3 +45,9 @@
 ;; This configuration ensures that your Python code is neatly formatted and
 ;; adheres to common style guidelines, making it easier for other developers to
 ;; read and understand your code.
+((python-mode . ((indent-tabs-mode . nil)      ; Use spaces, not tabs
+                 (tab-width . 4)               ; A tab is four spaces
+                 (fill-column . 79)            ; Set fill column to 79 chars
+                 (python-indent-offset . 4)))) ; Set indentation to 4 spaces
+
+;;; .dir-locals.el ends here
