@@ -30,6 +30,16 @@ define rm-venv-link
 	fi
 endef
 
+define section
+	@echo $(CS)">>> "$(1)$(CE)
+	@echo $(CS)"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"$(CE)
+endef
+
+define end_section
+	@echo $(CS)"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"$(CE)
+	@echo
+endef
+
 .env: .env.example
 	cp $< $@
 
@@ -40,7 +50,7 @@ $(VENV_PYTHON): $(VENV_ROOT)
 	@echo
 
 $(VENV_ROOT):
-	@echo $(CS)Creating a Python environment $(VENV_ROOT)$(CE)
+	$(call section, "Creating a Python environment $(VENV_ROOT)")
 	$(VIRTUALENV) --prompt $(PKG_NAME) $(VENV_ROOT)
 	@echo
 	@echo Done.
@@ -52,118 +62,134 @@ $(VENV_ROOT):
 	@echo See https://docs.python.org/3/library/venv.html for more.
 	@echo
 	$(call mk-venv-link)
+	$(call end_section)
 
 ## Public targets
 
 .PHONY: init
 init: $(VENV_PYTHON)
-	@echo $(CS)Set up virtualenv$(CE)
+	$(call section, "Set up virtualenv")
 	$(VENV_PIP) install --progress-bar=off --upgrade pip pip-tools
-	@echo
+	$(call end_section)
 
 .PHONY: install
 install: $(REQUIREMENTS)
-	@echo $(CS)Installing $(PKG_NAME) and all its dependencies$(CE)
+	$(call section, "Installing $(PKG_NAME) and all its dependencies")
 	$(VENV_BIN)/pip-sync $^
 	$(VENV_PIP) install --progress-bar=off -e .
-	@echo $(CS)Clean install Node.js dependencies$(CE)
+	$(call section, "Clean install Node.js dependencies")
 	npm ci
-	@echo
+	$(call end_section)
 
 .PHONY: uninstall
 uninstall:
-	@echo $(CS)Uninstalling $(PKG_NAME)$(CE)
+	$(call section, "Uninstalling $(PKG_NAME)")
 	- $(VENV_PIP) uninstall --yes $(PKG_NAME) &2>/dev/null
 
 	@echo Verifying...
 	cd .. && ! $(VENV_PYTHON) -m $(PKG_NAME) --version &2>/dev/null
 
 	@echo Done.
-	@echo
+	$(call end_section)
 
 .PHONY: serve
 serve: $(VENV_PYTHON) .env runner.py
-	@echo $(CS)Run builtin server$(CE)
+	$(call section, "Run builtin server")
 	$(VENV_BIN)/flask --app runner:app run --debug
-	@echo
+	$(call end_section)
 
 .PHONY: revision
 revision: $(VENV_PYTHON)
-	@echo $(CS)Run database migrations$(CE)
+	$(call section, "Run database migrations")
 	$(VENV_BIN)/flask --app runner:app db revision --autogenerate
-	@echo
+	$(call end_section)
 
 .PHONY: migrate
 migrate: $(VENV_PYTHON)
-	@echo $(CS)Run database migrations$(CE)
+	$(call section, "Run database migrations")
 	$(VENV_BIN)/flask --app runner:app db upgrade
-	@echo
+	$(call end_section)
 
 .PHONY: shell
 shell: $(PYTHON)
-	@echo $(CS)Starting a shell$(CE)
+	$(call section, "Starting a shell")
 	$(VENV_BIN)/flask --app runner:app shell
-	@echo
+	$(call end_section)
 
 .PHONY: seed
 seed: $(VENV_PYTHON)
-	@echo $(CS)Add seed data to the database$(CE)
+	$(call section, "Add seed data to the database")
 	$(VENV_BIN)/flask --app runner:app seed
-	@echo
+	$(call end_section)
 
 .PHONY: lint
 lint: $(VENV_PYTHON)
-	@echo $(CS)Running linters$(CE)
+	$(call section, "Running linters")
 	-$(VENV_BIN)/flake8 $(FLAKE8_FLAGS) ./
 	$(VENV_BIN)/pylint $(PYLINT_FLAGS) ./$(PKG_NAME)
-	@echo
+	$(call end_section)
 
 .PHONY: test
 test: $(VENV_PYTHON)
-	@echo $(CS)Running tests$(CE)
+	$(call section, "Running tests")
 	$(VENV_BIN)/coverage erase
 	$(VENV_BIN)/coverage run -m pytest $(PYTEST_FLAGS) ./$(PKG_NAME) ./tests
-	@echo
+	$(call end_section)
 
 .PHONY: ccov
 ccov: $(VENV_PYTHON)
-	@echo $(CS)Combine coverage reports$(CE)
+	$(call section, "Combine coverage reports")
 	$(VENV_BIN)/coverage combine
 	$(VENV_BIN)/coverage report
 	$(VENV_BIN)/coverage html
 	$(VENV_BIN)/coverage xml
-	@echo
+	$(call end_section)
 
 .PHONY: test-all
 test-all: uninstall clean install test lint
 
 .PHONY: docs
 docs: $(VENV_PYTHON)
-	@echo $(CS)Build package documentation$(CE)
-	$(VENV_BIN)/sphinx-build -n -T -W -b html -d ./doctrees docs docs/_build/html
-	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d ./doctrees docs docs/_build/html
-	$(VENV_PYTHON) -m doctest README.rst
-	$(RM) -r ./doctrees
+	$(call section, "Build package documentation")
+	@mkdir -p $(BUILD_DOC_DIR)
+	$(VENV_BIN)/sphinx-build -n -T -W -b html -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
+	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
 	@echo
+	$(VENV_PYTHON) -m doctest -v AUTHORS.rst
+	@echo
+	$(VENV_PYTHON) -m doctest -v CHANGELOG.rst
+	@echo
+	$(VENV_PYTHON) -m doctest -v CONTRIBUTING.rst
+	@echo
+	$(VENV_PYTHON) -m doctest -v README.rst
+	@echo
+	$(RM) -r $(DOCTREES)
+	$(call end_section)
 
 .PHONY: clean
 clean:
-	@echo $(CS)Remove build and tests artefacts and directories$(CE)
+	$(call section, "Remove build and tests artefacts and directories")
 	$(call rm-venv-link)
 	find ./ -name '__pycache__' -delete -o -name '*.pyc' -delete
 	$(RM) -r ./.cache ./.pytest_cache
 	$(RM) -r ./htmlcov
 	$(RM) ./coverage.*
-	@echo
+	$(call end_section)
+
+.PHONY: db-clean
+db-clean:
+	$(call section, "Cleanup database")
+	@echo "DELETE FROM chats;" | sqlite3 dev-db.sqlite3
+	$(call end_section)
 
 .PHONY: maintainer-clean
 maintainer-clean: clean
-	@echo $(CS)Performing full clean$(CE)
+	$(call section, "Performing full clean")
 	-$(RM) -r $(VENV_ROOT)
 	$(call rm-venv-link)
-	$(RM) requirements/*.txt
 	$(RM) *.env *.sqlite3
-	@echo
+	$(RM) -r $(BUILD_DOC_DIR)
+	$(call end_section)
 
 .PHONY: help
 help:
@@ -188,6 +214,7 @@ help:
 	@echo '  ccov:         Combine coverage reports'
 	@echo '  test-all:     Test everything'
 	@echo '  clean:        Remove build and tests artefacts and directories'
+	@echo '  db-clean:     Cleanup database'
 	@echo '  maintainer-clean:'
 	@echo '                Delete almost everything that can be reconstructed'
 	@echo '                with this Makefile'
@@ -210,4 +237,4 @@ help:
 	@echo '  VIRTUAL_ENV:  ${VIRTUAL_ENV}'
 	@echo '  SHELL:        $(shell echo $$SHELL)'
 	@echo '  TERM:         $(shell echo $$TERM)'
-	@echo
+	@echo '  LANG:         $(shell echo $$LANG)'

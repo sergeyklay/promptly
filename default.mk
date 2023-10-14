@@ -11,19 +11,22 @@
 ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PKG_NAME = promptly
 
+BUILD_DOC_DIR = ./docs/_build
+DOCTREES = $(BUILD_DOC_DIR)/doctrees
+
 PYLINT_FLAGS ?=
 FLAKE8_FLAGS ?= --show-source --statistics
 
 ifneq ($(TERM),)
 	GREEN := $(shell tput setaf 2)
 	RESET := $(shell tput sgr0)
-	CS = "${GREEN}~~~ "
-	CE = " ~~~${RESET}"
+	CS = "${GREEN}"
+	CE = "${RESET}"
 
 	PYTEST_FLAGS ?= --color=yes
 else
-	CS = "~~~ "
-	CE = " ~~~"
+	CS = ""
+	CE = ""
 
 	PYTEST_FLAGS ?= --color=no
 endif
