@@ -90,11 +90,55 @@ default_role = 'any'
 add_function_parentheses = True
 
 #
+# -- Options for autodoc -----------------------------------------------------
+#
+
+# Determines what content will be inserted into the main body of an autoclass
+# directive.
+# - 'class': Only the class' docstring is inserted.
+# - 'both': Both the class’ and the ``__init__`` method’s docstrings are
+#       concatenated and inserted.
+# - 'init': Only the __init__ method’s docstring is inserted.
+autoclass_content = 'class'
+
+# List of modules to be mocked up. This is useful when you have dependencies
+# that are not installed during the documentation build process. A mock object
+# will be used instead.
+autodoc_mock_imports = [
+    'alembic',
+    'flask_migrate',
+    'flask_sqlalchemy',
+]
+
+# If True, the docstring of the parent class will be inherited if the subclass
+# doesn't have one.
+autodoc_inherit_docstrings = True
+
+# Determines the sorting order for documented members.
+# 'bysource': Order by source order
+# 'alphabetical': Alphabetically ('A' to 'Z')
+autodoc_member_order = 'bysource'
+
+# Controls how typehints are displayed in the generated documentation.
+# - 'none': No type information.
+# - 'description': Only used in the parameter description, like Sphinx’s default
+#      format.
+# - 'signature': Only used in the signature, like the style of mypy.
+# - 'both': Used in the signature and in the parameter description.
+autodoc_typehints = 'signature'
+
+#
 # -- Options for intersphinx -------------------------------------------------
 #
 intersphinx_mapping = {
+    'alembic': ('https://alembic.sqlalchemy.org/en/latest/', None),
     'python': ('https://docs.python.org/3', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master', None),
+    'flask': ('https://flask.palletsprojects.com/en/3.0.x//', None),
+    'werkzeug': ('https://werkzeug.palletsprojects.com/en/3.0.x/', None),
+    'sqlalchemy': ('https://docs.sqlalchemy.org/en/20/', None),
+    'flask_sqlalchemy': ('https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/', None),
+    'flask_migrate': ('https://flask-migrate.readthedocs.io/en/latest/', None),
 }
 
 #
