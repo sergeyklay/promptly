@@ -95,6 +95,10 @@ add_function_parentheses = True
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master', None),
+    'flask': ('https://flask.palletsprojects.com/', None),
+    'werkzeug': ('https://werkzeug.palletsprojects.com/', None),
+    'sqlalchemy': ('https://docs.sqlalchemy.org/', None),
+    'flask_sqlalchemy': ('https://flask-sqlalchemy.palletsprojects.com/', None),
 }
 
 #
