@@ -51,19 +51,22 @@ class Prompt(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
     )
 
     rule: so.Mapped[List['Rule']] = so.relationship(
+        'Rule',
         back_populates='prompt',
     )
 
     reference: so.Mapped[List['Reference']] = so.relationship(
+        'Reference',
         back_populates='prompt',
     )
 
-    criterion: so.Mapped[List['Reference']] = so.relationship(
+    criterion: so.Mapped[List['Criterion']] = so.relationship(
+        'Criterion',
         back_populates='prompt',
     )
 
 
-class Rule(BaseMixin, db.Model):
+class Rule(BaseMixin, IdentityMixin, db.Model):
     """Represent a rule associated with a prompt."""
 
     __tablename__ = 'prompt_rules'
@@ -79,6 +82,7 @@ class Rule(BaseMixin, db.Model):
     )
 
     prompt: so.Mapped['Prompt'] = so.relationship(
+        'Prompt',
         back_populates='rule',
     )
 
@@ -113,15 +117,17 @@ class Reference(BaseMixin, IdentityMixin, db.Model):
     )
 
     prompt: so.Mapped['Prompt'] = so.relationship(
+        'Prompt',
         back_populates='reference',
     )
 
     key_insight: so.Mapped[List['KeyInsight']] = so.relationship(
+        'KeyInsight',
         back_populates='reference',
     )
 
 
-class KeyInsight(db.Model):
+class KeyInsight(BaseMixin, IdentityMixin, db.Model):
     """Represent a key insight associated with a reference."""
 
     __tablename__ = 'prompt_reference_key_insights'
@@ -137,11 +143,12 @@ class KeyInsight(db.Model):
     )
 
     reference: so.Mapped['Reference'] = so.relationship(
+        'Reference',
         back_populates='key_insight',
     )
 
 
-class Criteria(BaseMixin, IdentityMixin, db.Model):
+class Criterion(BaseMixin, IdentityMixin, db.Model):
     """Represent a criterion associated with a prompt."""
 
     __tablename__ = 'prompt_criteria'
@@ -164,5 +171,6 @@ class Criteria(BaseMixin, IdentityMixin, db.Model):
     )
 
     prompt: so.Mapped['Prompt'] = so.relationship(
+        'Prompt',
         back_populates='criterion',
     )
