@@ -5,10 +5,8 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""ORM models and helper functions for the application."""
-
 from datetime import datetime
-from typing import List
+from typing import Optional
 
 import sqlalchemy as sa
 from flask import abort
@@ -41,15 +39,10 @@ class BaseMixin:
     def get(cls, entity_id):
         """Fetch a record from the database by its identifier.
 
-        Parameters
-        ----------
-        entity_id : Any
-            The identifier of the record to fetch.
-
-        Returns
-        -------
-        db.Model
-            The fetched model instance if found, otherwise None.
+        :param entity_id: The identifier of the record to fetch.
+        :type entity_id: Any
+        :return: The fetched model instance if found, otherwise ``None``.
+        :rtype: Optional[object]
         """
         return db.session.get(cls, entity_id)
 
@@ -60,20 +53,11 @@ class BaseMixin:
         Fetches a record from the database by its identifier,
         aborts with a 404 error if the record is not found.
 
-        Parameters
-        ----------
-        entity_id : Any
-            The identifier of the record to fetch.
-
-        Returns
-        -------
-        db.Model
-            The fetched model instance.
-
-        Raises
-        ------
-        HTTPException
-            If the record is not found.
+        :param entity_id: The identifier of the record to fetch.
+        :type entity_id: Any
+        :return: The fetched model instance.
+        :rtype: object
+        :raises werkzeug.exceptions.HTTPException: If the record is not found.
         """
         rv = cls.get(entity_id)
         if rv is None:
@@ -87,15 +71,9 @@ class BaseMixin:
         Creates a new instance of the model, saves it to the database,
         and returns the created instance.
 
-        Parameters
-        ----------
-        **kwargs
-            The keyword arguments to initialize the model instance.
-
-        Returns
-        -------
-        db.Model
-            The created model instance.
+        :param kwargs: The keyword arguments to initialize the model instance.
+        :return: The created model instance.
+        :rtype: object
         """
         instance = cls(**kwargs)
         instance.save()
@@ -104,9 +82,7 @@ class BaseMixin:
     def save(self):
         """Save the current model to the database.
 
-        Returns
-        -------
-        None
+        :return: None
         """
         db.session.add(self)
         db.session.commit()
@@ -114,9 +90,7 @@ class BaseMixin:
     def delete(self):
         """Delete the current model from the database.
 
-        Returns
-        -------
-        None
+        :return: None
         """
         db.session.delete(self)
         db.session.commit()
@@ -131,7 +105,11 @@ class IdentityMixin:
     )
 
     def __repr__(self):
-        """Returns the object representation in string format."""
+        """Returns the object representation in string format.
+
+        :return: Object representation in string format.
+        :rtype: str
+        """
         return f'<{self.__class__.__name__} id={self.id!r}>'
 
 
@@ -154,54 +132,10 @@ class TimestampMixin:
     )
 
     def last_modified(self) -> str:
-        """Get the time of the last model update."""
+        """Get the time of the last model update.
+
+        :return: The time of the last model update.
+        :rtype: str
+        """
         modified = self.updated_at or self.created_at or datetime.utcnow()
         return modified.strftime('%a, %d %b %Y %H:%M:%S GMT')
-
-
-class Chat(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
-    """Chat Model.
-
-    Represents a chat conversation in the application.
-    """
-
-    __tablename__ = 'chats'
-
-    title: so.Mapped[str] = so.mapped_column(
-        sa.String(64),
-        unique=False,
-        index=True,
-        nullable=False,
-    )
-
-    teaser: so.Mapped[str] = so.mapped_column(
-        sa.String(128),
-        nullable=False,
-    )
-
-    entry: so.Mapped[List['ChatEntry']] = so.relationship(
-        back_populates='chat',
-    )
-
-
-class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
-    """ChatEntry Model.
-
-    Represents a single message in a Chat.
-    """
-
-    __tablename__ = 'chat_entries'
-
-    teaser: so.Mapped[str] = so.mapped_column(
-        sa.Text,
-        nullable=False,
-    )
-
-    chat_id: so.Mapped[int] = so.mapped_column(
-        sa.ForeignKey('chats.id'),
-        nullable=False
-    )
-
-    chat: so.Mapped['Chat'] = so.relationship(
-        back_populates='entry',
-    )
