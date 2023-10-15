@@ -7,8 +7,8 @@
 
 """This module provides a simplified interface to the OpenAI API."""
 
+import concurrent
 import logging
-from concurrent.futures import ThreadPoolExecutor, TimeoutError
 from os import environ as env
 
 import backoff
@@ -34,15 +34,15 @@ def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
     :param kwargs: Keyword arguments to pass to ``func``.
     :return: The return value of ``func``, if it completes successfully within
         the allotted time.
-    :raises: Any exceptions raised by ``func``, except for TimeoutError which
-        is caught and logged.
+    :raises: Any exceptions raised by ``func``, except for
+        ``concurrent.futures.TimeoutError`` which is caught and logged.
     """
     while True:
-        with ThreadPoolExecutor(max_workers=1) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(func, *args, **kwargs)
             try:
                 return future.result(timeout=timeout)
-            except TimeoutError as exc:
+            except concurrent.futures.TimeoutError as exc:
                 logger.warning(exc)
                 continue
 
