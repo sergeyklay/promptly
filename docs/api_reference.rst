@@ -30,3 +30,10 @@ API Reference
 
 .. automodule:: promptly.models.chat
     :members:
+
+
+`promptly.models.prompt`
+------------------------
+
+.. automodule:: promptly.models.prompt
+    :members:
