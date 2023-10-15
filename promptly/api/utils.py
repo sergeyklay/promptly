@@ -8,16 +8,15 @@
 """This module provides a simplified interface to the OpenAI API."""
 
 import logging
-import os
-
-import openai
-import backoff
 from concurrent.futures import ThreadPoolExecutor, TimeoutError
+from os import environ as env
 
+import backoff
+import openai
 
 logger = logging.getLogger(__name__)
 
-PROMPTLY_THREAD_TIMEOUT = float(os.environ.get('PROMPTLY_THREAD_TIMEOUT', '60'))
+PROMPTLY_THREAD_TIMEOUT = float(env.get('PROMPTLY_THREAD_TIMEOUT', '60'))
 
 
 def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
@@ -35,8 +34,8 @@ def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
     :param kwargs: Keyword arguments to pass to ``func``.
     :return: The return value of ``func``, if it completes successfully within
         the allotted time.
-    :raises: Any exceptions raised by ``func``, except for TimeoutError which is
-        caught and logged.
+    :raises: Any exceptions raised by ``func``, except for TimeoutError which
+        is caught and logged.
     """
     while True:
         with ThreadPoolExecutor(max_workers=1) as executor:
@@ -63,16 +62,17 @@ def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
 def completion(*args, **kwargs) -> str:
     """Generates a text completion using the OpenAI API.
 
-    This function uses an exponential backoff strategy to handle exceptions like
-    ``openai.error.ServiceUnavailableError``, ``openai.error.APIError``,
+    This function uses an exponential backoff strategy to handle exceptions
+    like ``openai.error.ServiceUnavailableError``, ``openai.error.APIError``,
     ``openai.error.RateLimitError``, ``openai.error.APIConnectionError``,
     and ``openai.error.Timeout``. The backoff delay starts at 1 second and
     increases by a factor of 1.5 with each retry, capping at a maximum delay of
     60 seconds between retries.
 
     Any arguments or keyword arguments are forwarded directly to the
-    ``openai.ChatCompletion.create`` method. The OpenAI API key is read from the
-    ``OPENAI_API_KEY`` environment variable by openai's ``__init__.py`` file.
+    ``openai.ChatCompletion.create`` method. The OpenAI API key is read from
+    the ``OPENAI_API_KEY`` environment variable by any import openai's
+    ``__init__.py`` file.
 
     :param args: Variable-length argument list.
     :param kwargs: Arbitrary keyword arguments.
