@@ -14,8 +14,7 @@ response.
 
 import os
 
-from flask import Blueprint
-from flask import jsonify, request
+from flask import Blueprint, jsonify, request
 
 from .utils import completion
 
