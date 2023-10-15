@@ -5,8 +5,16 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
+"""Database Models and Utilities Module.
+
+This module provides classes and utility functions to work with the database
+using SQLAlchemy ORM. It defines a set of mixin classes to extend SQLAlchemy
+models with common methods and attributes, along with a configured metadata
+object to enforce a naming convention for database constraints.
+
+"""
+
 from datetime import datetime
-from typing import Optional
 
 import sqlalchemy as sa
 from flask import abort
@@ -42,7 +50,6 @@ class BaseMixin:
         :param entity_id: The identifier of the record to fetch.
         :type entity_id: Any
         :return: The fetched model instance if found, otherwise ``None``.
-        :rtype: Optional[object]
         """
         return db.session.get(cls, entity_id)
 
@@ -56,7 +63,6 @@ class BaseMixin:
         :param entity_id: The identifier of the record to fetch.
         :type entity_id: Any
         :return: The fetched model instance.
-        :rtype: object
         :raises werkzeug.exceptions.HTTPException: If the record is not found.
         """
         rv = cls.get(entity_id)
@@ -73,7 +79,6 @@ class BaseMixin:
 
         :param kwargs: The keyword arguments to initialize the model instance.
         :return: The created model instance.
-        :rtype: object
         """
         instance = cls(**kwargs)
         instance.save()

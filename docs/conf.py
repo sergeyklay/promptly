@@ -121,8 +121,8 @@ autodoc_member_order = 'bysource'
 
 # Controls how typehints are displayed in the generated documentation.
 # - 'none': No type information.
-# - 'description': Only used in the parameter description, like Sphinx’s default
-#      format.
+# - 'description': Only used in the parameter description, like Sphinx’s
+#      default format.
 # - 'signature': Only used in the signature, like the style of mypy.
 # - 'both': Used in the signature and in the parameter description.
 autodoc_typehints = 'signature'
@@ -137,7 +137,8 @@ intersphinx_mapping = {
     'flask': ('https://flask.palletsprojects.com/en/3.0.x//', None),
     'werkzeug': ('https://werkzeug.palletsprojects.com/en/3.0.x/', None),
     'sqlalchemy': ('https://docs.sqlalchemy.org/en/20/', None),
-    'flask_sqlalchemy': ('https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/', None),
+    'flask_sqlalchemy': (
+        'https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/', None),
     'flask_migrate': ('https://flask-migrate.readthedocs.io/en/latest/', None),
 }
 
