@@ -178,6 +178,7 @@ INSTALL_REQUIRES = [
     'alembic>=1.12.0',  # A database migration tool for SQLAlchemy
     'openai>=0.28.1',  # Python client library for the OpenAI API
     'python-dotenv>=1.0.0',  # Read key-value pairs from a .env file
+    'backoff>=2.2.1',  # Function decoration for backoff and retry
 ]
 
 DEPENDENCY_LINKS = []

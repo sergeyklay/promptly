@@ -11,5 +11,6 @@ Flask-SQLAlchemy
 SQLAlchemy
 Werkzeug
 alembic
+backoff
 openai
 python-dotenv

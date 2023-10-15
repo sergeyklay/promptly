@@ -11,6 +11,7 @@ import logging
 import os
 
 import openai
+import backoff
 from concurrent.futures import ThreadPoolExecutor, TimeoutError
 
 
@@ -47,12 +48,31 @@ def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
                 continue
 
 
+@backoff.on_exception(
+    wait_gen=backoff.expo,
+    exception=(
+        openai.error.ServiceUnavailableError,
+        openai.error.APIError,
+        openai.error.RateLimitError,
+        openai.error.APIConnectionError,
+        openai.error.Timeout,
+    ),
+    max_value=60,
+    factor=1.5,
+)
 def completion(*args, **kwargs) -> str:
     """Generates a text completion using the OpenAI API.
 
+    This function uses an exponential backoff strategy to handle exceptions like
+    ``openai.error.ServiceUnavailableError``, ``openai.error.APIError``,
+    ``openai.error.RateLimitError``, ``openai.error.APIConnectionError``,
+    and ``openai.error.Timeout``. The backoff delay starts at 1 second and
+    increases by a factor of 1.5 with each retry, capping at a maximum delay of
+    60 seconds between retries.
+
     Any arguments or keyword arguments are forwarded directly to the
     ``openai.ChatCompletion.create`` method. The OpenAI API key is read from the
-    ``OPENAI_API_KEY`` environment variable.
+    ``OPENAI_API_KEY`` environment variable by openai's ``__init__.py`` file.
 
     :param args: Variable-length argument list.
     :param kwargs: Arbitrary keyword arguments.
