@@ -24,6 +24,7 @@ Full Table of Contents
    installation
    configuration
    usage
+   api_functions
 
 .. include:: ../README.rst
    :start-after: -project-information-
@@ -34,3 +35,9 @@ Full Table of Contents
 
    license
    changelog
+
+Indices and tables
+==================
+
+* `genindex`
+* `search`

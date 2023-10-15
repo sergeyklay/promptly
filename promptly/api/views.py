@@ -5,7 +5,12 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Module for serving chat API request."""
+"""Module for serving chat API request.
+
+This module contains a blueprint for a Flask application to handle chat API
+requests, specifically to process a user's chat message and return the model's
+response.
+"""
 
 import os
 
@@ -28,8 +33,8 @@ def conversation():
     :return: A JSON object containing the model's response to the user's
              message.
     :rtype: flask.Response
-    :raises: A variety of exceptions, such as `openai.error.OpenAIError` for
-             issues with the OpenAI call.
+    :raises: Exception: ``openai.error.OpenAIError`` for issues with the OpenAI
+        call.
     """
     query = request.json.get('message')
     openai_model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
