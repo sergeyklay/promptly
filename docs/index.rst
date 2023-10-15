@@ -24,7 +24,7 @@ Full Table of Contents
    installation
    configuration
    usage
-   api_functions
+   api_reference
 
 .. include:: ../README.rst
    :start-after: -project-information-
