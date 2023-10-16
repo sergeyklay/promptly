@@ -8,7 +8,7 @@
     "intro": "cat package.json | jq .scripts",
     "copy-materialize": "copyfiles -u 4 node_modules/materialize-css/dist/css/materialize.min.css promptly/static/css && copyfiles -u 4 node_modules/materialize-css/dist/js/materialize.min.js promptly/static/js",
     "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/",
-    "drawio": "drawio docs/database.drawio -o docs/_static/database.png",
+    "doc:img": "drawio docs/database.drawio -o docs/_static/database.png",
     "postinstall": "npm run copy-materialize",
     "postupdate": "npm run copy-materialize"
   },
