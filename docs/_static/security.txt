@@ -1,0 +1,24 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Contact: mailto:egrep@protonmail.ch
+Expires: 2024-01-17T08:00:00.000Z
+Encryption: https://serghei.blog/serghei.asc
+Preferred-Languages: en, ru
+Canonical: https://promptly.readthedocs.io/en/latest/_static/security.txt
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEvEm6OdSqAp7IRQpaxq8QFrveqAAFAmUtlfMACgkQxq8QFrve
+qAAR0Q/+KdbSeA0/NwSabOeTjMso2HnMPM1ljiC6mq0A7VQL4JAXsYFPuXF4EzcZ
+H05TUQ8Jc387AYJQbH0yLiVhOkYrWQSVJyvHhe8eoKrA+wF9TXw+KhNYK2ZSsh1o
+tsypiw8CcTB/yaMH+Xmgdbm0SUqg+9G5rzLC1IMiPjT2eheKwfFLttXmpGXnqCU7
+WgIwdsusxS+8iYtwaEKgDW/BaRifQrnj6R/ymdZd0xyublr4As6BF34fhR8Gjr8K
+yYIkjjUNWzb0i9xUOlIYZ5T4Mn0wvlxopBsvPmV7xYn1AH7Lm8Gkrg+8FFWqey6B
+pQf8eUvI38AYJ2TjYkFSm4SET2ttKCXcUNQbdiLfNy7RXgt/r45yb3YERTkdbCb/
+l5vEzo1CRlXhc7YZXc+Zdj07xu5nIF5Zs8RNQsI0ZhPKujmCnTqOxotWCxxmmZMr
+FwbkjzT3gKQ3mVID0XJTAZ5aCaO7/Xj54Vf2XW7tJy92JC6DKOUYFkT0dxbumNhr
+zk7QIQsQ2uSwEb1qRrAvomhD+UIaCebHnajreOeYJdbTNjoUszk5hYYiHBVwy+Vx
+StIDUE02Mj2LrBJZzpoFGvqRlmo41UYAtACOBt4cHEgggcN0t0rxe+CQg+G/bADB
+NwG/IrlCVWgGj7A/GqaUknqwCWVQTUZgGtnENQsPTN+t51e/1j0=
+=+2Wm
+-----END PGP SIGNATURE-----

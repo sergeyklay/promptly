@@ -49,6 +49,11 @@ $(INSTANCE_DIR):
 requirements/%.txt: requirements/%.in $(VENV_BIN)
 	$(VENV_BIN)/pip-compile --allow-unsafe --generate-hashes --output-file=$@ $<
 
+.PHONY: docs/_static/security.txt
+docs/_static/security.txt: docs/security.in
+	@gpg --clearsign --armor --digest-algo SHA512 docs/security.in
+	@mv docs/security.in.asc docs/_static/security.txt
+
 $(VENV_PYTHON): $(VENV_ROOT)
 	@echo
 
