@@ -46,7 +46,7 @@ def find_version(meta_file):
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 # General information about the project.
-project = 'promptly'
+project = 'Promptly'
 copyright = '2023, Serghei Iakovlev'
 author = 'Serghei Iakovlev'
 
@@ -58,6 +58,8 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
+    'notfound.extension',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -67,14 +69,16 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # Allow non-local URIs, so we can have images in CHANGELOG etc.
-suppress_warnings = ['image.nonlocal_uri']
+suppress_warnings = [
+    'image.nonlocal_uri'
+]
 
 # The master toctree document.
 master_doc = 'index'
 
 # The version info
 # The short X.Y version.
-release = find_version('../promptly/__init__.py')
+release = find_version(os.path.join('..', 'promptly', '__init__.py'))
 version = release.rsplit(u'.', 1)[0]
 # The full version, including alpha/beta/rc tags.
 
@@ -152,7 +156,7 @@ todo_include_todos = True
 # html_favicon = None
 
 html_theme = 'furo'
-html_title = 'Promptly'
+html_title = project
 
 html_theme_options = {}
 
@@ -195,7 +199,7 @@ htmlhelp_basename = 'promptlydoc'
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', project, u'Promptly Documentation', [author], 1)
+    ('index', project, 'Promptly Documentation', [author], 1)
 ]
 
 #
@@ -209,7 +213,7 @@ texinfo_documents = [
     (
         'index',
         project,
-        u'Promptly Documentation',
+        'Promptly Documentation',
         author,
         project,
         'A customizable ChatGPT API interface for OpenAPI models.',
