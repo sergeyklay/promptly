@@ -69,6 +69,7 @@ you.
    :maxdepth: 3
 
    contributing
+   security
    license
 
 .. include:: ../README.rst
