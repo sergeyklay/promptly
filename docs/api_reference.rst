@@ -1,6 +1,26 @@
 API Reference
 =============
 
+.. currentmodule:: promptly
+
+The ``promptly`` module
+-----------------------
+
+.. automodule:: promptly
+    :members:
+    :special-members:
+    :no-undoc-members:
+
+.. currentmodule:: promptly.api
+
+The ``promptly.api`` module
+---------------------------
+
+.. automodule:: promptly.api
+    :members:
+    :special-members:
+    :no-undoc-members:
+
 `promptly.api.utils`
 --------------------
 
@@ -13,11 +33,31 @@ API Reference
 .. automodule:: promptly.api.views
     :members:
 
+.. currentmodule:: promptly.main
+
+The ``promptly.main`` module
+----------------------------
+
+.. automodule:: promptly.main
+    :members:
+    :special-members:
+    :no-undoc-members:
+
 `promptly.main.views`
 ---------------------
 
 .. automodule:: promptly.main.views
     :members:
+
+.. currentmodule:: promptly.models
+
+The ``promptly.models`` module
+------------------------------
+
+.. automodule:: promptly.models
+    :members:
+    :special-members:
+    :no-undoc-members:
 
 `promptly.models.base`
 ----------------------

@@ -14,9 +14,15 @@ Release v\ |release| (`What's new? <changelog>`).
 
 ----
 
-
 Full Table of Contents
 ======================
+
+The User Guide
+--------------
+
+This part of the documentation, which is mostly prose, begins with some
+background information about Promptly, then focuses on step-by-step
+instructions for getting the most out of Promptly.
 
 .. toctree::
    :maxdepth: 2
@@ -24,17 +30,50 @@ Full Table of Contents
    installation
    configuration
    usage
-   api_reference
-
-.. include:: ../README.rst
-   :start-after: -project-information-
-   :end-before: -support-
 
 .. toctree::
    :maxdepth: 1
 
-   license
    changelog
+
+The Community Guide
+-------------------
+
+This part of the documentation, which is mostly prose, details the
+Promptly ecosystem and community.
+
+.. toctree::
+   :maxdepth: 1
+
+   changelog
+
+The API Documentation / Guide
+-----------------------------
+
+If you are looking for information on a specific function, class, or method,
+this part of the documentation is for you.
+
+.. toctree::
+   :maxdepth: 2
+
+   database
+   api_reference
+
+The Contributor Guide
+---------------------
+
+If you want to contribute to the project, this part of the documentation is for
+you.
+
+.. toctree::
+   :maxdepth: 3
+
+   contributing
+   license
+
+.. include:: ../README.rst
+   :start-after: -project-information-
+   :end-before: -support-
 
 Indices and tables
 ==================

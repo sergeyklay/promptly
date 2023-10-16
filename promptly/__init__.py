@@ -12,8 +12,6 @@ base application info used by various functions within the
 package and provides a factory function to create application
 instance.
 
-Refer to the `documentation <https://promptly.readthedocs.io/>`_ for
-details on the use of this package.
 """
 
 __copyright__ = 'Copyright (C) 2023 Serghei Iakovlev'
