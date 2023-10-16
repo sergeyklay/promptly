@@ -15,5 +15,6 @@ pytest
 pytest-mock
 
 # docs
-sphinx
 furo
+sphinx
+sphinx-notfound-page
