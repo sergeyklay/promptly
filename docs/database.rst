@@ -5,7 +5,6 @@ Database
 Entity Relationship Diagram
 ---------------------------
 
-.. image:: ./_static/database.svg
+.. image:: ./_static/database.png
    :alt: Entity Relationship Diagram
-   :width: 600
    :align: center
