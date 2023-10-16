@@ -13,9 +13,9 @@
 * text=auto eol=lf
 
 # Setting up linguist
-*.rst    linguist-documentation  linguist-detectable
-LICENSE  linguist-documentation  linguist-detectable
-*.drawio linguist-language=XML   linguist-detectable
+*.rst    linguist-documentation=true  linguist-detectable=true
+LICENSE  linguist-documentation=true  linguist-detectable=true
+*.drawio linguist-language=XML   linguist-detectable=true
 
 # Mark these built artifacts as generated
 /promptly/static/css/style.css            linguist-generated=true
