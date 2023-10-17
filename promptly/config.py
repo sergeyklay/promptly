@@ -15,6 +15,8 @@ between different configurations.
 
 import os
 
+from flask import Flask
+
 
 class Config:
     """Base config, uses staging database server."""
@@ -25,14 +27,14 @@ class Config:
     BASE_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
     @staticmethod
-    def init_app(app):
+    def init_app(app: Flask):
         """Initialize the application with configuration-specific settings.
 
         This method takes a Flask application instance and configures it
         with settings defined in the configuration object.
 
         :param app: The Flask application instance.
-        :type app: Flask
+        :type app: :class:`flask.Flask`
 
         Usage::
 
