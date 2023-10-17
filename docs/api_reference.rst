@@ -47,8 +47,3 @@ Indices and tables
    :members:
    :undoc-members:
    :show-inheritance:
-
-.. automodule:: promptly.services
-   :members:
-   :undoc-members:
-   :show-inheritance:
