@@ -51,7 +51,7 @@ is a description of some key variables and their usage:
 
 4. ``PROMPTLY_THREAD_TIMEOUT``
     This variable defines the maximum amount of time, in seconds, that the
-    :func:`promptly.api.utils.threaded_execute` function will wait for the
+    :func:`~promptly.utils.threaded_execute` function will wait for the
     completion of the function it is executing in a separate thread. If the
     function does not complete within this time, a TimeoutError will be thrown,
     logged, and the function will be invoked again with the same arguments.

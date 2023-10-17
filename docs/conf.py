@@ -14,52 +14,42 @@
 # -- Utils -----------------------------------------------------
 #
 
-import codecs
 import os
-import re
+import sys
 
 
-def read_file(filepath):
-    """Read content from a UTF-8 encoded text file."""
-    with codecs.open(filepath, 'rb', 'utf-8') as file_handle:
-        return file_handle.read()
+PROJECT_DIR = os.path.abspath('..')
 
-
-def find_version(meta_file):
-    """Extract ``__version__`` from meta_file."""
-    here = os.path.abspath(os.path.dirname(__file__))
-    contents = read_file(os.path.join(here, meta_file))
-
-    meta_match = re.search(
-        r"^__version__\s+=\s+['\"]([^'\"]*)['\"]",
-        contents,
-        re.M
-    )
-
-    if meta_match:
-        return meta_match.group(1)
-    raise RuntimeError(
-        'Unable to find __version__ string in package meta file')
-
+sys.path.insert(0, PROJECT_DIR)
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 # General information about the project.
 project = 'Promptly'
-copyright = '2023, Serghei Iakovlev'
 author = 'Serghei Iakovlev'
+copyright = f'2023, {author}'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+# The following Sphinx extensions are being used:
+# - sphinx.ext.autodoc: This extension generates documentation from docstrings
+#   in the code.
+# - sphinx.ext.intersphinx: This extension generates links to the documentation
+#   of objects in other projects.
+# - sphinx.ext.viewcode: This extension includes links to the source code in
+#   the generated documentation.
+# - sphinx.ext.doctest: This extension searches for and executes code snippets
+#   embedded in the documentation to ensure they produce the expected outputs.
+# - sphinx.ext.todo: This extension allows to insert TODO notes in the
+#   documentation, which can be shown or hidden.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
     'sphinx.ext.viewcode',
-    'notfound.extension',
+    'sphinx.ext.doctest',
+    'sphinx.ext.todo',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -69,17 +59,15 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # Allow non-local URIs, so we can have images in CHANGELOG etc.
-suppress_warnings = [
-    'image.nonlocal_uri'
-]
+suppress_warnings = []
 
 # The master toctree document.
 master_doc = 'index'
 
 # The version info
 # The short X.Y version.
-release = find_version(os.path.join('..', 'promptly', '__init__.py'))
-version = release.rsplit(u'.', 1)[0]
+from promptly import __version__ as release  # noqa: E402
+version = release.rsplit('.', 1)[0]
 # The full version, including alpha/beta/rc tags.
 
 # List of patterns, relative to source directory, that match files and
@@ -108,11 +96,7 @@ autoclass_content = 'class'
 # List of modules to be mocked up. This is useful when you have dependencies
 # that are not installed during the documentation build process. A mock object
 # will be used instead.
-autodoc_mock_imports = [
-    'alembic',
-    'flask_migrate',
-    'flask_sqlalchemy',
-]
+autodoc_mock_imports = []
 
 # If True, the docstring of the parent class will be inherited if the subclass
 # doesn't have one.
@@ -138,7 +122,7 @@ intersphinx_mapping = {
     'alembic': ('https://alembic.sqlalchemy.org/en/latest/', None),
     'python': ('https://docs.python.org/3', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master', None),
-    'flask': ('https://flask.palletsprojects.com/en/3.0.x//', None),
+    'flask': ('https://flask.palletsprojects.com/en/3.0.x/', None),
     'werkzeug': ('https://werkzeug.palletsprojects.com/en/3.0.x/', None),
     'sqlalchemy': ('https://docs.sqlalchemy.org/en/20/', None),
     'flask_sqlalchemy': (

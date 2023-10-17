@@ -31,11 +31,6 @@ instructions for getting the most out of Promptly.
    configuration
    usage
 
-.. toctree::
-   :maxdepth: 1
-
-   changelog
-
 The Community Guide
 -------------------
 
@@ -75,9 +70,3 @@ you.
 .. include:: ../README.rst
    :start-after: -project-information-
    :end-before: -support-
-
-Indices and tables
-==================
-
-* `genindex`
-* `search`
