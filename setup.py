@@ -201,8 +201,6 @@ EXTRAS_REQUIRE = {
     ],
     'docs': [
         'sphinx>=7.2.6',  # Python documentation generator,
-        'sphinx-notfound-page>=1.0.0',  # Create a custom 404 page
-        'furo>=2023.9.10',  # Sphinx documentation theme
     ],
 }
 
