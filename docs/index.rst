@@ -5,8 +5,8 @@ Promptly: A customizable ChatGPT API interface for OpenAPI models
 Release v\ |release| (`What's new? <changelog>`).
 
 .. include:: ../README.rst
-   :start-after: teaser-begin
-   :end-before: teaser-end
+   :start-after: -teaser-begin-
+   :end-before: -teaser-end-
 
 .. include:: ../README.rst
    :start-after: -support-start-

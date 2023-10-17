@@ -47,8 +47,8 @@ def long_description():
         text = read_file(readme)
         return extract_text_between(
             text,
-            '.. teaser-begin',
-            '.. teaser-end'
+            '.. -teaser-begin-',
+            '.. -teaser-end-'
         ).strip()
 
     def changes() -> str:

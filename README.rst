@@ -19,7 +19,7 @@
     </p>
 
 
-.. teaser-begin
+.. -teaser-begin-
 
 Welcome to Promptly, an open-source research project aimed at interacting with
 OpenAPI compatible language models. If you're an engineer, data scientist, or
@@ -40,7 +40,7 @@ Features:
 - **Multiple Models:** This isn't a one-trick pony. Use any OpenAPI-compatible
   model you like.
 
-.. teaser-end
+.. -teaser-end-
 
 .. -project-information-
 
