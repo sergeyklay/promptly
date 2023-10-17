@@ -7,7 +7,7 @@
 
 """Module for :promptly.api.utils testing."""
 
-from promptly.api.utils import threaded_execute
+from promptly.utils import threaded_execute
 
 
 def test_threaded_execute_success():
