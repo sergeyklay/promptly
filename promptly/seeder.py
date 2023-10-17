@@ -24,26 +24,17 @@ from promptly.models import db
 def seed_all():
     """Seed all fake data to the database.
 
-    This function reads a JSON file named `fake-data.json` located in
-    the `fixtures` directory relative to this module's directory. Each
+    This function reads a JSON file named ``fake-data.json`` located in
+    the ``fixtures`` directory relative to this module's directory. Each
     entry in the JSON file should be a dictionary with three keys:
     'table', 'model', and 'data'. The 'table' value should be the name
     of the database table, 'model' should be the name of the SQLAlchemy
     model class, and 'data' should be a list of dictionaries where each
     dictionary represents a row to be inserted into the table.
 
-    Raises:
-        SystemExit:
-            1. If the `fake-data.json` file does not exist.
-            1. If failed to parse JSON data from the `fake-data.json` file.
-            2. If a necessary key ('table', 'model', or 'data') is missing in
-               the JSON data.
-            3. If the model class cannot be found.
-            4. If there is a TypeError when attempting to create a new model
-               instance.
+    Usage::
 
-    Examples:
-        An example `fake-data.json` file might look like this:
+        An example ``fake-data.json`` file might look like this:
 
         [
             {
@@ -52,9 +43,18 @@ def seed_all():
                 "data": [
                     {"title": "GANs Discussion", "teaser": "..."},
                     {"title": "NLP Enthusiasts", "teaser": "..."}
-                ],
+                ]
             }
         ]
+
+    :raises SystemExit:
+        1. If the ``fake-data.json`` file does not exist.
+        2. If failed to parse JSON data from the ``fake-data.json`` file.
+        3. If a necessary key ('table', 'model', or 'data') is missing in
+           the JSON data.
+        4. If the model class cannot be found.
+        5. If there is a TypeError when attempting to create a new model
+           instance.
     """
     file_path = get_file_path('fixtures', 'fake-data.json')
     json_data = load_json_data(file_path)
@@ -76,11 +76,9 @@ def load_json_data(filename):
 
     This function reads a JSON file and returns the parsed data.
 
-    Args:
-        filename (str): The name of the file to read.
-
-    Returns:
-        dict: The parsed JSON data.
+    :param str filename: The name of the file to read.
+    :return: The parsed JSON data.
+    :rtype: dict
     """
     try:
         with open(filename, 'r', encoding='utf-8') as f:
