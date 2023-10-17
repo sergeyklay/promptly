@@ -48,7 +48,7 @@ Project Information
 ===================
 
 Promptly is an open-source project under the `MIT License <https://choosealicense.com/licenses/mit/>`_,
-its documentation lives at `Read the Docs <https://promptly.readthedocs.io/>`_,
+its documentation lives at `Read the Docs <https://promptly.readthedocs.io/en/latest//>`_,
 with its code available at `GitHub <https://github.com/sergeyklay/promptly>`_.
 It’s rigorously tested on Python 3.10+ to ensure reliable interactions with ML
 models.
