@@ -1,79 +1,54 @@
 API Reference
 =============
 
-.. currentmodule:: promptly
+Indices and tables
+------------------
 
-The ``promptly`` module
------------------------
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
 .. automodule:: promptly
-    :members:
-    :special-members:
-    :no-undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. currentmodule:: promptly.api
+.. automodule:: promptly.app
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-The ``promptly.api`` module
----------------------------
+.. automodule:: promptly.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: promptly.seeder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: promptly.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. automodule:: promptly.api
-    :members:
-    :special-members:
-    :no-undoc-members:
-
-`promptly.api.utils`
---------------------
-
-.. automodule:: promptly.api.utils
-    :members:
-
-`promptly.api.views`
---------------------
-
-.. automodule:: promptly.api.views
-    :members:
-
-.. currentmodule:: promptly.main
-
-The ``promptly.main`` module
-----------------------------
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. automodule:: promptly.main
-    :members:
-    :special-members:
-    :no-undoc-members:
-
-`promptly.main.views`
----------------------
-
-.. automodule:: promptly.main.views
-    :members:
-
-.. currentmodule:: promptly.models
-
-The ``promptly.models`` module
-------------------------------
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 .. automodule:: promptly.models
-    :members:
-    :special-members:
-    :no-undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-`promptly.models.base`
-----------------------
-
-.. automodule:: promptly.models.base
-    :members:
-
-`promptly.models.chat`
-----------------------
-
-.. automodule:: promptly.models.chat
-    :members:
-
-
-`promptly.models.prompt`
-------------------------
-
-.. automodule:: promptly.models.prompt
-    :members:
+.. automodule:: promptly.services
+   :members:
+   :undoc-members:
+   :show-inheritance:
