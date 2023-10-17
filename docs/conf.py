@@ -155,7 +155,7 @@ todo_include_todos = True
 
 # html_favicon = None
 
-html_theme = 'furo'
+html_theme = 'alabaster'
 html_title = project
 
 html_theme_options = {}
