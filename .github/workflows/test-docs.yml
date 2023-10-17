@@ -40,5 +40,18 @@ jobs:
       - name: Install dependencies
         run: make install
 
-      - name: Build and test package documentation
-        run: make docs
+      - name: Check all external links for integrity
+        run: make linkcheck
+        working-directory: docs
+
+      - name: Build standalone HTML files
+        run: make html
+        working-directory: docs
+
+      - name: Build epub
+        run: make epub
+        working-directory: docs
+
+      - name: Build manual pages
+        run: make man
+        working-directory: docs

@@ -156,15 +156,6 @@ ccov: $(VENV_PYTHON)
 .PHONY: test-all
 test-all: uninstall clean install test lint
 
-.PHONY: docs
-docs: $(VENV_PYTHON)
-	$(call section, "Build package documentation")
-	@mkdir -p $(BUILD_DOC_DIR)
-	$(VENV_BIN)/sphinx-build -n -T -W -b html -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
-	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d $(DOCTREES) docs $(BUILD_DOC_DIR)/html
-	$(RM) -r $(DOCTREES)
-	$(call end_section)
-
 .PHONY: clean
 clean:
 	$(call section, "Remove build and tests artefacts and directories")
@@ -187,7 +178,6 @@ maintainer-clean: clean
 	-$(RM) -r $(VENV_ROOT)
 	$(call rm-venv-link)
 	$(RM) *.env *.sqlite3
-	$(RM) -r $(BUILD_DOC_DIR)
 	$(RM) -r $(INSTANCE_DIR)
 	$(call end_section)
 
@@ -236,4 +226,3 @@ help:
 	@echo '  VIRTUAL_ENV:  ${VIRTUAL_ENV}'
 	@echo '  SHELL:        $(shell echo $$SHELL)'
 	@echo '  TERM:         $(shell echo $$TERM)'
-	@echo '  LANG:         $(shell echo $$LANG)'

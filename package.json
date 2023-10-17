@@ -35,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/sergeyklay/promptly/issues"
   },
-  "homepage": "https://promptly.readthedocs.io/en/latest//",
+  "homepage": "https://promptly.readthedocs.io/en/latest/",
   "dependencies": {
     "materialize-css": "^1.0.0"
   },
