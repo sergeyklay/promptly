@@ -42,18 +42,6 @@ Promptly ecosystem and community.
 
    changelog
 
-The API Documentation / Guide
------------------------------
-
-If you are looking for information on a specific function, class, or method,
-this part of the documentation is for you.
-
-.. toctree::
-   :maxdepth: 2
-
-   database
-   api_reference
-
 The Contributor Guide
 ---------------------
 
@@ -70,3 +58,15 @@ you.
 .. include:: ../README.rst
    :start-after: -project-information-
    :end-before: -support-
+
+The API Documentation / Guide
+-----------------------------
+
+If you are looking for information on a specific function, class, or method,
+this part of the documentation is for you.
+
+.. toctree::
+   :maxdepth: 2
+
+   database
+   api_reference
