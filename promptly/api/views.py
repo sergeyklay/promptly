@@ -16,7 +16,7 @@ import os
 
 from flask import Blueprint, jsonify, request
 
-from .openai_eval import completion
+from promptly.api.openai_eval import completion
 
 api_bp = Blueprint('api', __name__)
 
