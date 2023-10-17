@@ -38,20 +38,16 @@ jobs:
         run: make init
 
       - name: Install dependencies
-        run: make install
+        run: source .venv/bin/activate && make install
 
       - name: Check all external links for integrity
-        run: make linkcheck
-        working-directory: docs
+        run: source .venv/bin/activate; cd docs && make linkcheck
 
       - name: Build standalone HTML files
-        run: make html
-        working-directory: docs
+        run: source .venv/bin/activate; cd docs && make html
 
       - name: Build epub
-        run: make epub
-        working-directory: docs
+        run: source .venv/bin/activate; cd docs && make epub
 
       - name: Build manual pages
-        run: make man
-        working-directory: docs
+        run: source .venv/bin/activate; cd docs && make epub
