@@ -17,6 +17,7 @@
 import os
 import sys
 
+from sphinx.builders.epub3 import Epub3Builder
 
 PROJECT_DIR = os.path.abspath('..')
 
@@ -135,7 +136,12 @@ intersphinx_mapping = {
 #
 todo_include_todos = True
 
-# -- Options for HTML output ----------------------------------------------
+# -- Options for epub output -------------------------------------------------
+
+
+Epub3Builder.media_types['.txt'] = 'text/plain'
+
+# -- Options for HTML output -------------------------------------------------
 
 # html_favicon = None
 
