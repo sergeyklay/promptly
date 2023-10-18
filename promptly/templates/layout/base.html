@@ -1,57 +1,50 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     {% include "layout/icons.html" %}
 
     <title>Promptly</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block head_css %}{% endblock %}
     {% block head_js %}{% endblock %}
-  </head>
-  <body>
+</head>
+
+<!-- TODO: Do I really need all these data-* attributes? -->
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
     <noscript>
-      <p class="noscript-warning">
-        Oops, it seems you have disabled JavaScript.
-        Turn it on to enjoy all the features of the chat.
-      </p>
+        <p class="noscript-warning">
+            Oops, it seems you have disabled JavaScript.
+            Turn it on to enjoy all the features of the chat.
+        </p>
     </noscript>
 
-    <div id="wrapper">
-      <!-- Sidebar -->
-      <aside id="sidebar">
+    <div class="wrapper">
         {% include "layout/sidebar.html" %}
-      </aside>
 
-      <button id="sidebar-toggler-btn" class="btn waves-effect waves-light">
-        <i class="material-icons">menu</i>
-      </button>
+        <div class="main" id="chat-wrapper">
+            {% include "layout/header.html" %}
 
-      <!-- Main chat window -->
-      <div id="chat-window">
+            <main class="content overflow-auto chat-content pt-5 pb-5">
+                <div class="container-fluid p-0" id="chat-output">
+                    {% block container %}{% endblock %}
+                </div>
+            </main>
 
-        <header class="chat-header">
-          {% include "layout/header.html" %}
-        </header>
-
-        <main class="chat-body">
-          <section id="chat-output">
-            {% block container %}{% endblock %}
-          </section>
-        </main>
-
-        <footer class="chat-footer">
-          {% include "layout/footer.html" %}
-        </footer>
-      </div>
+            <footer class="footer chat-footer">
+                {% include "layout/footer.html" %}
+            </footer>
+        </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block body_js %}{% endblock %}
   </body>

@@ -15,7 +15,7 @@
             <img src="https://codecov.io/gh/sergeyklay/promptly/graph/badge.svg?token=QoPTJP3wRv" alt="Coverage Status"/>
         </a>
         <br>
-        <img src="https://github.com/sergeyklay/promptly/blob/main/docs/screenshot.jpeg?raw=true" alt="Demo">
+        <img src="https://github.com/sergeyklay/promptly/blob/main/docs/screenshot.png?raw=true" alt="Demo">
     </p>
 
 

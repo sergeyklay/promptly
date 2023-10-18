@@ -1,25 +1,102 @@
-<div id="sidebar-header">
-  <div class="sidebar-header">
-    <button id="new-chat" class="btn waves-effect waves-light">New Chat</button>
-  </div>
-</div>
-
-<div class="sidebar-main">
-  <div class="chat-history">
-    {% for chat in chats %}
-    <div class="chat-item">
-      <h6>{{ chat.title }}</h6>
-      <p>{{ chat.teaser }}</p>
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        <div class="simplebar-wrapper" style="margin: 0px;">
+            <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+            </div>
+            <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper">
+                            <div class="simplebar-content" style="padding: 0px;">
+                                <a class="sidebar-brand" href="#">Promptly</a>
+                                <div class="sidebar-user">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="flex-shrink-0">
+                                            <img src="/img/avatars/img.png" class="avatar img-fluid rounded me-1" alt="">
+                                        </div>
+                                        <div class="flex-grow-1 ps-2">
+                                            <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                                User Name
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-start">
+                                                <a class="dropdown-item" href="#">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user align-middle me-1">
+                                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                        <circle cx="12" cy="7" r="4"></circle>
+                                                    </svg>
+                                                    Profile
+                                                </a>
+                                            </div>
+                                            <div class="sidebar-user-subtitle">Hacker</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="sidebar-nav">
+                                    <li class="sidebar-header">Pages</li>
+                                    <li class="sidebar-item active">
+                                        <a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders align-middle">
+                                                <line x1="4" y1="21" x2="4" y2="14"></line>
+                                                <line x1="4" y1="10" x2="4" y2="3"></line>
+                                                <line x1="12" y1="21" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12" y2="3"></line>
+                                                <line x1="20" y1="21" x2="20" y2="16"></line>
+                                                <line x1="20" y1="12" x2="20" y2="3"></line>
+                                                <line x1="1" y1="14" x2="7" y2="14"></line>
+                                                <line x1="9" y1="8" x2="15" y2="8"></line>
+                                                <line x1="17" y1="16" x2="23" y2="16"></line>
+                                            </svg>
+                                            <span class="align-middle">Dashboards</span>
+                                        </a>
+                                        <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
+                                            <li class="sidebar-item active">
+                                                <a href="#" class="sidebar-link">Chat</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="sidebar-item">
+                                            <a class="sidebar-link" href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle">
+                                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                                </svg>
+                                                <span class="align-middle">Chat History</span>
+                                            </a>
+                                        </li>
+                                    <li class="sidebar-item">
+                                            <a class="sidebar-link" href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle">
+                                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                                </svg>
+                                                <span class="align-middle">Prompts</span>
+                                            </a>
+                                        </li>
+                                </ul>
+                                <div class="sidebar-cta">
+                                    <div class="sidebar-cta-content">
+                                        <strong class="d-inline-block mb-2">Build Info</strong>
+                                        <div class="mb-3 text-sm">
+                                            Version: v0.0.1<br>
+                                            Date: 2023-10-18
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="simplebar-placeholder" style="width: auto; height: 1326px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"></div>
+        <div class="simplebar-track simplebar-vertical" style="visibility: visible;"></div>
     </div>
-    {% endfor %}
-  </div>
-</div>
-
-<div class="sidebar-footer">
-  <p>Promptly v0.0.1 (build: 2023-01-01)</p>
-    <div class="attribution">
-        <a href="http://www.freepik.com" target="_blank" rel="noopener noreferrer">
-            Designed by Freepik
-        </a>
-    </div>
-</div>
+</nav>

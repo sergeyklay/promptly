@@ -1,9 +1,17 @@
-<div class="chat-input-container">
-  <textarea
-    type="text"
-    id="prompt-textarea"
-    tabindex="0"
-    rows="1"
-    placeholder="Type your message here..."></textarea>
-  <button id="send-button" type="submit" class="btn waves-effect waves-light center">Send</button>
+<div class="container-fluid">
+    <div class="row text-muted">
+        <div class="col-12 text-center">
+            <div class="input-group mb-3">
+                <textarea
+                        class="form-control"
+                        id="prompt-textarea"
+                        rows="1"
+                        tabindex="0"
+                        placeholder="Type your message here..."
+                        aria-label="Type your message here..."
+                        aria-describedby="button-send"></textarea>
+                <button class="btn btn-primary" type="submit" id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
 </div>
