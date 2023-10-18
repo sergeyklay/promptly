@@ -75,7 +75,7 @@ jobs:
           python setup.py --classifiers
 
       - name: Make self-test
-        run: make help
+        run: make help; (cd docs && make help)
 
       - name: Set up virtualenv
         run: make init
@@ -85,8 +85,6 @@ jobs:
 
       - name: Run database migrations
         run: make migrate
-
-
 
       - name: Add seed data to the database
         run: make seed

@@ -29,7 +29,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 .PHONY: help
 help:
-	@echo 'Promptly Documentation Makefile'
+	@echo 'Promptly Documentation'
 	@echo
 	@echo 'Available targets:'
 	@echo
