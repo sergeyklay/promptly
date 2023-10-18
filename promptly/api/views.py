@@ -8,17 +8,16 @@
 """Module for serving chat API request.
 
 This module contains a blueprint for a Flask application to handle chat API
-requests, specifically to process a user's chat message and return the model's
+requests. It processes a user's chat message and returns the model's
 response.
 """
 
-import os
-
 from flask import Blueprint, jsonify, request
 
-from promptly.api.openai_eval import completion
+from promptly.services import OpenAIService
 
 api_bp = Blueprint('api', __name__)
+openai_service = OpenAIService()
 
 
 @api_bp.route('/conversation', methods=['POST'])
@@ -32,22 +31,9 @@ def conversation():
     :return: A JSON object containing the model's response to the user's
              message.
     :rtype: flask.Response
-    :raises: Exception: ``openai.error.OpenAIError`` for issues with the OpenAI
-        call.
+    :raises Exception: ``openai.error.OpenAIError`` for issues with the OpenAI
+                       call.
     """
     query = request.json.get('message')
-    openai_model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
-
-    response = completion(
-        messages=[{'role': 'user', 'content': query}],
-        model=openai_model,
-        temperature=0,
-        max_tokens=2048,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-    )
-
-    response_message = response['choices'][0]['message']['content']
-
+    response_message = openai_service.get_response(query)
     return jsonify({'message': response_message})

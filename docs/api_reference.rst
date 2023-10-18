@@ -28,11 +28,26 @@ Indices and tables
    :members:
    :show-inheritance:
 
+.. automodule:: promptly.api.openai_eval
+   :members:
+   :show-inheritance:
+
+.. automodule:: promptly.api.views
+   :members:
+   :show-inheritance:
+
 .. automodule:: promptly.main
    :members:
    :show-inheritance:
 
 .. automodule:: promptly.models
    :members:
-   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: promptly.services
+   :members:
+   :show-inheritance:
+
+.. automodule:: promptly.services.openai_service
+   :members:
    :show-inheritance:
