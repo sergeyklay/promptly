@@ -227,3 +227,9 @@ help:
 	@echo '  VIRTUAL_ENV:  ${VIRTUAL_ENV}'
 	@echo '  SHELL:        $(shell echo $$SHELL)'
 	@echo '  TERM:         $(shell echo $$TERM)'
+	@echo
+	@echo 'To work with documentation, navigate to the docs directory and '
+	@echo 'execute make help: '
+	@echo
+	@echo '    cd docs && make help'
+	@echo
