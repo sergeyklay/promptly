@@ -69,5 +69,5 @@ endif
 
 HAVE_NPM := $(shell command -v npm 2> /dev/null)
 ifndef HAVE_NPM
-$(error "npm is not available. Please install Node.js.")
+$(warning "npm is not available. Please install Node.js.")
 endif
