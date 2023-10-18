@@ -75,7 +75,7 @@ jobs:
           python setup.py --classifiers
 
       - name: Make self-test
-        run: make help; (cd docs && make help)
+        run: make help; make -C docs help
 
       - name: Set up virtualenv
         run: make init

@@ -41,13 +41,13 @@ jobs:
         run: source .venv/bin/activate && make install
 
       - name: Check all external links for integrity
-        run: source .venv/bin/activate; cd docs && make linkcheck
+        run: source .venv/bin/activate; make -C docs linkcheck
 
       - name: Build standalone HTML files
-        run: source .venv/bin/activate; cd docs && make html
+        run: source .venv/bin/activate; make -C docs html
 
       - name: Build epub
-        run: source .venv/bin/activate; cd docs && make epub
+        run: source .venv/bin/activate; make -C docs epub
 
       - name: Build manual pages
-        run: source .venv/bin/activate; cd docs && make epub
+        run: source .venv/bin/activate; make -C docs epub
