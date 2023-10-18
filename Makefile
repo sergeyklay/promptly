@@ -164,6 +164,7 @@ clean:
 	$(RM) -r ./.cache ./.pytest_cache
 	$(RM) -r ./htmlcov
 	$(RM) ./coverage.*
+	$(MAKE) -C docs clean
 	$(call end_section)
 
 .PHONY: db-clean
