@@ -103,7 +103,7 @@ uninstall:
 .PHONY: serve
 serve: $(VENV_PYTHON) $(INSTANCE_DIR) .env runner.py
 	$(call section, "Run builtin server")
-	$(VENV_BIN)/flask --app runner:app run --debug
+	$(VENV_BIN)/flask --app runner:app run --debug --port $(PORT)
 	$(call end_section)
 
 .PHONY: revision

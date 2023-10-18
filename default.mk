@@ -11,6 +11,13 @@
 ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PKG_NAME = promptly
 
+# macOS Monterey and later automatically starts a service that uses port 5000.
+# To disable the service, go to System Preferences, Sharing, and disable
+# “AirPlay Receiver”.
+#
+# Another way is to change current application's port.
+PORT = 5000
+
 INSTANCE_DIR = ./instance
 
 PYLINT_FLAGS ?=
