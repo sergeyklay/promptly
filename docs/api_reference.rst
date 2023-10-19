@@ -16,10 +16,6 @@ Indices and tables
    :members:
    :show-inheritance:
 
-.. automodule:: promptly.seeder
-   :members:
-   :show-inheritance:
-
 .. automodule:: promptly.utils
    :members:
    :show-inheritance:

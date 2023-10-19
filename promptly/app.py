@@ -84,7 +84,7 @@ def configure_extensions(app: Flask):
     @app.cli.command()
     def seed():
         """Add seed data to the database."""
-        from promptly.seeder import seed
+        from tests.seeder import seed
         seed()
 
 
