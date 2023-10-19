@@ -36,6 +36,14 @@ Indices and tables
    :members:
    :show-inheritance:
 
+.. automodule:: promptly.chat
+   :members:
+   :show-inheritance:
+
+.. automodule:: promptly.chat.views
+   :members:
+   :show-inheritance:
+
 .. automodule:: promptly.main
    :members:
    :show-inheritance:
