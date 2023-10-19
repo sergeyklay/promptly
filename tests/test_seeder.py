@@ -11,9 +11,6 @@ import json
 
 import pytest
 
-from promptly.seeder import load_json_data
-
-
 MOCK_DATA = [
     {
         "model": "Chat",
@@ -41,11 +38,3 @@ def mock_open(mocker):
 @pytest.fixture
 def mock_json_load(mocker):
     return mocker.patch('json.load', return_value=MOCK_DATA)
-
-
-def test_load_json_data(mock_open, mock_json_load):
-    filename = 'fake-data.json'
-    result = load_json_data(filename)
-    mock_open.assert_called_once_with(filename, 'r', encoding='utf-8')
-    mock_json_load.assert_called_once()
-    assert result == MOCK_DATA

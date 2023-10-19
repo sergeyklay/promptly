@@ -191,13 +191,15 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
+        'Faker>=19.11.0',  # Faker is a Python package that generates fake data
+        'coverage[toml]>=7.3.2',  # Code coverage measurement for Python
+        'factory-boy>=3.3.0',  # A test fixtures replacement for Python
         'flake8-blind-except>=0.2.0',  # Checks for blind except: statements
         'flake8-import-order>=0.18.1',  # Checks the ordering of imports
         'flake8>=6.1.0',  # The modular source code checker
         'pylint>=3.0.1',  # Python code static checker
-        'pytest>=7.4.2',  # Our tests framework
         'pytest-mock>=3.11.1',  # Mocking with pytest
-        'coverage[toml]>=7.3.2',  # Code coverage measurement for Python
+        'pytest>=7.4.2',  # Our tests framework
     ],
     'docs': [
         'sphinx>=7.2.6',  # Python documentation generator,
