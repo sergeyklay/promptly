@@ -56,7 +56,7 @@ class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
 
     __tablename__ = 'chat_entries'
 
-    teaser: so.Mapped[str] = so.mapped_column(
+    content: so.Mapped[str] = so.mapped_column(
         sa.Text,
         nullable=False,
     )
