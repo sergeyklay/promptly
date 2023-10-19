@@ -121,7 +121,6 @@ def get_model_class(model, table):
     :raises SystemExit: If the model class cannot be found.
     """
     model_class = getattr(sys.modules['promptly.models'], model, None)
-    print(f'model_class: {model_class} type: {type(model_class)}')
     if not model_class:
         error_exit(f'Failed to find model class for {table}', 1)
     return model_class
