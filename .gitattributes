@@ -15,12 +15,10 @@
 # Setting up linguist
 *.rst    linguist-documentation=true  linguist-detectable=true
 LICENSE  linguist-documentation=true  linguist-detectable=true
-*.drawio linguist-language=XML   linguist-detectable=true
+*.drawio linguist-language=XML        linguist-detectable=true
 
 # Mark these built artifacts as generated
-/promptly/static/css/style.css            linguist-generated=true
-/promptly/static/css/materialize.min.css  linguist-generated=true
-/promptly/static/js/materialize.min.js    linguist-generated=true
+/promptly/static/css/style.css  linguist-generated=true
 
 # Exclude files from exporting
 # (used by the "download ZIP archive" option, for example).
