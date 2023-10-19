@@ -171,6 +171,8 @@ clean:
 db-clean:
 	$(call section, "Cleanup database")
 	@echo "DELETE FROM chats;" | sqlite3 dev-db.sqlite3
+	@echo "DELETE FROM chat_entries;" | sqlite3 dev-db.sqlite3
+	@echo "VACUUM;" | sqlite3 dev-db.sqlite3
 	$(call end_section)
 
 .PHONY: maintainer-clean
