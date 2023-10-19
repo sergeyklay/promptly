@@ -7,96 +7,100 @@
 
 """Module for seeding the database with fake data.
 
-This module contains functions necessary for loading fake data from
-a JSON file and seeding it into the database using SQLAlchemy ORM.
+This module is part of the Promptly application and provides functionality for
+seeding the database with fake data. The data is generated using the Faker
+library, and is inserted into the database using the SQLAlchemy ORM.
 """
 
-import json
-import os
+import random
 import sys
 from contextlib import contextmanager
 
+from faker import Faker
+from faker.providers import company, lorem, python
 from sqlalchemy.exc import IntegrityError
 
-from promptly.models import db
+from promptly.models import ChatEntry, db
 
 
-def seed_all():
-    """Seed all fake data to the database.
+def seed():
+    """Init the seeding process by seeding chat and chat entry entities."""
+    chats = seed_entities(create_chats())
+    seed_chat_entries(chats)
 
-    This function reads a JSON file named ``fake-data.json`` located in
-    the ``fixtures`` directory relative to this module's directory. Each
-    entry in the JSON file should be a dictionary with three keys:
-    'table', 'model', and 'data'. The 'table' value should be the name
-    of the database table, 'model' should be the name of the SQLAlchemy
-    model class, and 'data' should be a list of dictionaries where each
-    dictionary represents a row to be inserted into the table.
 
-    Usage::
+def create_chats(chats_count=None):
+    """Generate a specified number of fake chat data."""
+    fake = Faker()
 
-        An example ``fake-data.json`` file might look like this:
+    fake.add_provider(company)
+    fake.add_provider(lorem)
+    fake.add_provider(python)
 
-        [
-            {
-                "table": "chats",
-                "model": "Chat",
-                "data": [
-                    {"title": "GANs Discussion", "teaser": "..."},
-                    {"title": "NLP Enthusiasts", "teaser": "..."}
-                ]
-            }
-        ]
+    if chats_count is None:
+        chats_count = 15
 
-    :raises SystemExit:
-        1. If the ``fake-data.json`` file does not exist.
-        2. If failed to parse JSON data from the ``fake-data.json`` file.
-        3. If a necessary key ('table', 'model', or 'data') is missing in
-           the JSON data.
-        4. If the model class cannot be found.
-        5. If there is a TypeError when attempting to create a new model
-           instance.
+    seed_data = {
+        'model': 'Chat',
+        'table': 'chats',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < chats_count:
+        seed_data['data'].append({
+            'title': fake.company(),
+            'teaser': fake.paragraph(nb_sentences=1),
+        })
+
+    return seed_data
+
+
+def seed_chat_entries(chats):
     """
-    file_path = get_file_path('fixtures', 'fake-data.json')
-    json_data = load_json_data(file_path)
+    Seed the chat entries table with a specified chats.
 
-    for entry in json_data:
-        seed_entry(entry)
-
-
-def get_file_path(*path_parts):
-    """Construct file path."""
-    return os.path.join(
-        os.path.dirname(os.path.dirname(__file__)),
-        *path_parts
-    )
-
-
-def load_json_data(filename):
-    """Load JSON data from a file.
-
-    This function reads a JSON file and returns the parsed data.
-
-    :param str filename: The name of the file to read.
-    :return: The parsed JSON data.
-    :rtype: dict
+    :param chats: A list of chats to which the chat entries will be associated.
+    :type chats: list
     """
-    try:
-        with open(filename, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        error_exit(f'Failed to parse JSON data from {filename}', 1)
-        return None  # to mute R1710
+    fake = Faker()
+
+    fake.add_provider(company)
+    fake.add_provider(lorem)
+    fake.add_provider(python)
+
+    entries_count = 500
+    created = 0
+
+    while created < entries_count:
+        try:
+            chat_entry = ChatEntry.create(
+                content=fake.paragraph(nb_sentences=2),
+                chat=random.choice(chats),
+            )
+            db.session.add(chat_entry)
+            db.session.commit()
+            created += 1
+        except IntegrityError:
+            db.session.rollback()
 
 
-def seed_entry(entry):
-    """Seed a single entry to the database."""
-    try:
-        table, model, table_data = get_entry_data(entry)
-        model_class = get_model_class(model, table)
-        for row_data in table_data:
-            seed_row(model_class, table, row_data)
-    except KeyError:
-        error_exit('Invalid JSON data', 1)
+def seed_entities(entry):
+    """
+    Seed a single table based on the provided entry data.
+
+    :param dict entry: A dictionary containing the model name, table name, and
+        a list of dictionaries where each dictionary represents a row to be
+        inserted into the table.
+    :return: A list of instances that have been added to the session.
+    :rtype: list
+    """
+    entities = []
+    table, model, table_data = get_entry_data(entry)
+    model_class = get_model_class(model, table)
+    for row_data in table_data:
+        entities.append(seed_row(model_class, table, row_data))
+
+    return entities
 
 
 def get_entry_data(entry):
@@ -105,19 +109,47 @@ def get_entry_data(entry):
 
 
 def get_model_class(model, table):
-    """Get the model class from the model name."""
+    """
+    Retrieve the model class based on the provided model name.
+
+    :param str model: The name of the model class to retrieve.
+    :param str table: The name of the table associated with the model, used for
+        error messaging.
+    :return: The model class if found, or exits the program with an error
+        message if not found.
+    :rtype: flask_sqlalchemy.model.DefaultMeta
+    :raises SystemExit: If the model class cannot be found.
+    """
     model_class = getattr(sys.modules['promptly.models'], model, None)
+    print(f'model_class: {model_class} type: {type(model_class)}')
     if not model_class:
         error_exit(f'Failed to find model class for {table}', 1)
     return model_class
 
 
+# pylint: disable=inconsistent-return-statements
 def seed_row(model_class, table, row_data):
-    """Seed a single row to the database."""
+    """
+    Insert a single row into the specified table based on the provided data.
+
+    :param model_class: The SQLAlchemy model class for the table.
+    :type model_class: flask_sqlalchemy.model.DefaultMeta
+    :param str table: The name of the table.
+    :param dict row_data: The data for the row to be inserted.
+    :return: The instance of the model class representing the inserted row.
+    :rtype: sqlalchemy.orm.state.InstanceState|None
+
+    :raises TypeError: If there's a type error when attempting to create a new
+        model instance.
+    :raises sqlalchemy.exc.IntegrityError: If there's an integrity error when
+        attempting to insert the row into the table.
+
+    """
     try:
         instance = model_class().create(**row_data)
         with db_session() as session:
             session.add(instance)
+            return instance
     except TypeError:
         error_exit(f'''
         Failed to use {row_data} to insert into "{table}" table

@@ -84,8 +84,8 @@ def configure_extensions(app: Flask):
     @app.cli.command()
     def seed():
         """Add seed data to the database."""
-        from promptly.seeder import seed_all
-        seed_all()
+        from promptly.seeder import seed
+        seed()
 
 
 def configure_context_processors(app: Flask):
