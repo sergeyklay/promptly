@@ -13,11 +13,9 @@ Promptly application, including the homepage and maintenance mode handling.
 
 import os
 
-from flask import abort, render_template
-from flask import Blueprint
+from flask import abort, Blueprint
 
 from promptly.utils import strtobool
-
 
 main_bp = Blueprint('main', __name__)
 
@@ -39,15 +37,3 @@ def maintained():
             abort(503)
     except ValueError:
         pass
-
-
-@main_bp.route('/')
-def home_page():
-    """Render the homepage of the application.
-
-    :return: The rendered homepage template.
-    :rtype: str
-    """
-    from promptly.models import Chat
-    chats = Chat.query.all()
-    return render_template('home.html', chats=chats)

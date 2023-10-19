@@ -115,6 +115,10 @@ def configure_blueprints(app: Flask):
     from promptly.main import main_bp
     app.register_blueprint(main_bp)
 
+    # chat blueprint registration
+    from promptly.chat import chat_bp
+    app.register_blueprint(chat_bp)
+
     # api blueprint registration
     from promptly.api import api_bp
     app.register_blueprint(api_bp)
