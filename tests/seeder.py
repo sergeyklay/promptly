@@ -20,33 +20,40 @@ from faker import Faker
 from faker.providers import company, lorem, python
 from sqlalchemy.exc import IntegrityError
 
-from promptly.models import ChatEntry, db
+from promptly.models import db
+
+
+fake = Faker()
+
+fake.add_provider(company)
+fake.add_provider(lorem)
+fake.add_provider(python)
 
 
 def seed():
     """Init the seeding process by seeding chat and chat entry entities."""
     chats = seed_entities(create_chats())
-    seed_chat_entries(chats)
+    _ = seed_entities(create_chat_entries(chats))
+
+    prompts = seed_entities(create_prompts())
+    _ = seed_entities(create_prompt_rules(prompts))
+    _ = seed_entities(create_prompt_criteria(prompts))
+
+    references = seed_entities(create_prompt_references(prompts))
+    _ = seed_entities(create_prompt_reference_key_insights(references))
 
 
-def create_chats(chats_count=None):
+def create_chats(entries_count=None):
     """Generate a specified number of fake chat data."""
-    fake = Faker()
-
-    fake.add_provider(company)
-    fake.add_provider(lorem)
-    fake.add_provider(python)
-
-    if chats_count is None:
-        chats_count = 15
-
+    if entries_count is None:
+        entries_count = 15
     seed_data = {
         'model': 'Chat',
         'table': 'chats',
         'data': [],
     }
 
-    while len(seed_data['data']) < chats_count:
+    while len(seed_data['data']) < entries_count:
         seed_data['data'].append({
             'title': fake.company(),
             'teaser': fake.paragraph(nb_sentences=1),
@@ -55,33 +62,129 @@ def create_chats(chats_count=None):
     return seed_data
 
 
-def seed_chat_entries(chats):
+def create_chat_entries(chats):
     """
     Seed the chat entries table with a specified chats.
 
     :param chats: A list of chats to which the chat entries will be associated.
     :type chats: list
     """
-    fake = Faker()
+    entries_count = len(chats) * 10
+    seed_data = {
+        'model': 'ChatEntry',
+        'table': 'chat_entries',
+        'data': [],
+    }
 
-    fake.add_provider(company)
-    fake.add_provider(lorem)
-    fake.add_provider(python)
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'content': fake.paragraph(nb_sentences=2),
+            'chat': random.choice(chats),
+        })
 
-    entries_count = 500
-    created = 0
+    return seed_data
 
-    while created < entries_count:
-        try:
-            chat_entry = ChatEntry.create(
-                content=fake.paragraph(nb_sentences=2),
-                chat=random.choice(chats),
-            )
-            db.session.add(chat_entry)
-            db.session.commit()
-            created += 1
-        except IntegrityError:
-            db.session.rollback()
+
+def create_prompts():
+    entries_count = 10
+    seed_data = {
+        'model': 'Prompt',
+        'table': 'prompts',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'prompt': fake.paragraph(nb_sentences=1),
+            'role': random.choice([
+                'Software Engineer',
+                'Engineering Manager',
+            ]),
+            'field': random.choice([
+                'Engineering',
+                'Product',
+            ]),
+            'task': random.choice([
+                'Create A User Guide',
+                'Write A Blog Post',
+                'Create A New Feature',
+
+            ]),
+            'task_description': fake.paragraph(nb_sentences=2),
+        })
+
+    return seed_data
+
+
+def create_prompt_references(prompts):
+    entries_count = len(prompts) * 2
+    seed_data = {
+        'model': 'Reference',
+        'table': 'prompt_references',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'title': fake.paragraph(nb_sentences=1),
+            'author': fake.name(),
+            'year': fake.year(),
+            'prompt': random.choice(prompts),
+        })
+
+    return seed_data
+
+
+def create_prompt_criteria(prompts):
+    entries_count = len(prompts) * 8
+    seed_data = {
+        'model': 'Criterion',
+        'table': 'prompt_criteria',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'name': f'{fake.unique.word()} {fake.unique.word()}',
+            'description': fake.paragraph(nb_sentences=1),
+            'prompt': random.choice(prompts),
+        })
+
+    return seed_data
+
+
+def create_prompt_reference_key_insights(references):
+    entries_count = len(references) * 8
+    seed_data = {
+        'model': 'KeyInsight',
+        'table': 'prompt_reference_key_insights',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'description': fake.paragraph(nb_sentences=1),
+            'reference': random.choice(references),
+        })
+
+    return seed_data
+
+
+def create_prompt_rules(prompts):
+    entries_count = len(prompts) * 6
+    seed_data = {
+        'model': 'Rule',
+        'table': 'prompt_rules',
+        'data': [],
+    }
+
+    while len(seed_data['data']) < entries_count:
+        seed_data['data'].append({
+            'description': fake.paragraph(nb_sentences=1),
+            'prompt': random.choice(prompts),
+        })
+
+    return seed_data
 
 
 def seed_entities(entry):

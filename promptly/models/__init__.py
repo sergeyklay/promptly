@@ -14,4 +14,10 @@ ease of access.
 
 from .base import db  # noqa: F401
 from .chat import Chat, ChatEntry  # noqa: F401
-from .prompt import Prompt  # noqa: F401
+from .prompt import (  # noqa: F401
+    Criterion,
+    KeyInsight,
+    Prompt,
+    Reference,
+    Rule
+)
