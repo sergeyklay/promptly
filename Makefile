@@ -167,12 +167,11 @@ clean:
 	$(MAKE) -C docs clean
 	$(call end_section)
 
+# TODO:
 .PHONY: db-clean
-db-clean:
+db-clean: migrations/db-clean.sqlite3
 	$(call section, "Cleanup database")
-	@echo "DELETE FROM chats;" | sqlite3 dev-db.sqlite3
-	@echo "DELETE FROM chat_entries;" | sqlite3 dev-db.sqlite3
-	@echo "VACUUM;" | sqlite3 dev-db.sqlite3
+	sqlite3 dev-db.sqlite3 < $<
 	$(call end_section)
 
 .PHONY: maintainer-clean
