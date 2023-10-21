@@ -10,6 +10,7 @@
 import pytest
 
 from promptly.utils import strtobool
+from promptly.utils import threaded_execute
 
 
 @pytest.mark.parametrize(
@@ -29,3 +30,21 @@ def test_should_return_false(value):
 def test_should_raise_value_error():
     with pytest.raises(ValueError):
         strtobool('FOO_BAR')
+
+
+def test_threaded_execute_success():
+    def fast_func():
+        return 'Success'
+
+    result = threaded_execute(fast_func)
+    assert result == 'Success'
+
+
+def test_threaded_execute_non_timeout_exception():
+    def failing_func():
+        raise ValueError('Something went wrong')
+
+    try:
+        threaded_execute(failing_func)
+    except ValueError as e:
+        assert str(e) == 'Something went wrong'
