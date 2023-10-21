@@ -21,7 +21,7 @@ def chat():
     :return: The rendered homepage template.
     :rtype: str
     """
-    return render_template('chat/chat.html')
+    return render_template('chat/chat.html', active_page='chat')
 
 
 @chat_bp.route('/history')
@@ -35,7 +35,8 @@ def history():
     chats = Chat.query.all()
     return render_template(
         'chat/history.html',
-        chats=chats
+        chats=chats,
+        active_page='history'
     )
 
 
