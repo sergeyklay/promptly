@@ -1,0 +1,25 @@
+{% extends "layout/base.html" %}
+
+{% block container %}
+    <h1 class="h3 mb-3">Chat History</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <table class="table table-hover table-borderless">
+                    <tbody>
+                    {% for chat in chats %}
+                        <tr class="chat-history-item">
+                            <td>{{ chat.updated_at|human_readable_date }}</td>
+                            <th scope="row">{{ chat.title }}</th>
+                            <td class="chat-history-teaser">
+                                {{ chat.teaser }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

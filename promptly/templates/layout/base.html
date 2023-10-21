@@ -39,7 +39,9 @@
             </main>
 
             <footer class="footer chat-footer">
-                {% include "layout/footer.html" %}
+                {% if active_page == 'chat' %}
+                    {% include "layout/footer.html" %}
+                {% endif %}
             </footer>
         </div>
     </div>

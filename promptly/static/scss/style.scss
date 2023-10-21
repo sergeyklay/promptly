@@ -14,6 +14,35 @@ body { opacity: 0; }
   height: 100vh;
 }
 
+.sidebar-user {
+  padding: .75rem 1.5rem
+}
+
+.sidebar-user a {
+  outline: 0;
+  text-decoration: none
+}
+
+.sidebar-user-title,
+.sidebar-user-title:hover {
+    color: #e9ecef
+}
+
+.sidebar-user-subtitle {
+    color: #adb5bd
+}
+
+.chat-history-item:hover {
+  cursor: pointer;
+}
+
+.chat-history-teaser {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
 #chat-wrapper {
   overflow-x: hidden;
   overflow-y: auto;
