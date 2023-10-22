@@ -68,6 +68,23 @@ def strtobool(value: str) -> bool:
         raise ValueError(f'''"{value}" is not a valid bool value''') from exc
 
 
+def try_parse_int(s):
+    """Try to convert a string to an integer.
+
+    This function attempts to convert a string to an integer. If the conversion
+    fails due to a `ValueError` or `TypeError`, it returns `None`.
+
+    :param s: The string to convert.
+    :type s: str or None
+    :return: The integer value if conversion is successful, `None` otherwise.
+    :rtype: int or None
+    """
+    try:
+        return int(s)
+    except (ValueError, TypeError):
+        return None
+
+
 def threaded_execute(func, *args, timeout=None, **kwargs):
     """Worker thread for timed request execution.
 

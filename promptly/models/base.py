@@ -21,7 +21,7 @@ from datetime import datetime
 import sqlalchemy as sa
 from flask import abort
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData, orm as so
+from sqlalchemy import exists, MetaData, orm as so
 from sqlalchemy.sql import func
 
 convention = {
@@ -118,6 +118,26 @@ class IdentityMixin:
         :rtype: str
         """
         return f'<{self.__class__.__name__} id={self.id!r}>'
+
+    @classmethod
+    def exists(cls, entity_id: int) -> bool:
+        """Check if a record with the given ID exists in the database.
+
+        This is a class method that uses SQLAlchemy's :func:`exists` function
+        and the :meth:`scalar` method to efficiently check if a record with the
+        specified ID is present in the database. It returns a boolean value
+        indicating the presence or absence of the record.
+
+        :param entity_id: The ID of the chat to be checked.
+        :type entity_id: int
+        :return: True if the chat exists, otherwise False.
+        :rtype: bool
+
+        .. note::
+            This method assumes an active SQLAlchemy database session.
+
+        """
+        return db.session.query(exists().where(cls.id == entity_id)).scalar()
 
 
 class TimestampMixin:

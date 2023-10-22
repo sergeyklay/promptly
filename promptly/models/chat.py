@@ -17,6 +17,7 @@ within the application, including the :class:`.Chat` and
           and the necessary base mixins for identity and timestamp handling.
 """
 
+from enum import Enum
 from typing import List
 
 import sqlalchemy as sa
@@ -59,12 +60,33 @@ class Chat(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
 
         return first_entry.content[:length]
 
+    @classmethod
+    def create_new_chat(cls, title=None):
+        """Create a new chat and return the new chat."""
+        title = title or 'New chat'
+        new_chat = cls.create(title=title)
+        new_chat.save()
+        return new_chat
+
 
 class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
     """ChatEntry Model.
 
     Represents a single message in a Chat.
     """
+    class Role(Enum):
+        """Represents the role of a :class:`.ChatEntry`."""
+
+        USER = 'user'
+        ASSISTANT = 'assistant'
+
+        def __str__(self) -> str:
+            """Get a string representation of this role.
+
+            :return: The name of this role.
+            :rtype: str
+            """
+            return self.name.strip().lower()
 
     __tablename__ = 'chat_entries'
 
@@ -76,6 +98,15 @@ class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
     chat_id: so.Mapped[int] = so.mapped_column(
         sa.ForeignKey('chats.id'),
         nullable=False
+    )
+
+    role: so.Mapped[Role] = so.mapped_column(
+        sa.Enum(
+            Role,
+            name='role_types',
+            values_callable=lambda obj: [str(item.value) for item in obj]
+        ),
+        nullable=False,
     )
 
     chat: so.Mapped['Chat'] = so.relationship(
