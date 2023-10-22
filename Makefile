@@ -144,6 +144,11 @@ test: $(VENV_PYTHON)
 	$(VENV_BIN)/coverage run -m pytest $(PYTEST_FLAGS) ./$(PKG_NAME) ./tests
 	$(call end_section)
 
+.PHONY: test-js
+test-js:
+	npm run build
+	npm run test
+
 .PHONY: ccov
 ccov: $(VENV_PYTHON)
 	$(call section, "Combine coverage reports")
@@ -154,7 +159,7 @@ ccov: $(VENV_PYTHON)
 	$(call end_section)
 
 .PHONY: test-all
-test-all: uninstall clean install test lint
+test-all: lint test test-js ccov
 
 .PHONY: clean
 clean:

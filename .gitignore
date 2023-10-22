@@ -13,7 +13,6 @@
 # https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
 
 # Directories to ignore (do not add trailing '/'s, they skip symlinks):
-/.cache
 /.pytest_cache
 /htmlcov
 /instance
@@ -28,6 +27,7 @@
 __pycache__
 
 # Ignore codecoverage stuff:
+/coverage
 coverage.*
 
 # draw.io backup- and temp-files:
