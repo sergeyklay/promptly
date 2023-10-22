@@ -21,7 +21,7 @@ from faker.providers import company, lorem, python
 from sqlalchemy.exc import IntegrityError
 
 from promptly.models import db
-
+from promptly.models.chat import ChatEntry
 
 fake = Faker()
 
@@ -74,8 +74,14 @@ def create_chat_entries(chats):
     }
 
     while len(seed_data['data']) < entries_count:
+        if len(seed_data['data']) % 2 == 0:
+            role = ChatEntry.Role.USER
+        else:
+            role = ChatEntry.Role.ASSISTANT
+
         seed_data['data'].append({
             'content': fake.paragraph(nb_sentences=4),
+            'role': role,
             'chat': random.choice(chats),
         })
 

@@ -1,3 +1,15 @@
 {% extends "layout/base.html" %}
 
-{% block container %}{% endblock %}
+{% block container %}
+    {%  for chat_entry in chat.entry %}
+        <div class="row chat-message" data-chat-role="{{ chat_entry.role }}">
+            <div class="col-12">
+                <div class="card bg-light py-2 py-md-3 border">
+                    <div class="card-body">
+                        {{ chat_entry.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

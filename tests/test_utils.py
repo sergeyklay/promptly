@@ -9,8 +9,7 @@
 
 import pytest
 
-from promptly.utils import strtobool
-from promptly.utils import threaded_execute
+from promptly.utils import strtobool, threaded_execute, try_parse_int
 
 
 @pytest.mark.parametrize(
@@ -48,3 +47,19 @@ def test_threaded_execute_non_timeout_exception():
         threaded_execute(failing_func)
     except ValueError as e:
         assert str(e) == 'Something went wrong'
+
+
+@pytest.mark.parametrize(
+    'provided, expected',
+    [
+        ('42', 42),
+        ('0', 0),
+        ('-1', -1),
+        ('abc', None),
+        (None, None),
+        ('', None),
+        ('3.14', None),  # float string
+    ]
+)
+def test_try_parse_int(provided, expected):
+    assert try_parse_int(provided) == expected
