@@ -53,6 +53,8 @@ class BaseMixin:
         :type entity_id: Any
         :return: The fetched model instance if found, otherwise ``None``.
         """
+        if entity_id is None:
+            return None
         return db.session.get(cls, entity_id)
 
     @classmethod

@@ -42,7 +42,7 @@ def conversation():
     message, chat_id = data.get('message'), data.get('chat_id')
 
     chat_id = try_parse_int(chat_id)
-    chat = Chat.query.get(chat_id) if chat_id else Chat.create_new_chat()
+    chat = Chat.get(chat_id) if chat_id else Chat.create_new_chat()
     if chat is None:
         chat = Chat.create_new_chat()
 
