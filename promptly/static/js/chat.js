@@ -20,11 +20,6 @@ export function autoResizePromptTextarea(e) {
   const numericLineHeight = parseFloat(computedLineHeight);
   const maxHeight = numericLineHeight * 8;
 
-  console.error(`computedLineHeight: ${computedLineHeight}`);
-  console.error(`numericLineHeight: ${numericLineHeight}`);
-  console.error(`maxHeight: ${maxHeight}`);
-  console.error(`scrollHeight: ${e.scrollHeight}`);
-
   if (e.scrollHeight > maxHeight) {
     newHeight = maxHeight;
     e.style.overflowY = 'auto';
