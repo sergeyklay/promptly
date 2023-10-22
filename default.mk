@@ -22,6 +22,9 @@ INSTANCE_DIR = ./instance
 
 PYLINT_FLAGS ?=
 FLAKE8_FLAGS ?= --show-source --statistics
+PYTHON_FLAGS ?= -W always
+
+export SQLALCHEMY_WARN_20 ?= 1
 
 ifneq ($(TERM),)
 	GREEN := $(shell tput setaf 2)
@@ -57,7 +60,7 @@ else
 	VENV_BIN = $(VENV_ROOT)/bin
 endif
 
-VENV_PYTHON = $(VENV_BIN)/python
+VENV_PYTHON = $(VENV_BIN)/$(PYTHON) $(PYTHON_FLAGS)
 VENV_PIP    = $(VENV_PYTHON) -m pip
 
 export PATH := $(VENV_BIN):$(PATH)
