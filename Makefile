@@ -212,14 +212,16 @@ help:
 	@echo
 	@echo 'Virtualenv:'
 	@echo
-	@echo '  Python:       $(VENV_PYTHON)'
-	@echo '  pip:          $(VENV_PIP)'
+	@echo '  python:             $(VENV_BIN)/$(PYTHON)'
+	@echo '  pip:                $(VENV_BIN)/$(PYTHON) -m pip'
 	@echo
 	@echo 'Flags:'
 	@echo
-	@echo '  FLAKE8_FLAGS: $(FLAKE8_FLAGS)'
-	@echo '  PYTEST_FLAGS: $(PYTEST_FLAGS)'
-	@echo '  PYLINT_FLAGS: $(PYLINT_FLAGS)'
+	@echo '  SQLALCHEMY_WARN_20: $(SQLALCHEMY_WARN_20)'
+	@echo '  PYTHON_FLAGS:       $(PYTHON_FLAGS)'
+	@echo '  FLAKE8_FLAGS:       $(FLAKE8_FLAGS)'
+	@echo '  PYTEST_FLAGS:       $(PYTEST_FLAGS)'
+	@echo '  PYLINT_FLAGS:       $(PYLINT_FLAGS)'
 	@echo
 	@echo 'Environment variables:'
 	@echo
