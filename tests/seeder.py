@@ -54,10 +54,7 @@ def create_chats(entries_count=None):
     }
 
     while len(seed_data['data']) < entries_count:
-        seed_data['data'].append({
-            'title': fake.company(),
-            'teaser': fake.paragraph(nb_sentences=3),
-        })
+        seed_data['data'].append({'title': fake.sentence(nb_words=3)})
 
     return seed_data
 
@@ -78,7 +75,7 @@ def create_chat_entries(chats):
 
     while len(seed_data['data']) < entries_count:
         seed_data['data'].append({
-            'content': fake.paragraph(nb_sentences=2),
+            'content': fake.paragraph(nb_sentences=4),
             'chat': random.choice(chats),
         })
 
