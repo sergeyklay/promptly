@@ -89,11 +89,14 @@ jobs:
       - name: Add seed data to the database
         run: make seed
 
-      - name: Run unit tests with coverage
+      - name: Run python unit tests with coverage
         run: make test
 
       - name: Combine coverage reports
         run: make ccov
+
+      - name: Run js  unit tests with coverage
+        run: make test-js
 
       - uses: codecov/codecov-action@v3.1.4
         if: success()

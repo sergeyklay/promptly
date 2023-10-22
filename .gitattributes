@@ -18,7 +18,9 @@ LICENSE  linguist-documentation=true  linguist-detectable=true
 *.drawio linguist-language=XML        linguist-detectable=true
 
 # Mark these built artifacts as generated
-/promptly/static/css/style.css  linguist-generated=true
+/promptly/static/css/style.css     linguist-generated=true
+/promptly/static/js/script.js      linguist-generated=true
+/promptly/static/js/script.min.js  -diff linguist-generated=true
 
 # Exclude files from exporting
 # (used by the "download ZIP archive" option, for example).
