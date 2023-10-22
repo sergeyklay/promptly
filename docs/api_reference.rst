@@ -40,6 +40,10 @@ Indices and tables
    :members:
    :show-inheritance:
 
+.. automodule:: promptly.chat.template_filters
+   :members:
+   :show-inheritance:
+
 .. automodule:: promptly.main
    :members:
    :show-inheritance:

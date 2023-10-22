@@ -10,8 +10,6 @@ The chat module for the application.
 ------------------------------------
 """
 
-from datetime import datetime, timedelta
-
 from flask import (
     Blueprint,
     make_response,
@@ -25,8 +23,10 @@ from sqlalchemy import desc
 
 from promptly.models import Chat
 from promptly.utils import try_parse_int
+from .template_filters import human_readable_date
 
 chat_bp = Blueprint('chat', __name__)
+chat_bp.add_app_template_filter(human_readable_date)
 
 
 @chat_bp.route('/', methods=['GET'])
@@ -83,41 +83,3 @@ def history() -> str:
         chats=chats,
         active_page='history'
     )
-
-
-@chat_bp.app_template_filter()
-def human_readable_date(value: datetime) -> str:
-    """Convert a datetime object to a human-readable date.
-
-    This function takes a datetime object and returns a string that represents
-    a more human-readable and context-sensitive representation of the time. The
-    output will be one of the following:
-
-    - ``Today``
-    - ``Yesterday``
-    - ``Previous 7 Days``
-    - ``Previous 30 Days``
-    - ``Previous Year``
-    - ``Older``
-
-    :param datetime.datetime value: The datetime object to be converted.
-    :return: A string representing the human-readable date.
-    :rtype: str
-    """
-    today = datetime.now().date()
-    date_val = str(value).split(' ', maxsplit=1)[0]
-    value_date = datetime.strptime(date_val, '%Y-%m-%d').date()
-
-    time_ranges = [
-        (0, 'Today'),
-        (1, 'Yesterday'),
-        (7, 'Previous 7 Days'),
-        (30, 'Previous 30 Days'),
-        (365, 'Previous Year')
-    ]
-
-    for days, label in time_ranges:
-        if today - timedelta(days=days) <= value_date <= today:
-            return label
-
-    return 'Older'

@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from promptly.chat.views import human_readable_date
+from promptly.chat.template_filters import human_readable_date
 
 
 @pytest.mark.parametrize(
