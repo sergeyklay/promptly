@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The Chat models package for the application.
+"""
+The Chat models package for the application.
+--------------------------------------------
 
 This module contains the SQLAlchemy models for handling chat conversations
 within the application, including the :class:`.Chat` and
@@ -21,6 +23,8 @@ import sqlalchemy as sa
 from sqlalchemy import orm as so
 
 from .base import BaseMixin, db, IdentityMixin, TimestampMixin
+
+__all__ = ['Chat', 'ChatEntry']
 
 
 class Chat(BaseMixin, IdentityMixin, TimestampMixin, db.Model):

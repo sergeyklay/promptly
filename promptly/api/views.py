@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Module for serving chat API request.
+"""
+Module for serving chat API request.
+------------------------------------
 
 This module contains a blueprint for a Flask application to handle chat API
 requests. It processes a user's chat message and returns the model's

@@ -6,10 +6,18 @@
 # the LICENSE file that was distributed with this source code.
 
 """
-This module defines a service to interact with the OpenAI API.
+OpenAI Service Wrapper.
+-----------------------
 
-The main class `OpenAIService` encapsulates the logic for sending a query
-to OpenAI and fetching the response.
+The :mod:`promptly.services.openai_service` module provides a service for
+interacting with the OpenAI's API through the :class:`.OpenAIService` class.
+It handles query construction, API calls, and response extraction.
+
+Example::
+
+    >>> from promptly.services.openai_service import OpenAIService
+    >>> service = OpenAIService()
+    >>> response = service.get_response('Tell me a joke.')
 """
 
 import os

@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The Prompt models package for the application.
+"""
+The Prompt models package for the application.
+----------------------------------------------
 
 This module defines the structure and relationship of prompts, rules,
 references, criteria, and key insights using SQLAlchemy ORM. It's an integral
@@ -19,6 +21,14 @@ import sqlalchemy as sa
 from sqlalchemy import orm as so
 
 from .base import BaseMixin, db, IdentityMixin, TimestampMixin
+
+__all__ = [
+    'Criterion',
+    'KeyInsight',
+    'Prompt',
+    'Reference',
+    'Rule',
+]
 
 
 class Prompt(BaseMixin, IdentityMixin, TimestampMixin, db.Model):

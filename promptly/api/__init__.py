@@ -5,7 +5,10 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The api blueprint module for the application."""
+"""
+The api blueprint module for the application.
+=============================================
+"""
 
 
 from .views import api_bp  # noqa: F401

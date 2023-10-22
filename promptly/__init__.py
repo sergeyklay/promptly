@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The top-level module for the application.
+"""
+The top-level module for the application.
+==========================================
 
 This module tracks the version of the application as well as the
 base application info used by various functions within the

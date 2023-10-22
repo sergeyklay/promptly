@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Database Models and Utilities Module.
+"""
+Database Models and Utilities Module.
+-------------------------------------
 
 This module provides classes and utility functions to work with the database
 using SQLAlchemy ORM. It defines a set of mixin classes to extend SQLAlchemy

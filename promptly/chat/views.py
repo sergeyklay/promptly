@@ -5,7 +5,10 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Chat module for the Promptly Flask application."""
+"""
+The chat module for the application.
+------------------------------------
+"""
 
 from datetime import datetime, timedelta
 
@@ -42,7 +45,7 @@ def history():
 
 @chat_bp.app_template_filter()
 def human_readable_date(value: datetime):
-    """Convert a datetime object to a human readable date.
+    """Convert a datetime object to a human-readable date.
 
     This function takes a datetime object and returns a string that represents
     a more human-readable and context-sensitive representation of the time. The

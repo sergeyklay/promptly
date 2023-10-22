@@ -5,19 +5,15 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Models module.
+"""
+Application models and convenient imports.
+==========================================
 
-This module initializes the models package and imports necessary modules for
-ease of access.
+The :mod:`promptly.models` module provides application models and imports
+necessary modules for ease of access.
 
 """
 
 from .base import db  # noqa: F401
-from .chat import Chat, ChatEntry  # noqa: F401
-from .prompt import (  # noqa: F401
-    Criterion,
-    KeyInsight,
-    Prompt,
-    Reference,
-    Rule
-)
+from .chat import *  # noqa: F401, F403
+from .prompt import *  # noqa: F401, F403

@@ -5,10 +5,12 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""The main blueprint module for the application.
+"""
+The main blueprint module for the application.
+==============================================
 
-Provides the routes and errors handlers definition for the
-application.
+The :mod:`promptly.main` module provides the routes and errors handlers
+definition for the application.
 
 """
 

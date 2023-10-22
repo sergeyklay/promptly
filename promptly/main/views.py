@@ -5,7 +5,9 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""Main module for the Promptly Flask application.
+"""
+General routes and views for the application.
+---------------------------------------------
 
 This module contains the general routes and views for the main section of the
 Promptly application, including the homepage and maintenance mode handling.

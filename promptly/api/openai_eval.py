@@ -5,7 +5,10 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""This module provides a simplified interface to the OpenAI API."""
+"""
+This module provides a simplified interface to the OpenAI API.
+--------------------------------------------------------------
+"""
 
 import logging
 from os import environ as env
