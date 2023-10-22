@@ -13,11 +13,6 @@ The :mod:`promptly.services.openai_service` module provides a service for
 interacting with the OpenAI's API through the :class:`.OpenAIService` class.
 It handles query construction, API calls, and response extraction.
 
-Example::
-
-    >>> from promptly.services.openai_service import OpenAIService
-    >>> service = OpenAIService()
-    >>> response = service.get_response('Tell me a joke.')
 """
 
 import os

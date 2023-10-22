@@ -44,6 +44,10 @@ Indices and tables
    :members:
    :show-inheritance:
 
+.. automodule:: promptly.main.views
+   :members:
+   :show-inheritance:
+
 .. automodule:: promptly.models
    :members:
    :show-inheritance:

@@ -44,7 +44,7 @@ def history():
 
 
 @chat_bp.app_template_filter()
-def human_readable_date(value: datetime):
+def human_readable_date(value: datetime) -> str:
     """Convert a datetime object to a human-readable date.
 
     This function takes a datetime object and returns a string that represents
@@ -61,12 +61,6 @@ def human_readable_date(value: datetime):
     :param datetime.datetime value: The datetime object to be converted.
     :return: A string representing the human-readable date.
     :rtype: str
-
-    Example::
-
-        >>> human_readable_date(datetime(2023, 10, 21))
-        'Today'
-
     """
     today = datetime.now().date()
     date_val = str(value).split(' ', maxsplit=1)[0]

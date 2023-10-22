@@ -11,7 +11,6 @@ This module provides a simplified interface to the OpenAI API.
 """
 
 import logging
-from os import environ as env
 
 import backoff
 import openai
@@ -19,8 +18,6 @@ import openai
 from promptly.utils import threaded_execute
 
 logger = logging.getLogger(__name__)
-
-PROMPTLY_THREAD_TIMEOUT = float(env.get('PROMPTLY_THREAD_TIMEOUT', '60'))
 
 
 @backoff.on_exception(
@@ -40,11 +37,13 @@ def completion(*args, **kwargs) -> str:
 
     This function uses an exponential backoff strategy to handle the following
     exceptions:
+
     - ``openai.error.ServiceUnavailableError``
     - ``openai.error.APIError``
     - ``openai.error.RateLimitError``
     - ``openai.error.APIConnectionError``
-    - ``openai.error.Timeout``.
+    - ``openai.error.Timeout``
+
     The backoff delay starts at 1 second and increases by a factor of 1.5 with
     each retry, capping at a maximum delay of 60 seconds between retries.
 

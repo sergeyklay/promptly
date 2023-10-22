@@ -22,20 +22,31 @@ from promptly.utils import strtobool
 main_bp = Blueprint('main', __name__)
 
 
+PROMPTLY_MAINTENANCE_MODE: bool = strtobool(
+    os.getenv('PROMPTLY_MAINTENANCE_MODE', 'False'))
+"""The maintenance mode flag for the application.
+
+This constant uses ``PROMPTLY_MAINTENANCE_MODE`` environment variable to
+determine if the application is in maintenance mode. The value of the
+environment variable is converted to a boolean value using the
+:func:`.strtobool` function.
+"""
+
+
 @main_bp.before_app_request
 def maintained():
     """Check if the application is in maintenance mode.
 
     This function is called before each request to the application.
-    If the environment variable 'PROMPTLY_MAINTENANCE_MODE' is set to a truthy
-    value, the function will abort the request with a 503 Service Unavailable
-    status.
+    If the environment variable :const:`PROMPTLY_MAINTENANCE_MODE` is set to a
+    truthy value, the function will abort the request with a 503 Service
+    Unavailable status.
 
-    :raises: 503 Service Unavailable, if the app is in maintenance mode.
+    :raises: HTTPException: 503 Service Unavailable, if the app is in
+        maintenance mode.
     """
     try:
-        mode = os.getenv('PROMPTLY_MAINTENANCE_MODE', 'False')
-        if strtobool(mode):
+        if PROMPTLY_MAINTENANCE_MODE:
             abort(503)
     except ValueError:
         pass

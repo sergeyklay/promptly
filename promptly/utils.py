@@ -32,9 +32,16 @@ _BOOL_MAP = {
     '0': False
 }
 
-PROMPTLY_THREAD_TIMEOUT = float(env.get('PROMPTLY_THREAD_TIMEOUT', '60'))
-
 logger = logging.getLogger(__name__)
+
+PROMPTLY_THREAD_TIMEOUT: float = float(env.get('PROMPTLY_THREAD_TIMEOUT', 60))
+"""The maximum amount of time, in seconds, that the :func:`.threaded_execute`
+function will wait for the completion of the function it is executing in a
+separate thread.
+
+This constant uses the value of the ``PROMPTLY_THREAD_TIMEOUT`` environment
+variable, if set, or defaults to 60 seconds.
+"""
 
 
 def strtobool(value: str) -> bool:
@@ -61,7 +68,7 @@ def strtobool(value: str) -> bool:
         raise ValueError(f'''"{value}" is not a valid bool value''') from exc
 
 
-def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
+def threaded_execute(func, *args, timeout=None, **kwargs):
     """Worker thread for timed request execution.
 
     This function will continuously attempt to execute ``func`` until it
@@ -72,13 +79,14 @@ def threaded_execute(func, *args, timeout=PROMPTLY_THREAD_TIMEOUT, **kwargs):
     :param func: The function to be executed.
     :param args: Positional arguments to pass to ``func``.
     :param timeout: The time, in seconds, within which ``func`` should complete
-        execution. Defaults to ``PROMPTLY_THREAD_TIMEOUT``.
+        execution. Defaults to :const:`PROMPTLY_THREAD_TIMEOUT`.
     :param kwargs: Keyword arguments to pass to ``func``.
     :return: The return value of ``func``, if it completes successfully within
         the allotted time.
     :raises: Any exceptions raised by ``func``, except for
-        ``concurrent.futures.TimeoutError`` which is caught and logged.
+        :class:`concurrent.futures.TimeoutError` which is caught and logged.
     """
+    timeout = timeout or PROMPTLY_THREAD_TIMEOUT
     while True:
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(func, *args, **kwargs)
