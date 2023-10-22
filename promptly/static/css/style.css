@@ -34,7 +34,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 400px; }
+  max-width: 600px; }
 
 #chat-wrapper {
   overflow-x: hidden;

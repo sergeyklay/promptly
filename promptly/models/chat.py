@@ -42,14 +42,22 @@ class Chat(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
         nullable=False,
     )
 
-    teaser: so.Mapped[str] = so.mapped_column(
-        sa.String(128),
-        nullable=False,
-    )
-
     entry: so.Mapped[List['ChatEntry']] = so.relationship(
         back_populates='chat',
     )
+
+    def teaser(self, length=None) -> str:
+        """Return a teaser for the chat."""
+        if not self.entry:
+            return ''
+
+        first_entry = min(self.entry, key=lambda x: x.created_at)
+        length = length or 150
+
+        if len(first_entry.content) > length:
+            return first_entry.content[:length - 3] + '...'
+
+        return first_entry.content[:length]
 
 
 class ChatEntry(BaseMixin, IdentityMixin, TimestampMixin, db.Model):
