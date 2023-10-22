@@ -43,3 +43,6 @@ body {
 
 #prompt-textarea {
   resize: none; }
+
+.chat-message .card-body {
+  white-space: pre-line; }

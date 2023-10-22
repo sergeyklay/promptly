@@ -7,7 +7,9 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-body { opacity: 0; }
+body {
+  opacity: 0;
+}
 
 .wrapper {
   overflow: hidden;
@@ -18,18 +20,20 @@ body { opacity: 0; }
   padding: .75rem 1.5rem
 }
 
-.sidebar-user a {
-  outline: 0;
-  text-decoration: none
+.sidebar-user {
+  a {
+    outline: 0;
+    text-decoration: none
+  }
 }
 
 .sidebar-user-title,
 .sidebar-user-title:hover {
-    color: #e9ecef
+  color: #e9ecef
 }
 
 .sidebar-user-subtitle {
-    color: #adb5bd
+  color: #adb5bd
 }
 
 .chat-history-item:hover {
@@ -48,6 +52,13 @@ body { opacity: 0; }
   overflow-y: auto;
   position: relative;
 }
+
 #prompt-textarea {
   resize: none;
+}
+
+.chat-message {
+  .card-body {
+    white-space: pre-line;
+  }
 }
