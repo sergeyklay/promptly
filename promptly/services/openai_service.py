@@ -15,9 +15,12 @@ It handles query construction, API calls, and response extraction.
 
 """
 
+import logging
 import os
 
 from promptly.api.openai_eval import completion
+
+logger = logging.getLogger(__name__)
 
 
 class OpenAIService:
@@ -25,9 +28,11 @@ class OpenAIService:
     A service class for interacting with the OpenAI API.
 
     Attributes:
-        model (str): The model to be used by OpenAI. Default is 'gpt-3.5-turbo'
-                     or can be set via the environment variable
-                     ``OPENAI_MODEL``.
+        model (str): The model to be used by OpenAI. Default is
+            ``gpt-3.5-turbo`` or can be set via the environment variable
+            ``OPENAI_MODEL``. For details on available models, see
+            the `OpenAI API documentation
+            <https://platform.openai.com/docs/models/overview>`_.
     """
 
     def __init__(self):
@@ -56,4 +61,5 @@ class OpenAIService:
             presence_penalty=0
         )
 
+        logger.debug('OpenAI response: {}', response)
         return response['choices'][0]['message']['content']

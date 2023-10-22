@@ -11,6 +11,7 @@ This module provides a simplified interface to the OpenAI API.
 """
 
 import logging
+from typing import Any, Dict
 
 import backoff
 import openai
@@ -32,7 +33,7 @@ logger = logging.getLogger(__name__)
     max_value=60,
     factor=1.5,
 )
-def completion(*args, **kwargs) -> str:
+def completion(*args, **kwargs) -> Dict[str, Any]:
     """Generates a text completion using the OpenAI API.
 
     This function uses an exponential backoff strategy to handle the following
@@ -55,6 +56,7 @@ def completion(*args, **kwargs) -> str:
     :param args: Variable-length argument list.
     :param kwargs: Arbitrary keyword arguments.
     :return: The generated text completion.
+    :rtype: dict
     :raises Exception: ``openai.error.OpenAIError`` if there is an error in the
         API request.
     """
@@ -63,4 +65,30 @@ def completion(*args, **kwargs) -> str:
     if 'error' in result:
         logger.warning(result)
         raise openai.error.APIError(result['error'])
+
+    # Typically, the response is a single message, but it can be multiple
+    # messages if the model is configured to generate multiple messages.
+    #
+    # Example response:
+    # {
+    #   'id': 'chatcmpl-8CPG5CegoglqliSS1kD6E7zCXjzXO',
+    #   'object': 'chat.completion',
+    #   'created': 1697967721,
+    #   'model': 'gpt-3.5-turbo-16k-061',
+    #   'choices': [
+    #     {
+    #       'index': 0,
+    #       'message': {
+    #         'role': 'assistant',
+    #         'content': '2 + 2 = 4'
+    #       },
+    #       'finish_reason': 'stop',
+    #     }
+    #   ],
+    #   'usage': {
+    #     'prompt_tokens': 13,
+    #     'completion_tokens': 7,
+    #     'total_tokens': 20
+    #   }
+    # }
     return result
