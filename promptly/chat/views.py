@@ -56,7 +56,7 @@ def chat(chat_id=None) -> Response:
     :return: The rendered chat page template.
     :rtype: flask.Response
     """
-    chat_instance = Chat.query.get(chat_id)
+    chat_instance = Chat.get(chat_id)
     if not chat_instance:
         chat_instance = Chat.create_new_chat()
 
