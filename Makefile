@@ -152,7 +152,8 @@ ccov: $(VENV_PYTHON)
 	$(call end_section)
 
 .PHONY: test-all
-test-all: lint test test-js ccov
+test-all: lint test ccov
+	$(MAKE) -C docs html
 
 .PHONY: clean
 clean:
