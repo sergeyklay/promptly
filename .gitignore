@@ -34,6 +34,12 @@ coverage.*
 .$*.bkp
 .$*.dtmp
 
+# Ignore build artifacts
+/promptly/static/css/style.css
+/promptly/static/css/style.min.css
+/promptly/static/js/script.js
+/promptly/static/js/script.min.js
+
 # Ignore build documentation artifacts and keep only .gitkeep file:
 /docs/_build/*
 /docs/_build/**/*
