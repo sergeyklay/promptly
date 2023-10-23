@@ -5,7 +5,7 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-name: Build Docs
+name: Docs
 
 on:
   push:
@@ -23,7 +23,7 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-22.04
-    name: Build and test package documentation
+    name: Build and test documentation
 
     steps:
       - name: Checkout code

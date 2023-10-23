@@ -31,7 +31,7 @@ on:
 
 jobs:
   tests:
-    name: Tests service
+    name: Build & test app
     runs-on: ${{ matrix.os }}
 
     # The maximum number of minutes to let a workflow run
