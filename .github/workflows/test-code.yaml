@@ -98,14 +98,11 @@ jobs:
       - name: Run Python unit tests with coverage
         run: make test
 
-      - name: Run JS unit tests with coverage
-        run: npm run test
-
       - name: Combine coverage reports
         run: make ccov
 
-      - name: Run js  unit tests with coverage
-        run: make test-js
+      - name: Run JS unit tests with coverage
+        run: npm run test
 
       - uses: codecov/codecov-action@v3.1.4
         if: success()
