@@ -23,7 +23,7 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-22.04
-    name: Build and test documentation
+    name: Build and test
 
     steps:
       - name: Checkout code

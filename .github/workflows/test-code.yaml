@@ -5,7 +5,7 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-name: Unit Tests
+name: Test
 
 on:
   push:
@@ -31,7 +31,7 @@ on:
 
 jobs:
   tests:
-    name: Build & test app
+    name: Build & test
     runs-on: ${{ matrix.os }}
 
     # The maximum number of minutes to let a workflow run
