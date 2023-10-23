@@ -9,9 +9,9 @@
     "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/",
     "doc:img": "drawio docs/database.drawio -o docs/_static/database.png",
     "clean": "rm -rf coverage/ && rm -f promptly/static/js/script.js && rm -f promptly/static/js/script.min.js",
-    "build": "npm run sass && NODE_ENV=production webpack",
-    "build:prod": "NODE_ENV=production npm run sass && NODE_ENV=production webpack",
-    "build:dev": "NODE_ENV=development npm run sass && NODE_ENV=production webpack",
+    "build": "npm run sass && webpack",
+    "build:prod": "npm run sass && NODE_ENV=production webpack",
+    "build:dev": "npm run sass && NODE_ENV=development webpack",
     "test": "jest"
   },
   "repository": {
