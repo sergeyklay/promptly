@@ -10,8 +10,8 @@ A module with utility functions.
 --------------------------------
 """
 
-import concurrent
 import logging
+from concurrent import futures
 from os import environ as env
 
 _BOOL_MAP = {
@@ -65,22 +65,22 @@ def strtobool(value: str) -> bool:
     try:
         return _BOOL_MAP[str(value).lower()]
     except KeyError as exc:
-        raise ValueError(f'''"{value}" is not a valid bool value''') from exc
+        raise ValueError(f'"{value}" is not a valid bool value') from exc
 
 
-def try_parse_int(s):
+def try_parse_int(value: str) -> int or None:
     """Try to convert a string to an integer.
 
     This function attempts to convert a string to an integer. If the conversion
     fails due to a `ValueError` or `TypeError`, it returns `None`.
 
-    :param s: The string to convert.
-    :type s: str or None
+    :param value: The string to convert.
+    :type value: str or None
     :return: The integer value if conversion is successful, `None` otherwise.
     :rtype: int or None
     """
     try:
-        return int(s)
+        return int(value)
     except (ValueError, TypeError):
         return None
 
@@ -105,10 +105,10 @@ def threaded_execute(func, *args, timeout=None, **kwargs):
     """
     timeout = timeout or PROMPTLY_THREAD_TIMEOUT
     while True:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        with futures.ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(func, *args, **kwargs)
             try:
                 return future.result(timeout=timeout)
-            except concurrent.futures.TimeoutError as exc:
+            except futures.TimeoutError as exc:
                 logger.warning(exc)
                 continue
