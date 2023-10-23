@@ -10,17 +10,20 @@
 const path = require('path');
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
-module.exports = {
+/** @type {import('webpack').Configuration } */
+const config = {
   mode: mode, // 'production', 'development', 'none'
   entry: './promptly/static/js/promptly.js',
+
   output: {
     filename: mode === 'production' ? 'script.min.js' : 'script.js',
     path: path.resolve(__dirname, 'promptly/static/js'),
   },
+
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -32,3 +35,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = config;
