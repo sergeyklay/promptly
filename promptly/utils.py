@@ -109,6 +109,6 @@ def threaded_execute(func, *args, timeout=None, **kwargs):
             future = executor.submit(func, *args, **kwargs)
             try:
                 return future.result(timeout=timeout)
-            except futures.TimeoutError as exc:
-                logger.warning(exc)
+            except futures.TimeoutError:
+                logger.warning('The operation exceeded the given deadline')
                 continue

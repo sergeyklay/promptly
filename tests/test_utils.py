@@ -7,6 +7,8 @@
 
 """Module for Utils testing."""
 
+import time
+
 import pytest
 
 from promptly.utils import strtobool, threaded_execute, try_parse_int
@@ -47,6 +49,22 @@ def test_threaded_execute_non_timeout_exception():
         threaded_execute(failing_func)
     except ValueError as e:
         assert str(e) == 'Something went wrong'
+
+
+def test_threaded_execute(caplog):
+    i = 0
+
+    def fun():
+        nonlocal i
+        i += 1
+        if i == 1:  # first time around, time out
+            time.sleep(1)
+        return f'OK {i}'
+
+    assert threaded_execute(fun, timeout=0.5) == 'OK 2'
+    assert caplog.records[0].message == (
+        'The operation exceeded the given deadline'
+    )
 
 
 @pytest.mark.parametrize(
