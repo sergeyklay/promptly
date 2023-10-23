@@ -14,21 +14,30 @@ from promptly.app import create_app
 
 
 @pytest.fixture()
-def app():
+def project_root() -> str:
+    """Get actual project root path."""
+    return os.path.dirname(
+        os.path.dirname(os.path.realpath(__file__))
+    )
+
+
+@pytest.fixture()
+def app(project_root: str):
+    """An application for the tests."""
     app_instance = create_app('testing')
     app_instance.config.update({
         'TESTING': True,
     })
     with app_instance.app_context():
-        upgrade(os.path.join(
-            os.path.dirname(app_instance.root_path), 'migrations')
-        )
+        upgrade(os.path.join(project_root, 'migrations'))
         yield app_instance
 
 
 @pytest.fixture()
 def client(app):
-    return app.test_client()
+    """A Flask test client."""
+    with app.test_client() as client:
+        yield client
 
 
 @pytest.fixture()
