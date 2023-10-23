@@ -8,7 +8,9 @@
     "intro": "cat package.json | jq .scripts",
     "sass": "node-sass --output-style expanded promptly/static/scss/ -o promptly/static/css/",
     "doc:img": "drawio docs/database.drawio -o docs/_static/database.png",
-    "build": "NODE_ENV=production webpack",
+    "clean": "rm -rf coverage/ && rm -f promptly/static/js/script.js && rm -f promptly/static/js/script.min.js",
+    "build": "webpack",
+    "build:prod": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack",
     "test": "jest"
   },

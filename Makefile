@@ -85,8 +85,6 @@ install: $(REQUIREMENTS)
 	$(call section, "Installing $(PKG_NAME) and all its dependencies")
 	$(VENV_BIN)/pip-sync $^
 	$(VENV_PIP) install --progress-bar=off -e .
-	$(call section, "Clean install Node.js dependencies")
-	npm ci
 	$(call end_section)
 
 .PHONY: uninstall
@@ -143,11 +141,6 @@ test: $(VENV_PYTHON)
 	$(VENV_BIN)/coverage erase
 	$(VENV_BIN)/coverage run -m pytest $(PYTEST_FLAGS) ./$(PKG_NAME) ./tests
 	$(call end_section)
-
-.PHONY: test-js
-test-js:
-	npm run build
-	npm run test
 
 .PHONY: ccov
 ccov: $(VENV_PYTHON)

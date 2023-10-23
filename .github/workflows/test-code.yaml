@@ -83,14 +83,23 @@ jobs:
       - name: Install Python dependencies
         run: make install
 
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Build JS bundle
+        run: npm run build
+
       - name: Run database migrations
         run: make migrate
 
       - name: Add seed data to the database
         run: make seed
 
-      - name: Run python unit tests with coverage
+      - name: Run Python unit tests with coverage
         run: make test
+
+      - name: Run JS unit tests with coverage
+        run: npm run test
 
       - name: Combine coverage reports
         run: make ccov
