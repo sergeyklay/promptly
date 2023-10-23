@@ -8,8 +8,8 @@
         <a href="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml">
             <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-code.yaml/badge.svg" alt="Test Code" />
         </a>
-        <a href="https://github.com/sergeyklay/promptly/actions/workflows/lint-code.yaml">
-            <img src="https://github.com/sergeyklay/promptly/actions/workflows/lint-code.yaml/badge.svg" alt="Lint Code" />
+        <a href="https://github.com/sergeyklay/promptly/actions/workflows/lint-code.yml">
+            <img src="https://github.com/sergeyklay/promptly/actions/workflows/lint-code.yml/badge.svg" alt="Lint Code" />
         </a>
         <a href="https://codecov.io/gh/sergeyklay/promptly" >
             <img src="https://codecov.io/gh/sergeyklay/promptly/graph/badge.svg?token=QoPTJP3wRv" alt="Coverage Status"/>
