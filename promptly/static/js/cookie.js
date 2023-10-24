@@ -26,7 +26,12 @@ export function setCookie(name, value, days) {
     expires = `; expires=${date.toUTCString()}`;
   }
 
-  document.cookie = `${name}=${value || ''}${expires}; path=/`;
+  let cookieValue = '';
+  if (value) {
+    cookieValue = value;
+  }
+
+  document.cookie = `${name}=${cookieValue}${expires}; path=/`;
 }
 
 /**
@@ -42,10 +47,17 @@ export function setCookie(name, value, days) {
 export function getCookie(name) {
   const nameEQ = `${name}=`;
   const ca = document.cookie.split(';');
+
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1, c.length);
+    }
+
+    if (c.indexOf(nameEQ) === 0) {
+      return c.substring(nameEQ.length, c.length);
+    }
   }
   return null;
 }

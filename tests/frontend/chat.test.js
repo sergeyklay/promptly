@@ -52,9 +52,19 @@ describe('chat-textarea', () => {
         autoResizePromptTextarea(mockElement);
 
         expect(mockElement.style.height).toBe('50px');
+        expect(mockElement.style.overflowY).toBe('hidden');
     });
 
-    test('should set overflowY to hidden', () => {
+    test('should set height to 160 if scrollHeight is greater than maxHeight', () => {
+        mockGetComputedStyle('20px');
+        const mockElement = createMockElement(180);
+        autoResizePromptTextarea(mockElement);
+
+        expect(mockElement.style.height).toBe('160px');
+        expect(mockElement.style.overflowY).toBe('auto');
+    });
+
+    test('should set overflowY to hidden by default', () => {
         autoResizePromptTextarea(textarea);
 
         expect(textarea.style.overflowY).toBe('hidden');

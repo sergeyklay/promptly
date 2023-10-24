@@ -16,4 +16,14 @@ describe('cookies', () => {
     test('should return null if cookie not found', () => {
         expect(getCookie('nonexistent')).toBe(null);
     });
+
+    test('should handle cookies with leading whitespace', () => {
+        document.cookie = ' test=value';
+        expect(getCookie('test')).toBe('value');
+    });
+
+    test('should handle cookies with multiple leading whitespaces', () => {
+        document.cookie = '   foo=bar';
+        expect(getCookie('foo')).toBe('bar');
+    });
 });
