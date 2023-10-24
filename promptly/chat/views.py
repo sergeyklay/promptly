@@ -63,7 +63,6 @@ def chat(chat_id=None) -> Response:
     template = render_template(
         'chat/chat.html',
         chat=chat_instance,
-        active_page='chat',
     )
     resp = make_response(template)
     resp.set_cookie('chat_id', str(chat_instance.id))
@@ -78,8 +77,4 @@ def history() -> str:
     :rtype: str
     """
     chats = Chat.query.order_by(desc(Chat.created_at)).all()
-    return render_template(
-        'chat/history.html',
-        chats=chats,
-        active_page='history'
-    )
+    return render_template('chat/history.html', chats=chats)

@@ -1,0 +1,3 @@
+{%- macro active_page(endpoint) -%}
+    {{- 'active' if request.endpoint and request.endpoint.endswith(endpoint) else request.endpoint -}}
+{%- endmacro -%}

@@ -1,3 +1,5 @@
+{% import 'macros.html' as macros %}
+
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar" data-simplebar="init">
         <div class="simplebar-wrapper" style="">
@@ -37,7 +39,7 @@
                                 <ul class="sidebar-nav">
                                     <li class="sidebar-header">Pages</li>
 
-                                    <li class="sidebar-item {{ 'active' if active_page == 'chat' else '' }}">
+                                    <li class="sidebar-item {{ macros.active_page('chat') }}">
                                         <a href="/" class="sidebar-link">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card align-middle">
                                                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
@@ -47,7 +49,7 @@
                                         </a>
                                     </li>
 
-                                    <li class="sidebar-item {{ 'active' if active_page == 'history' else '' }}">
+                                    <li class="sidebar-item {{ macros.active_page('history') }}">
                                         <a href="/history" class="sidebar-link">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle">
                                                     <line x1="8" y1="6" x2="21" y2="6"></line>
@@ -61,7 +63,7 @@
                                         </a>
                                     </li>
 
-                                    <li class="sidebar-item {{ 'active' if active_page == 'prompts' else '' }}">
+                                    <li class="sidebar-item {{ macros.active_page('prompts') }}">
                                             <a class="sidebar-link" href="#">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list align-middle">
                                                     <line x1="8" y1="6" x2="21" y2="6"></line>
