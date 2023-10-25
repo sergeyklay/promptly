@@ -39,6 +39,8 @@ coverage.*
 /promptly/static/css/style.min.css
 /promptly/static/js/script.js
 /promptly/static/js/script.min.js
+/promptly/static/js/script.min.js.LICENSE.txt
+/promptly/static/js/script.min.js.map
 
 # Ignore build documentation artifacts and keep only .gitkeep file:
 /docs/_build/*
