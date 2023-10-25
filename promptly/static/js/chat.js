@@ -11,6 +11,7 @@
  * Automatically resizes the textarea element based on its content.
  *
  * @param {HTMLTextAreaElement} textarea - The textarea element to resize.
+ * @returns {void}
  */
 export function autoResizePromptTextarea(textarea) {
   if (!textarea || !textarea.nodeName || textarea.nodeName !== 'TEXTAREA') {

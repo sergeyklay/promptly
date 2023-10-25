@@ -1,16 +1,20 @@
 <div class="container-fluid">
     <div class="row text-muted">
-        <div class="col-12 text-center">
-            <div class="input-group mb-3">
+        <div class="col-10 offset-1 text-center">
+            <div class="position-relative">
                 <textarea
                         class="form-control"
                         id="prompt-textarea"
                         rows="1"
                         tabindex="0"
-                        placeholder="Type your message here..."
-                        aria-label="Type your message here..."
-                        aria-describedby="button-send"></textarea>
-                <button class="btn btn-primary" type="submit" id="send-button">Send</button>
+                        placeholder="Send a message"
+                        aria-describedby="btn-send"></textarea>
+                    <button id="btn-send" class="btn btn-primary position-absolute" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="feather feather-send btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
             </div>
         </div>
     </div>
