@@ -26,16 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   sendButton.addEventListener('click', function() {
-    const userInput = document.getElementById('prompt-textarea').value;
+    const userInput = textarea.value;
     const chatOutput = document.getElementById('chat-output');
 
     if (userInput.length > 0) {
-      document.getElementById('prompt-textarea').value = '';
-      const userMessage = createChatElement(
-          userInput,
-          'user'
-      );
-      chatOutput.appendChild(userMessage);
+      textarea.value = '';
+      textarea.style.height = 'initial';
+
+      chatOutput.appendChild(createChatElement(userInput, 'user'));
       const loadingRow = createChatElement(
           'Waiting for server response',
           'assistant'
@@ -55,12 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentChatId = data.chat_id;
         setCookie('chat_id', currentChatId, 30);
         loadingRow.remove();
-
-        const assistantMessage = createChatElement(
-            data.message,
-            'assistant'
-        );
-        chatOutput.appendChild(assistantMessage);
+        chatOutput.appendChild(createChatElement(data.message, 'assistant'));
       })
       .catch(() => {
         // TODO: Log error

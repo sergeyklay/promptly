@@ -43,14 +43,8 @@ export function calculateTextareaHeight (lineCount, textarea) {
     const borderBottom = parseFloat(styles.borderBottomWidth) || 0;
     const borderTop = parseFloat(styles.borderTopWidth) || 0;
     const fontSize = parseFloat(styles.fontSize) || 0;
-
-    const sizes = [
-        borderBottom,
-        borderTop,
-        fontSize,
-        parseFloat(styles.paddingBottom) || 0,
-        parseFloat(styles.paddingTop) || 0,
-    ];
+    const paddingBottom = parseFloat(styles.paddingBottom) || 0;
+    const paddingTop = parseFloat(styles.paddingTop) || 0;
 
     let lineHeight = 0;
     if (styles.lineHeight === 'normal') {
@@ -59,9 +53,7 @@ export function calculateTextareaHeight (lineCount, textarea) {
         lineHeight = parseFloat(styles.lineHeight) || 0;
     }
 
-    sizes.push(lineHeight);
-
-    const stylesHeight = sizes.reduce((a, b) => a + b, 0);
+    const stylesHeight = lineHeight * lineCount + borderBottom + borderTop + paddingBottom + paddingTop;
     const scrollHeight = textarea.scrollHeight + borderBottom + borderTop;
 
     return Math.max(stylesHeight, scrollHeight);
