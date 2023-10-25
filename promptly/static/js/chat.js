@@ -22,7 +22,7 @@ export function autoResizePromptTextarea(textarea) {
   const currentMaxHeight = window.getComputedStyle(textarea).maxHeight;
 
   if (currentMaxHeight !== 'none' && parseFloat(currentMaxHeight) < textarea.scrollHeight) {
-    overflowStatus = '';
+    overflowStatus = 'auto';
   }
 
   textarea.style.height = '0';
