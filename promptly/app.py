@@ -63,7 +63,7 @@ def configure_app(app: Flask, config_name=None):
     # The configuration files themselves are actual Python files.  Only values
     # in uppercase are actually stored in the config object later on. So make
     # sure to use uppercase letters for your config keys.
-    app.config.from_envvar('PRODUCTS_API_SETTINGS', silent=True)
+    app.config.from_envvar('PROMPTLY_SETTINGS', silent=True)
 
 
 def configure_extensions(app: Flask):

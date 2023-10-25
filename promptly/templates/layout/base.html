@@ -48,8 +48,7 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <!-- TODO: production: script.min.js, development: script.js  -->
-    <script src="{{ url_for('static', filename='js/script.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script' + ('.min' if not g.debug_mode else '') + '.js') }}"></script>
     {% block body_js %}{% endblock %}
   </body>
 </html>

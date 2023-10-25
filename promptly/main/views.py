@@ -15,7 +15,7 @@ Promptly application, including the homepage and maintenance mode handling.
 
 import os
 
-from flask import abort, Blueprint
+from flask import abort, Blueprint, current_app, g
 
 from promptly.utils import strtobool
 
@@ -50,3 +50,9 @@ def maintained():
             abort(503)
     except ValueError:
         pass
+
+
+@main_bp.before_request
+def setting_globals():
+    """Set the debug mode for the application."""
+    g.debug_mode = current_app.config['DEBUG']
