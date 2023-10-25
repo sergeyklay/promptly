@@ -10,25 +10,61 @@
 /**
  * Automatically resizes the textarea element based on its content.
  *
- * @param {HTMLTextAreaElement} e - The textarea element to resize.
+ * @param {HTMLTextAreaElement} textarea - The textarea element to resize.
  */
-export function autoResizePromptTextarea(e) {
-  e.style.height = 'auto';
-
-  let newHeight;
-  const computedLineHeight = window.getComputedStyle(e).lineHeight;
-  const numericLineHeight = parseFloat(computedLineHeight);
-  const maxHeight = numericLineHeight * 8;
-
-  if (e.scrollHeight > maxHeight) {
-    newHeight = maxHeight;
-    e.style.overflowY = 'auto';
-  } else {
-    newHeight = e.scrollHeight;
-    e.style.overflowY = 'hidden';
+export function autoResizePromptTextarea(textarea) {
+  if (!textarea || !textarea.nodeName || textarea.nodeName !== 'TEXTAREA') {
+    return;
   }
 
-  e.style.height = `${newHeight}px`;
+  let overflowStatus = 'hidden';
+  const currentMaxHeight = window.getComputedStyle(textarea).maxHeight;
+
+  if (currentMaxHeight !== 'none' && parseFloat(currentMaxHeight) < textarea.scrollHeight) {
+    overflowStatus = '';
+  }
+
+  textarea.style.height = '0';
+  textarea.style.overflowY = overflowStatus;
+
+  const lineCount = textarea.value.split('\n').length;
+  textarea.style.height = `${calculateTextareaHeight(lineCount, textarea)}px`;
+}
+
+/**
+ * Calculates the textarea height based on its content.
+ *
+ * @param {number} lineCount - The number of lines in the textarea.
+ * @param {HTMLTextAreaElement} textarea - The textarea element to resize.
+ * @returns {number} The calculated textarea height.
+ */
+export function calculateTextareaHeight (lineCount, textarea) {
+    const styles = window.getComputedStyle(textarea);
+    const borderBottom = parseFloat(styles.borderBottomWidth) || 0;
+    const borderTop = parseFloat(styles.borderTopWidth) || 0;
+    const fontSize = parseFloat(styles.fontSize) || 0;
+
+    const sizes = [
+        borderBottom,
+        borderTop,
+        fontSize,
+        parseFloat(styles.paddingBottom) || 0,
+        parseFloat(styles.paddingTop) || 0,
+    ];
+
+    let lineHeight = 0;
+    if (styles.lineHeight === 'normal') {
+        lineHeight = 1.2 * fontSize;
+    } else {
+        lineHeight = parseFloat(styles.lineHeight) || 0;
+    }
+
+    sizes.push(lineHeight);
+
+    const stylesHeight = sizes.reduce((a, b) => a + b, 0);
+    const scrollHeight = textarea.scrollHeight + borderBottom + borderTop;
+
+    return Math.max(stylesHeight, scrollHeight);
 }
 
 /**

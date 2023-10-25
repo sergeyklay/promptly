@@ -40,7 +40,7 @@
             </main>
 
             <footer class="footer chat-footer">
-                {% if active_page == 'chat' %}
+                {% if request.endpoint == 'chat.chat' %}
                     {% include "layout/footer.html" %}
                 {% endif %}
             </footer>
