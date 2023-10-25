@@ -55,6 +55,19 @@ body {
 
 #prompt-textarea {
   resize: none;
+  max-height: 200px;
+  height: 56px;
+  overflow-y: hidden;
+  background-color: transparent;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+@media (min-width: 768px) {
+  #prompt-textarea {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
 }
 
 .chat-message {
