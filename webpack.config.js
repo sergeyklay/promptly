@@ -7,16 +7,15 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
-const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
-/** @type {import('webpack').Configuration } */
-const config = {
-  mode: mode, // 'production', 'development', 'none'
+const baseConfig = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // 'production', 'development', 'none'
   entry: './promptly/static/js/promptly.js',
 
   output: {
-    filename: mode === 'production' ? 'script.min.js' : 'script.js',
+    filename: 'script.js',
     path: path.resolve(__dirname, 'promptly/static/js'),
   },
 
@@ -34,6 +33,23 @@ const config = {
       },
     ],
   },
+
+  optimization: {
+    minimize: false,
+  },
 };
 
-module.exports = config;
+const minConfig = {
+    ...baseConfig,
+  output: {
+      ...baseConfig.output,
+    filename: 'script.min.js',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
+  devtool: 'source-map',
+};
+
+module.exports = [baseConfig, minConfig];
