@@ -54,5 +54,8 @@
     "presets": [
       "@babel/preset-env"
     ]
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.1"
   }
 }

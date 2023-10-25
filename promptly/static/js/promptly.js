@@ -12,10 +12,11 @@ import { getCookie, setCookie } from './cookie.js';
 
 document.addEventListener('DOMContentLoaded', function() {
   const textarea = document.getElementById('prompt-textarea');
-  const sendButton = document.getElementById('send-button');
+  const sendButton = document.getElementById('btn-send');
 
   textarea.addEventListener('input', () => {
     autoResizePromptTextarea(textarea);
+    sendButton.disabled = !textarea.value;
   });
 
   textarea.addEventListener('keypress', function(e) {
@@ -23,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       sendButton.click();
     }
+  });
+
+  textarea.addEventListener('focus', () => {
+    sendButton.style.cursor = textarea.value ? 'pointer' : 'default';
+  });
+
+  sendButton.addEventListener('mouseover', () => {
+    sendButton.style.cursor = textarea.value ? 'pointer' : 'default';
   });
 
   sendButton.addEventListener('click', function() {
