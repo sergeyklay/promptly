@@ -71,7 +71,7 @@ describe('chat-textarea', () => {
         textarea.value = 'A very long text that should exceed the max height';
 
         autoResizePromptTextarea(textarea);
-        expect(textarea.style.overflowY).toBe('');
+        expect(textarea.style.overflowY).toBe('auto');
     });
 
     test('should calculate correct height with given line count and styles', () => {
