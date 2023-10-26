@@ -9,9 +9,9 @@
     "sass": "node-sass --output-style expanded frontend/scss/ -o promptly/static/css/",
     "doc:img": "drawio docs/database.drawio -o docs/_static/database.png",
     "clean": "rm -rf coverage/ && rm -f promptly/static/js/script.* && rm -f promptly/static/css/style.*",
-    "build": "npm run sass && webpack",
-    "build:prod": "npm run sass && NODE_ENV=production webpack",
-    "build:dev": "npm run sass && NODE_ENV=development webpack",
+    "build": "npm run sass && webpack --config webpack.config.js --progress",
+    "build:prod": "npm run sass && NODE_ENV=production webpack --config webpack.config.js --progress",
+    "build:dev": "npm run sass && NODE_ENV=development webpack --config webpack.config.js --progress",
     "test": "jest"
   },
   "repository": {
@@ -32,7 +32,7 @@
     "prompt",
     "text generation"
   ],
-  "author": "Serghei Iakovlev",
+  "author": "Serghei Iakovlev <egrep@protonmail.ch>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sergeyklay/promptly/issues"
