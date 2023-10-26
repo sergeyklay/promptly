@@ -9,6 +9,7 @@
 
 /** @type {import('jest').Config} */
 const config = {
+    clearMocks: true,
     moduleFileExtensions: ['js'],
     testEnvironment: 'jsdom',
     testPathIgnorePatterns: ['/node_modules/'],

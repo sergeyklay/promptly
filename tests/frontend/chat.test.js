@@ -20,23 +20,33 @@ describe('chat-elements', () => {
 });
 
 describe('chat-textarea', () => {
-    let originalGetComputedStyle;
     let textarea;
+    let originalComputedStyle;
+
+    const computedStylesSpy = jest.spyOn(window, 'getComputedStyle');
+    const mockGetComputedStyle = styles => {
+        return computedStylesSpy.mockReturnValue(styles);
+    };
 
     beforeEach(() => {
-        originalGetComputedStyle = window.getComputedStyle;
+        // Save the original getComputedStyle function
+        originalComputedStyle = window.getComputedStyle;
+
+        // textarea
         textarea = document.createElement('textarea');
         document.body.appendChild(textarea);
     });
 
-    afterEach(() => {
-        window.getComputedStyle = originalGetComputedStyle;
-        document.body.removeChild(textarea);
-    });
+    afterAll(async () => {
+        jest.restoreAllMocks();
+    }, 100000);
 
-    const mockGetComputedStyle = (styles) => {
-        window.getComputedStyle = jest.fn().mockReturnValue(styles);
-    };
+    afterEach(() => {
+        window.getComputedStyle = originalComputedStyle;
+        document.body.removeChild(textarea);
+
+        jest.clearAllMocks();
+    });
 
     test('should exit early if element is not a TEXTAREA', () => {
         const div = document.createElement('div');
