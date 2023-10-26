@@ -10,13 +10,17 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
+const sourceRoot = path.join(path.resolve(__dirname), 'frontend');
+const jsSource = path.join(sourceRoot, 'js');
+const outputRoot = path.join(path.resolve(__dirname), 'promptly', 'static', 'js');
+
 const baseConfig = {
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // 'production', 'development', 'none'
-  entry: './promptly/static/js/promptly.js',
+  entry: path.join(jsSource, 'promptly.js'),
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
 
   output: {
     filename: 'script.js',
-    path: path.resolve(__dirname, 'promptly/static/js'),
+    path: outputRoot,
   },
 
   module: {

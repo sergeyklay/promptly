@@ -9,7 +9,7 @@ import {
     autoResizePromptTextarea,
     calculateTextareaHeight,
     createChatElement,
-} from '../../promptly/static/js/chat.js';
+} from '../../frontend/js/chat.js';
 
 describe('chat-elements', () => {
     test('should create a chat element with given message and role', () => {

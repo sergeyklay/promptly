@@ -5,7 +5,7 @@
 // For the full copyright and license information, please view
 // the LICENSE file that was distributed with this source code.
 
-import { getCookie, setCookie } from '../../promptly/static/js/cookie.js';
+import { getCookie, setCookie } from '../../frontend/js/cookie.js';
 
 describe('cookies', () => {
     test('should set and get a cookie', () => {
