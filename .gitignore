@@ -37,6 +37,7 @@ coverage.*
 # Ignore build artifacts
 /promptly/static/css/style.css
 /promptly/static/css/style.min.css
+/promptly/static/css/style.min.css.map
 /promptly/static/js/script.js
 /promptly/static/js/script.min.js
 /promptly/static/js/script.min.js.LICENSE.txt
