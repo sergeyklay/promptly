@@ -4,11 +4,11 @@ Promptly: A customizable ChatGPT API interface for OpenAPI models
 
 Release v\ |release| (`What's new? <changelog>`).
 
-.. include:: ../README.rst
+.. include:: ../../README.rst
    :start-after: -teaser-begin-
    :end-before: -teaser-end-
 
-.. include:: ../README.rst
+.. include:: ../../README.rst
    :start-after: -support-start-
    :end-before: -support-end-
 
@@ -55,7 +55,7 @@ you.
    security
    license
 
-.. include:: ../README.rst
+.. include:: ../../README.rst
    :start-after: -project-information-
    :end-before: -support-
 

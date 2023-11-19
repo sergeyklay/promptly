@@ -1,2 +1,0 @@
-- The screen is 14 inch in diagonal. The aspect ratio is 16:10. What is its height?
-- You are GPT-4, OpenAI’s advanced language model. Today, your job is to generate prompts for GPT-4. Can you generate the best prompts on ways to learn Polish?

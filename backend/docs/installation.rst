@@ -75,18 +75,6 @@ Install the necessary Python libraries:
    $ make init
    $ make install
 
-Install the necessary JS libraries:
-
-.. code-block:: console
-
-   $ npm ci
-
-Build JS bundle:
-
-.. code-block:: console
-
-   $ npm run build
-
 Run database migrations:
 
 .. code-block:: console
@@ -99,16 +87,30 @@ Optionally you can add seed (fake) data to the database:
 
    $ make seed
 
+To install the necessary JS libraries run the following command in the ``frontend``
+directory:
+
+.. code-block:: console
+
+   $ npm ci
+
+To build JS part of the application run the following command in the ``frontend``
+directory:
+
+.. code-block:: console
+
+   $ npm run build
+
 Testing
 --------
 
-Run Python unit tests with coverage:
+Run Python unit tests with coverage in the ``backend`` directory:
 
 .. code-block:: console
 
    $ make test
 
-Run JS unit tests with coverage:
+Run JS unit tests with coverage in the ``frontend`` directory:
 
 .. code-block:: console
 
