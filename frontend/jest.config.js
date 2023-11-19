@@ -13,7 +13,7 @@ const config = {
     moduleFileExtensions: ['js'],
     testEnvironment: 'jsdom',
     testPathIgnorePatterns: ['/node_modules/'],
-    testMatch: ['**/tests/frontend/**/*.test.js'],
+    testMatch: ['**/__tests__/**/*.test.js'],
     transform: {
         '^.+\\.js$': 'babel-jest',
     },

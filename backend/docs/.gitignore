@@ -12,38 +12,11 @@
 #
 # https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
 
-# Directories to ignore (do not add trailing '/'s, they skip symlinks):
-/.pytest_cache
-/htmlcov
-/instance
-/node_modules
-/promptly.egg-info
-
-# Application configuration:
-.env
-
-# Python cache files:
-*.py[cod]
-__pycache__
-
-# Ignore codecoverage stuff:
-/coverage
-coverage.*
-
 # draw.io backup- and temp-files:
 .$*.bkp
 .$*.dtmp
 
-# Ignore build artifacts
-/promptly/static/css/style.css
-/promptly/static/css/style.min.css
-/promptly/static/css/style.min.css.map
-/promptly/static/js/script.js
-/promptly/static/js/script.min.js
-/promptly/static/js/script.min.js.LICENSE.txt
-/promptly/static/js/script.min.js.map
-
 # Ignore build documentation artifacts and keep only .gitkeep file:
-/docs/_build/*
-/docs/_build/**/*
-!/docs/_build/.gitkeep
+/_build/*
+/_build/**/*
+!/_build/.gitkeep

@@ -53,6 +53,8 @@ extensions = [
     'sphinx.ext.todo',
 ]
 
+linkcheck_ignore = [r'https://platform.openai.com/docs/models/overview']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

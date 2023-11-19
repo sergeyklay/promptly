@@ -1,0 +1,113 @@
+# This file is part of the Promptly.
+#
+# Copyright (C) 2023 Serghei Iakovlev <egrep@protonmail.ch>
+#
+# For the full copyright and license information, please view
+# the LICENSE file that was distributed with this source code.
+
+name: Build & Test
+
+on:
+  push:
+    branches-ignore:
+      # These should always correspond to pull requests, so ignore them for
+      # the push trigger and let them be triggered by the pull_request
+      # trigger, avoiding running the workflow twice.  This is a minor
+      # optimization so there's no need to ensure this is comprehensive.
+      - 'dependabot/**'
+
+  pull_request:
+    branches:
+      - main
+
+  schedule:
+    - cron: '0 12 * * *'
+      #      | | | | |
+      #      | | | | |____ day of the week (0 - 6 or SUN-SAT)
+      #      | | | |____ month (1 - 12 or JAN-DEC)
+      #      | | |____ day of the month (1 - 31)
+      #      | |____ hour (0 - 23)
+      #      |____ minute (0 - 59)
+
+jobs:
+  tests:
+    name: Backend
+    runs-on: ${{ matrix.os }}
+
+    # The maximum number of minutes to let a workflow run
+    # before GitHub automatically cancels it. Default: 360
+    timeout-minutes: 30
+
+    strategy:
+      # When set to true, GitHub cancels
+      # all in-progress jobs if any matrix job fails.
+      fail-fast: false
+
+      matrix:
+        python:
+          - '3.10'
+        os:
+          - ubuntu-latest
+        include:
+          - os: ubuntu-latest
+            pip-cache-path: ~/.cache/pip
+
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON_VERSION: ${{ matrix.python }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: 'Set up Python ${{ matrix.python }}'
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: backend/requirements/*.txt
+
+      - name: 'Setup pip cache on ${{ runner.os }}'
+        uses: actions/cache@v3
+        with:
+          path: ${{ matrix.pip-cache-path }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements/*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Setuptools self-test
+        run: |
+          python setup.py --fullname
+          python setup.py --long-description
+          python setup.py --classifiers
+        working-directory: backend
+
+      - name: Make self-test
+        run: make -C backend help
+
+      - name: Set up virtualenv
+        run: make -C backend init
+
+      - name: Install Python dependencies
+        run: make -C backend install
+
+      - name: Run database migrations
+        run: make -C backend migrate
+
+      - name: Add seed data to the database
+        run: make -C backend seed
+
+      - name: Run Python unit tests with coverage
+        run: make -C backend test
+
+      - name: Combine coverage reports
+        run: make -C backend ccov
+
+      - uses: codecov/codecov-action@v3.1.4
+        if: success()
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          name: codecov-umbrella
+          flags: unittests,backend
+          env_vars: OS,PYTHON_VERSION

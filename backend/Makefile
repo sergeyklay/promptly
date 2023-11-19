@@ -47,7 +47,7 @@ $(INSTANCE_DIR):
 	cp $< $@
 
 requirements/%.txt: requirements/%.in $(VENV_BIN)
-	$(VENV_BIN)/pip-compile --allow-unsafe --generate-hashes --output-file=$@ $<
+	$(VENV_BIN)/pip-compile --no-strip-extras --allow-unsafe --generate-hashes --output-file=$@ $<
 
 .PHONY: docs/_static/security.txt
 docs/_static/security.txt: docs/security.in

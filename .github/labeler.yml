@@ -6,16 +6,20 @@
 # the LICENSE file that was distributed with this source code.
 
 frontend:
-  - 'promptly/static/css/**/*'
-  - 'promptly/static/img/**/*'
-  - 'promptly/static/js/**/*'
-  - 'promptly/static/scss/**/*'
-  - 'promptly/templates/**/*'
+  - 'frontend/**/*'
+  - 'backend/promptly/static/css/**/*'
+  - 'backend/promptly/static/img/**/*'
+  - 'backend/promptly/static/js/**/*'
+  - 'backend/promptly/static/scss/**/*'
+  - 'backend/promptly/templates/**/*'
+
+backend:
+  - 'backend/**/*'
 
 javascript:
-  - 'package.json'
-  - 'package-lock.json'
-  - '**/*.js'
+  - 'frontend/package.json'
+  - 'frontend/package-lock.json'
+  - 'frontend/**/*.js'
 
 python:
   - 'requirements/**/*.in'
