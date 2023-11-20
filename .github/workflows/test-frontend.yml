@@ -5,7 +5,7 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-name: Build & Test
+name: Build Frontend
 
 on:
   push:
@@ -31,7 +31,7 @@ on:
 
 jobs:
   tests:
-    name: Backend
+    name: Build & Test
     runs-on: ${{ matrix.os }}
 
     # The maximum number of minutes to let a workflow run
@@ -44,64 +44,50 @@ jobs:
       fail-fast: false
 
       matrix:
-        python:
-          - '3.10'
+        node:
+          - '16'
         os:
           - ubuntu-latest
-        include:
-          - os: ubuntu-latest
-            pip-cache-path: ~/.cache/pip
 
     env:
       OS: ${{ matrix.os }}
-      PYTHON_VERSION: ${{ matrix.python }}
+      NODE_VERSION: ${{ matrix.node }}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: 'Set up Python ${{ matrix.python }}'
-        uses: actions/setup-python@v4
+      - name: 'Setup Node.js ${{ matrix.node }}'
+        uses: actions/setup-node@v4
         with:
-          python-version: ${{ matrix.python }}
-          cache: pip
-          cache-dependency-path: backend/requirements/*.txt
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
-      - name: 'Setup pip cache on ${{ runner.os }}'
+
+      - name: 'Setup npm cache on ${{ runner.os }}'
         uses: actions/cache@v3
         with:
-          path: ${{ matrix.pip-cache-path }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements/*.txt') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-node-
 
-      - name: Setuptools self-test
-        run: |
-          python setup.py --fullname
-          python setup.py --long-description
-          python setup.py --classifiers
-        working-directory: backend
+      - name: package.json self-test
+        run: npm run intro
+        working-directory: frontend
 
-      - name: Make self-test
-        run: make -C backend help
+      - name: Install JS dependencies
+        run: npm ci
+        working-directory: frontend
 
-      - name: Set up virtualenv
-        run: make -C backend init
+      - name: Build JS bundle
+        run: npm run build
+        working-directory: frontend
 
-      - name: Install Python dependencies
-        run: make -C backend install
-
-      - name: Run database migrations
-        run: make -C backend migrate
-
-      - name: Add seed data to the database
-        run: make -C backend seed
-
-      - name: Run Python unit tests with coverage
-        run: make -C backend test
-
-      - name: Combine coverage reports
-        run: make -C backend ccov
+      - name: Run JS unit tests with coverage
+        run: npm run test
+        working-directory: frontend
 
       - uses: codecov/codecov-action@v3.1.4
         if: success()
@@ -109,5 +95,5 @@ jobs:
           fail_ci_if_error: true
           verbose: true
           name: codecov-umbrella
-          flags: unittests,backend
-          env_vars: OS,PYTHON_VERSION
+          flags: unittests,frontend
+          env_vars: OS,NODE_VERSION
