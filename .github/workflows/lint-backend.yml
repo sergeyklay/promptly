@@ -5,7 +5,7 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-name: Lint Code
+name: Lint Backend
 
 on:
   push:
@@ -31,7 +31,7 @@ on:
 
 jobs:
   lint-code:
-    name: Backend
+    name: Lint Code
     runs-on: ubuntu-latest
 
     steps:
