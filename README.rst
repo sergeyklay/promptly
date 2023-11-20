@@ -6,7 +6,7 @@
             <img src="https://readthedocs.org/projects/promptly/badge/?version=latest" alt="Documentation Status" />
         </a>
         <a href="https://github.com/sergeyklay/promptly/actions/workflows/test-frontend.yml">
-            <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-frontend.yaml/badge.svg" alt="Build Frontend" />
+            <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-frontend.yml/badge.svg" alt="Build Frontend" />
         </a>
         <a href="https://github.com/sergeyklay/promptly/actions/workflows/test-backend.yml">
             <img src="https://github.com/sergeyklay/promptly/actions/workflows/test-backend.yml/badge.svg" alt="Build Backend" />
