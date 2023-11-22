@@ -15,6 +15,7 @@ flake8-import-order
 pylint
 pytest
 pytest-mock
+exceptiongroup>=1.2.0  # To resolve dependency conflict with pytest
 
 # docs
 sphinx
