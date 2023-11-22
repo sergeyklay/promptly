@@ -22,14 +22,14 @@ javascript:
   - 'frontend/**/*.js'
 
 python:
-  - 'requirements/**/*.in'
-  - 'requirements/**/*.txt'
-  - 'migrations/**/*'
+  - 'backend/requirements/**/*.in'
+  - 'backend/requirements/**/*.txt'
+  - 'backend/migrations/**/*'
   - '**/*.py'
 
 github_actions:
   - '.github/**/*'
 
 documentation:
-  - 'docs/**/*'
+  - 'backend/docs/**/*'
   - '**/*.rst'
