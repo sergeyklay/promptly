@@ -93,5 +93,4 @@ def completion(*args, **kwargs) -> Dict[str, Any]:
     #     'total_tokens': 20
     #   }
     # }
-    print(f'OpenAI response: {result} ({type(result)}))')
     return result
