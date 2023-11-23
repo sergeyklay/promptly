@@ -24,11 +24,10 @@ logger = logging.getLogger(__name__)
 @backoff.on_exception(
     wait_gen=backoff.expo,
     exception=(
-        openai.error.ServiceUnavailableError,
-        openai.error.APIError,
-        openai.error.RateLimitError,
-        openai.error.APIConnectionError,
-        openai.error.Timeout,
+        openai.APIConnectionError,
+        openai.APITimeoutError,
+        openai.InternalServerError,
+        openai.RateLimitError,
     ),
     max_value=60,
     factor=1.5,
@@ -39,32 +38,34 @@ def completion(*args, **kwargs) -> Dict[str, Any]:
     This function uses an exponential backoff strategy to handle the following
     exceptions:
 
-    - ``openai.error.ServiceUnavailableError``
-    - ``openai.error.APIError``
-    - ``openai.error.RateLimitError``
-    - ``openai.error.APIConnectionError``
-    - ``openai.error.Timeout``
+    - ``openai.APIConnectionError``
+    - ``openai.APITimeoutError``
+    - ``openai.InternalServerError``
+    - ``openai.RateLimitError``
 
     The backoff delay starts at 1 second and increases by a factor of 1.5 with
     each retry, capping at a maximum delay of 60 seconds between retries.
 
     Any arguments or keyword arguments are forwarded directly to the
-    ``openai.ChatCompletion.create`` method. The OpenAI API key is read from
-    the ``OPENAI_API_KEY`` environment variable by any import openai's
-    ``__init__.py`` file.
+    ``openai.resources.chat.completions.Completions.create`` method. The OpenAI
+    API key is read from the ``OPENAI_API_KEY`` environment variable by any
+    import openai's ``__init__.py`` file.
 
     :param args: Variable-length argument list.
     :param kwargs: Arbitrary keyword arguments.
     :return: The generated text completion.
     :rtype: dict
-    :raises Exception: ``openai.error.OpenAIError`` if there is an error in the
+    :raises Exception: ``openai.OpenAIError`` if there is an error in the
         API request.
     """
     # For details see https://platform.openai.com/docs/api-reference
-    result = threaded_execute(openai.ChatCompletion.create, *args, **kwargs)
+    client = openai.OpenAI()
+    result = threaded_execute(client.chat.completions.create, *args, **kwargs)
+    # FIXME: This API was changed in openai-python >= 0.28.1 and now it not
+    # returns a dict, but a Completions object.  We need to update this code
     if 'error' in result:
         logger.warning(result)
-        raise openai.error.APIError(result['error'])
+        raise openai.OpenAIError(result['error'])
 
     # Typically, the response is a single message, but it can be multiple
     # messages if the model is configured to generate multiple messages.
@@ -75,6 +76,7 @@ def completion(*args, **kwargs) -> Dict[str, Any]:
     #   'object': 'chat.completion',
     #   'created': 1697967721,
     #   'model': 'gpt-3.5-turbo-16k-061',
+    #   'system_fingerprint': 'fp_44709d6fcb',
     #   'choices': [
     #     {
     #       'index': 0,
@@ -91,4 +93,5 @@ def completion(*args, **kwargs) -> Dict[str, Any]:
     #     'total_tokens': 20
     #   }
     # }
+    print(f'OpenAI response: {result} ({type(result)}))')
     return result
