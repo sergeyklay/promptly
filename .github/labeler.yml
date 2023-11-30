@@ -33,3 +33,9 @@ github_actions:
 documentation:
   - 'docs/**/*'
   - '**/*.rst'
+
+dependencies:
+  - 'frontend/package.json'
+  - 'frontend/package-lock.json'
+  - 'requirements/**/*.in'
+  - 'requirements/**/*.txt'
