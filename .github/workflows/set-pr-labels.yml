@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: Label the PR
       id: label-the-pr
-      uses: actions/labeler@v4
+      uses: actions/labeler@v5
       continue-on-error: true
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
