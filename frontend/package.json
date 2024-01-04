@@ -41,7 +41,7 @@
   },
   "homepage": "https://promptly.readthedocs.io/en/latest/",
   "dependencies": {
-    "bootstrap-icons": "^1.11.2"
+    "bootstrap-icons": "^1.11.3"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
