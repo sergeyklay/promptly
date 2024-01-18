@@ -68,7 +68,7 @@ jobs:
           cache-dependency-path: backend/requirements/*.txt
 
       - name: 'Setup pip cache on ${{ runner.os }}'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ matrix.pip-cache-path }}
           key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements/*.txt') }}
