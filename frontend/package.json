@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
-    "@babel/preset-env": "^7.23.7",
+    "@babel/preset-env": "^7.24.3",
     "@types/jest": "^29.5.10",
     "babel-loader": "^9.1.3",
     "draw.io-export": "^0.3.0",
